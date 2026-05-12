@@ -1,0 +1,929 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial;
+
+    background:url("img/bg.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    color:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    height:100vh;
+}
+
+.container{
+    position: relative;
+z-index: 10;
+    width:900px;
+
+    background:rgba(0,0,0,0.75);
+
+    backdrop-filter:blur(10px);
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:0 0 30px cyan;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:40px;
+}
+
+h1{
+    color:cyan;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    margin-bottom:30px;
+    color:#aaa;
+}
+
+.platforms{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+
+    margin-bottom:30px;
+}
+
+.cards{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 40px;
+    width: 500px;
+}
+
+.card{
+    width: 220px;
+    height: 80px;
+    border: none;
+    border-radius: 18px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card:hover{
+    transform: scale(1.03);
+}
+
+.card.netflix{
+    background: #e50914;
+}
+
+.card.prime{
+    background: #1da1f2;
+}
+
+.card.disney{
+    background: #111;
+    border: 2px solid white;
+}
+
+.card.spotify{
+    background: #1db954;
+}
+
+.card.active{
+    transform: scale(1.05);
+    box-shadow: 0 0 25px white;
+    border: 3px solid white;
+}
+
+input{
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:12px;
+
+    margin-top:25px;
+
+    margin-bottom:20px;
+
+    font-size:18px;
+
+    outline:none;
+}
+
+.consultar{
+    width:100%;
+
+    padding:15px;
+
+    background:cyan;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.consultar{
+    width:100%;
+
+    padding:18px;
+
+    background:cyan;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}.left{
+    width:500px;
+}.left{
+    width:500px;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.platforms{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+
+    margin-top:30px;
+
+    margin-bottom:30px;
+}#resultado{
+    margin-top:25px;
+
+    background:rgba(255,255,255,0.08);
+
+    padding:20px;
+
+    border-radius:15px;
+
+    font-size:25px;
+
+    font-weight:bold;
+
+    color:cyan;
+
+    text-align:center;
+
+    
+}.loading{
+    animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+
+    0%{
+        opacity:0.3;
+    }
+
+    50%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0.3;
+    }
+
+}.card.active {
+
+    transform: scale(1.08);
+
+    border: 4px solid white;
+
+    box-shadow:
+    0 0 20px white,
+    0 0 40px cyan;
+
+}
+
+.instructions-box{
+    width: 100%;
+    padding: 30px;
+    border-radius: 30px;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(0,255,255,0.3);
+    box-shadow: 0 0 25px rgba(0,255,255,0.25);
+}
+
+.instructions-title{
+    text-align: center;
+    color: white;
+    font-size: 38px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.step{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: 0.3s;
+}
+
+.step:hover{
+    transform: scale(1.02);
+}
+
+.icon{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+.step1 .icon{
+    background: rgba(0,255,255,0.15);
+    box-shadow: 0 0 20px cyan;
+}
+
+.step2 .icon{
+    background: rgba(0,255,0,0.15);
+    box-shadow: 0 0 20px lime;
+}
+
+.step3 .icon{
+    background: rgba(255,200,0,0.15);
+    box-shadow: 0 0 20px gold;
+}
+
+.step4 .icon{
+    background: rgba(180,0,255,0.15);
+    box-shadow: 0 0 20px violet;
+}
+
+.step-content h3{
+    color: white;
+    margin-bottom: 8px;
+    font-size: 24px;
+}
+
+.step-content p{
+    color: #ccc;
+    font-size: 16px;
+    line-height: 1.5;
+}.right{
+    width: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.instructions-box{
+    width: 100%;
+    padding: 30px;
+    border-radius: 30px;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(0,255,255,0.3);
+    box-shadow: 0 0 25px rgba(0,255,255,0.25);
+}
+
+.instructions-title{
+    text-align: center;
+    color: white;
+    font-size: 38px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.step{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: 0.3s;
+}
+
+.step:hover{
+    transform: scale(1.02);
+}
+
+.icon{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+.step1 .icon{
+    background: rgba(0,255,255,0.15);
+    box-shadow: 0 0 20px cyan;
+}
+
+.step2 .icon{
+    background: rgba(0,255,0,0.15);
+    box-shadow: 0 0 20px lime;
+}
+
+.step3 .icon{
+    background: rgba(255,200,0,0.15);
+    box-shadow: 0 0 20px gold;
+}
+
+.step4 .icon{
+    background: rgba(180,0,255,0.15);
+    box-shadow: 0 0 20px violet;
+}
+
+.step-content h3{
+    color: white;
+    margin-bottom: 8px;
+    font-size: 24px;
+}
+
+.step-content p{
+    color: #ccc;
+    font-size: 16px;
+    line-height: 1.5;
+}body{
+    overflow-x: hidden;
+}
+
+.container{
+    width: 1400px;
+    min-height: 780px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    padding: 55px;
+}
+
+.left{
+    width: 650px;
+}
+
+.right{
+    width: 520px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.instructions-box{
+    width: 100%;
+    padding: 35px;
+    border-radius: 28px;
+    background: rgba(0,0,0,0.55);
+    border: 2px solid rgba(0,255,255,0.45);
+    box-shadow: 0 0 30px rgba(0,255,255,0.35);
+}
+
+.instructions-title{
+    font-size: 36px;
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.step{
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 22px;
+    margin-bottom: 18px;
+    border-radius: 22px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+.icon{
+    min-width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+
+.step-content h3{
+    font-size: 22px;
+    color: cyan;
+}
+
+.step-content p{
+    font-size: 16px;
+    color: #ddd;
+}.cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    width:100%;
+}
+
+.card.max{
+    background:#6c2cff;
+}
+
+.card.crunchy{
+    background:#ff7a00;
+}/* ANIMACION OTP */
+
+.otp-animation{
+
+    animation:
+    vibrar 0.3s ease,
+    glowOtp 1.5s ease;
+
+}
+
+/* VIBRACION */
+
+@keyframes vibrar{
+
+    0%{
+        transform: translateX(0px);
+    }
+
+    25%{
+        transform: translateX(-4px);
+    }
+
+    50%{
+        transform: translateX(4px);
+    }
+
+    75%{
+        transform: translateX(-4px);
+    }
+
+    100%{
+        transform: translateX(0px);
+    }
+
+}
+
+/* GLOW OTP */
+
+@keyframes glowOtp{
+
+    0%{
+
+        box-shadow:
+        0 0 10px cyan,
+        0 0 20px cyan;
+
+    }
+
+    100%{
+
+        box-shadow:
+        0 0 0px transparent;
+
+    }
+
+}
+
+/* BOTONES FLOTANDO */
+
+.card{
+
+    animation:
+    floating 3s ease-in-out infinite;
+
+}
+
+@keyframes floating{
+
+    0%{
+        transform: translateY(0px);
+    }
+
+    50%{
+        transform: translateY(-4px);
+    }
+
+    100%{
+        transform: translateY(0px);
+    }
+
+}
+
+/* FONDO DINAMICO */
+
+body::before{
+
+    content: "";
+
+    position: fixed;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(0,255,255,0.08),
+        transparent 60%
+    );
+
+    animation:
+    moveBg 10s linear infinite;
+
+    z-index: -1;
+
+}
+
+@keyframes moveBg{
+
+    0%{
+        transform:
+        translateX(-10%)
+        translateY(-10%);
+    }
+
+    50%{
+        transform:
+        translateX(10%)
+        translateY(10%);
+    }
+
+    100%{
+        transform:
+        translateX(-10%)
+        translateY(-10%);
+    }
+
+}/* ========================= */
+/* RESPONSIVE CELULAR */
+/* ========================= */
+
+@media screen and (max-width: 768px){
+
+    body{
+
+        padding: 20px;
+        overflow-x: hidden;
+height: auto;
+min-height: 100vh;
+    }
+
+    .container{
+
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+
+        width: 100%;
+padding: 0;
+    }
+
+    .left{
+
+        width: 100%;
+        max-width: 100%;
+
+        padding: 25px;
+
+    }
+
+    .right{
+
+        width: 100%;
+        max-width: 100%;
+
+    }
+
+    h1{
+
+        font-size: 45px;
+        text-align: center;
+
+    }
+
+    .subtitle{
+
+        text-align: center;
+        font-size: 18px;
+
+    }
+
+    .cards{
+
+        display: grid;
+
+        grid-template-columns:
+        1fr 1fr;
+
+        gap: 15px;
+
+        width: 100%;
+
+    }
+
+    .card{
+
+        width: 100%;
+        height: 80px;
+
+        font-size: 24px;
+
+    }
+
+    input{
+
+        width: 100%;
+        height: 70px;
+
+        font-size: 22px;
+
+    }
+
+    .consultar{
+
+        width: 100%;
+        height: 75px;
+
+        font-size: 28px;
+
+    }
+
+    #resultado{
+
+        width: 100%;
+
+        font-size: 28px;
+        text-align: center;
+
+        padding: 20px;
+
+    }
+
+    .instructions-box{
+
+        width: 100%;
+
+        padding: 25px;
+
+    }
+
+    .instructions-title{
+
+    text-align: center;
+
+    font-size: 28px;
+
+}
+
+.step{
+
+    flex-direction: row;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px;
+
+}
+
+.step h3{
+
+    font-size: 18px;
+
+}
+
+.step p{
+
+    font-size: 13px;
+
+}
+
+.icon{
+
+    font-size: 28px;
+
+}
+
+/* ========================= */
+/* EXTRA PEQUEÑOS */
+/* ========================= */
+
+@media screen and (max-width: 480px){
+
+    h1{
+
+        font-size: 36px;
+
+    }
+
+    .instructions-title{
+
+        font-size: 35px;
+
+    }
+
+    .card{
+
+        font-size: 18px;
+        height: 70px;
+
+    }
+
+    input{
+
+        font-size: 18px;
+
+    }
+
+    .consultar{
+
+        font-size: 22px;
+
+    }
+
+    #resultado{
+
+        font-size: 22px;
+
+    }
+
+}/* ========================= */
+/* CYBER BACKGROUND */
+/* ========================= */
+
+body{
+
+    position: relative;
+    overflow-x: hidden;
+
+    background:
+    radial-gradient(circle at top left,
+    rgba(0,255,255,0.15),
+    transparent 30%),
+
+    radial-gradient(circle at bottom right,
+    rgba(140,0,255,0.15),
+    transparent 30%),
+
+    #050816;
+
+}
+
+/* PARTICULAS */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background-image:
+
+    radial-gradient(
+        rgba(0,255,255,0.7) 1px,
+        transparent 1px
+    ),
+
+    radial-gradient(
+        rgba(255,255,255,0.4) 1px,
+        transparent 1px
+    );
+
+    background-size:
+    120px 120px,
+    200px 200px;
+
+    animation:
+    particlesMove 18s linear infinite;
+
+    opacity:0.35;
+
+    z-index:-2;
+}
+
+/* GLOW MOVIMIENTO */
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    top:-20%;
+    left:-20%;
+
+    width:140%;
+    height:140%;
+
+    background:
+    conic-gradient(
+        from 0deg,
+        rgba(0,255,255,0.08),
+        rgba(140,0,255,0.08),
+        rgba(0,255,255,0.08)
+    );
+
+    animation:
+    rotateGlow 20s linear infinite;
+
+    z-index:-3;
+
+    filter:blur(90px);
+}
+
+/* ANIMACION PARTICULAS */
+
+@keyframes particlesMove{
+
+    0%{
+
+        transform:
+        translateY(0px)
+        translateX(0px);
+
+    }
+
+    50%{
+
+        transform:
+        translateY(-40px)
+        translateX(20px);
+
+    }
+
+    100%{
+
+        transform:
+        translateY(0px)
+        translateX(0px);
+
+    }
+
+}
+
+/* ROTACION CYBER */
+
+@keyframes rotateGlow{
+
+    0%{
+
+        transform:rotate(0deg);
+
+    }
+
+    100%{
+
+        transform:rotate(360deg);
+
+    }
+
+}

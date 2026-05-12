@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RestarStore</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+<div class="left">
+  <h1>🔥 RestarStore</h1>
+  <p class="subtitle">
+    Sistema de validación de códigos
+  </p>
+
+  <div class="platforms">
+
+    <div class="cards">
+
+    <button class="card netflix" onclick="seleccionar('netflix')">
+        Netflix
+    </button>
+
+    <button class="card prime" onclick="seleccionar('amazon')">
+        Prime Video
+    </button>
+
+    <button class="card disney" onclick="seleccionar('disney')">
+        Disney+
+    </button>
+
+    <button class="card spotify" onclick="seleccionar('spotify')">
+        Spotify
+    </button>
+
+    <button class="card max" onclick="seleccionar('max')">
+        Max
+    </button>
+
+    <button class="card crunchy" onclick="seleccionar('crunchyroll')">
+        Crunchyroll
+    </button>
+
+</div>
+
+  </div>
+
+  <input
+    type="email"
+    id="correo"
+    placeholder="Ingresa tu correo"
+/>
+
+ <button class="consultar" onclick="consultarCodigo()">
+    Consultar Código
+</button>
+<div id="resultado">
+    Aqui aparecera el codigo
+</div>
+
+<div id="historial">
+
+    <h3>📜 Historial</h3>
+
+</div>
+
+</div>
+
+<div class="right">
+
+    <div class="instructions-box">
+
+        <div class="instructions-title">
+            📋 Instrucciones
+        </div>
+
+        <div class="step step1">
+
+            <div class="icon">🖥️</div>
+
+            <div class="step-content">
+                <h3>Selecciona una plataforma</h3>
+                <p>
+                    Elige la plataforma para la cual necesitas el código.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="step step2">
+
+            <div class="icon">📧</div>
+
+            <div class="step-content">
+                <h3>Ingresa tu correo</h3>
+                <p>
+                    Escribe el correo asociado a la cuenta.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="step step3">
+
+            <div class="icon">🔍</div>
+
+            <div class="step-content">
+                <h3>Presiona consultar</h3>
+                <p>
+                    El sistema buscará el último código recibido.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="step step4">
+
+            <div class="icon">🔐</div>
+
+            <div class="step-content">
+                <h3>Obtén tu código OTP</h3>
+                <p>
+                    El código aparecerá automáticamente en pantalla.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+<<audio id="otpSound" preload="auto">
+    <source src="otp.mp3" type="audio/mpeg">
+</audio>
+<script src="app.js"></script>
+
+</body>
+</html>
