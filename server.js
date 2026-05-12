@@ -1,3 +1,4 @@
+require("dotenv").config();
 const USERS_FILE = "users.json";
 const HISTORY_FILE = "history.json";
 const session = require("express-session");
@@ -9,7 +10,7 @@ const { google } = require("googleapis");
 const app = express();
 app.use(session({
 
-    secret: "restarstore_secret",
+    secret: process.env.SESSION_SECRET,
 
     resave: false,
 
