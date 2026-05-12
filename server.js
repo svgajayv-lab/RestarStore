@@ -33,7 +33,7 @@ credentials.installed || credentials.web;
 const oAuth2Client = new google.auth.OAuth2(
     client_id,
     client_secret,
-    "http://localhost:3000/oauth2callback"
+    "https://restarstore.onrender.com/oauth2callback"
 );
 
 const SCOPES = [
