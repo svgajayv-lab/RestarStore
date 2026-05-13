@@ -1,5 +1,6 @@
 let plataformaSeleccionada = "amazon";
-
+let monitoreandoOTP = false;
+let ultimoOTP = "";
 function seleccionar(plataforma) {
 
     plataformaSeleccionada = plataforma;
@@ -86,12 +87,12 @@ if(
 
     resultado.innerHTML =
     "🔎 Buscando código de Prime Video...";
-
+monitoreandoOTP = true;
     try {
 
         const response =
         await fetch(
-            `/otp?platform=${plataformaSeleccionada}&correo=${correo}`
+            `/otp?plataforma=${plataformaSeleccionada}&correo=${correo}`
         );
 
         const data =
@@ -102,7 +103,13 @@ if(
             data.otp !== "No encontrado" &&
             data.otp !== "Error"
         ) {
+if(data.otp === ultimoOTP){
 
+    return;
+
+}
+
+ultimoOTP = data.otp;
             resultado.innerHTML =
 `🔐 Código OTP: ${data.otp}`;
 
@@ -148,4 +155,12 @@ setTimeout(() => {
 
     }
 
-}
+}setInterval(() => {
+
+    if(monitoreandoOTP){
+
+        consultarCodigo();
+
+    }
+
+}, 3000);
