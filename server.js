@@ -235,19 +235,34 @@ switch(plataforma){
 
 let otp = "No encontrado";
 
-const textoPlano = body
-    .replace(/<[^>]*>/g, " ")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&#39;/g, "'")
-    .replace(/\s+/g, " ");
+const patrones = [
 
-console.log(textoPlano);
+/verification code is[:\s]+(\d{6,8})/i,
 
-const match = textoPlano.match(/\b\d{6}\b/);
+/your verification code is[:\s]+(\d{6,8})/i,
 
-if(match){
+/use this code[:\s]+(\d{6,8})/i,
 
-    otp = match[0];
+/one time password[:\s]+(\d{6,8})/i,
+
+/otp[:\s]+(\d{6,8})/i,
+
+/enter the following code[:\s]+(\d{6,8})/i,
+
+/código de verificación[:\s]+(\d{6,8})/i
+
+];
+
+for (const patron of patrones) {
+
+    const match = textoPlano.match(patron);
+
+    if (match) {
+
+        otp = match[1];
+        break;
+
+    }
 
 }
 
