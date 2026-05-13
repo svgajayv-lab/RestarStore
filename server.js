@@ -117,8 +117,8 @@ app.get("/otp", async (req, res) => {
 switch(plataforma){
 
     case "amazon":
-        remitente = "amazon.com";
-        break;
+    remitente = "amazon";
+    break;
 
     case "netflix":
         remitente = "netflix";
