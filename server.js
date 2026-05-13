@@ -41,10 +41,10 @@ const SCOPES = [
     "https://www.googleapis.com/auth/gmail.readonly"
 ];
 
-if (fs.existsSync("token.json")) {
+if (process.env.GMAIL_TOKEN) {
 
     const token = JSON.parse(
-        fs.readFileSync("token.json")
+        process.env.GMAIL_TOKEN
     );
 
     oAuth2Client.setCredentials(token);
@@ -84,10 +84,10 @@ app.get("/oauth2callback", async (req, res) => {
 
         oAuth2Client.setCredentials(tokens);
 
-        fs.writeFileSync(
-            "token.json",
-            JSON.stringify(tokens)
-        );
+        console.log(
+    "TOKEN:",
+    JSON.stringify(tokens)
+);
 
         console.log("🔥 TOKEN GUARDADO");
 
