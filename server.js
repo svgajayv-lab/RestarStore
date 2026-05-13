@@ -243,11 +243,7 @@ const textoPlano = body
 
 console.log(textoPlano);
 
-const partes = textoPlano.split(
-    "verification code is:"
-);
-
-const match = cuerpo.match(/\b\d{6}\b/);
+const match = textoPlano.match(/\b\d{6}\b/);
 
 if(match){
 
