@@ -1,5 +1,4 @@
 let plataformaSeleccionada = "amazon";
-let monitoreandoOTP = false;
 let ultimoOTP = "";
 function seleccionar(plataforma) {
 
@@ -86,8 +85,9 @@ if(
     }
 
     resultado.innerHTML =
-    "🔎 Buscando código de Prime Video...";
+'<span class="loader">🔎 Buscando código</span>';
 monitoreandoOTP = true;
+yaConsulto = true;
     try {
 
         const response =
@@ -155,12 +155,4 @@ setTimeout(() => {
 
     }
 
-}setInterval(() => {
-
-    if(monitoreandoOTP){
-
-        consultarCodigo();
-
-    }
-
-}, 3000);
+}

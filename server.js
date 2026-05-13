@@ -247,18 +247,11 @@ const partes = textoPlano.split(
     "verification code is:"
 );
 
-if (partes.length > 1) {
+const match = texto.match(/\b\d{6}\b/);
 
-    const despues = partes[1];
+if(match){
 
-    const match =
-    despues.match(/\b\d{6}\b/);
-
-    if (match) {
-
-        otp = match[0];
-
-    }
+    otp = match[0];
 
 }
 
