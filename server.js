@@ -143,10 +143,14 @@ switch(plataforma){
     default:
         remitente = "";
 }
+const cuentasGmail = [
 
+    oAuth2Client
+
+];
         const gmail = google.gmail({
             version: "v1",
-            auth: oAuth2Client,
+            auth: cuentasGmail[0],
         });
 
         const response =
