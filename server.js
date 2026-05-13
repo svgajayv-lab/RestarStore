@@ -232,6 +232,11 @@ switch(plataforma){
         }
 
         console.log(body);
+const textoPlano = body
+.replace(/<[^>]*>/g, " ")
+.replace(/&nbsp;/g, " ")
+.replace(/&#39;/g, "'")
+.replace(/\s+/g, " ");
 
 let otp = "No encontrado";
 
