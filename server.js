@@ -112,19 +112,37 @@ app.get("/otp", async (req, res) => {
         const plataforma =
         req.query.plataforma;
 
-        let remitente = "amazon";
+       let remitente = "";
 
-        if (plataforma === "netflix") {
-            remitente = "netflix";
-        }
+switch(plataforma){
 
-        if (plataforma === "disney") {
-            remitente = "disney";
-        }
+    case "amazon":
+        remitente = "amazon.com";
+        break;
 
-        if (plataforma === "spotify") {
-            remitente = "spotify";
-        }
+    case "netflix":
+        remitente = "netflix";
+        break;
+
+    case "disney":
+        remitente = "disney";
+        break;
+
+    case "spotify":
+        remitente = "spotify";
+        break;
+
+    case "max":
+        remitente = "max";
+        break;
+
+    case "crunchyroll":
+        remitente = "crunchyroll";
+        break;
+
+    default:
+        remitente = "";
+}
 
         const gmail = google.gmail({
             version: "v1",
@@ -138,7 +156,7 @@ app.get("/otp", async (req, res) => {
 
             maxResults: 10,
 
-            q: `from:${remitente} newer_than:10m`
+            q: `from:${remitente} newer_than:2m`
 
         });
 
@@ -265,7 +283,7 @@ historial.unshift({
     correo:
     req.query.correo || "No definido",
 
-    plataforma: req.query.platform,
+    plataforma,
 
     otp,
 
@@ -950,8 +968,8 @@ app.post("/login", (req, res) => {
 
     if(
 
-        usuario === "admin" &&
-        password === "123456"
+        usuario === process.env.ADMIN_USER &&
+password === process.env.ADMIN_PASS
 
     ){
 
