@@ -1,7 +1,21 @@
 require("dotenv").config();
+mongoose.connect(process.env.MONGO_URI)
+
+.then(() => {
+
+    console.log("🔥 MongoDB conectado");
+
+})
+
+.catch((err) => {
+
+    console.log(err);
+
+});
 const USERS_FILE = "users.json";
 const HISTORY_FILE = "history.json";
 const session = require("express-session");
+const express = require("express");
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
