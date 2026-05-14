@@ -293,9 +293,9 @@ for (const patron of patrones) {
 console.log("OTP:", otp);
 await History.create({
 
-    correo,
+    correo: req.query.correo,
 
-    plataforma,
+    plataforma: req.query.plataforma,
 
     otp,
 
