@@ -1,5 +1,6 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
+const History = require("./models/History");
 mongoose.connect(process.env.MONGO_URI)
 
 .then(() => {
@@ -290,7 +291,19 @@ for (const patron of patrones) {
 }
 
 console.log("OTP:", otp);
+await History.create({
 
+    correo,
+
+    plataforma,
+
+    otp,
+
+    ip: req.ip,
+
+    dispositivo: req.headers["user-agent"]
+
+});
 /* ========================= */
 /* GUARDAR HISTORIAL */
 /* ========================= */
