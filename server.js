@@ -60,6 +60,8 @@ if (process.env.GMAIL_TOKEN) {
 
     oAuth2Client.setCredentials(token);
 
+    console.log("🔥 TOKEN Gmail cargado");
+
 }
 
 app.get("/", (req, res) => {
