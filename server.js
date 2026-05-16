@@ -242,17 +242,50 @@ app.get("/otp", async (req, res) => {
 
         }
 
-        const ultimoMensaje =
-        messages[0];
+        let message = null;
 
-        const message =
-        await gmail.users.messages.get({
+for (const msg of messages) {
 
-            userId: "me",
+    const tempMessage =
+    await gmail.users.messages.get({
 
-            id: ultimoMensaje.id,
+        userId: "me",
 
-        });
+        id: msg.id,
+
+    });
+
+    const snippet =
+    tempMessage.data.snippet || "";
+
+    const internalDate =
+    parseInt(tempMessage.data.internalDate);
+
+    const ahora = Date.now();
+
+    const diferencia =
+    (ahora - internalDate) / 1000;
+
+    // SOLO correos últimos 120 segundos
+
+    if (diferencia <= 120) {
+
+        message = tempMessage;
+        break;
+
+    }
+
+}
+
+if (!message) {
+
+    return res.json({
+
+        otp: "No encontrado"
+
+    });
+
+}
 
         const payload =
         message.data.payload;
