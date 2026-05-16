@@ -218,14 +218,9 @@ app.get("/otp", async (req, res) => {
 
             userId: "me",
 
-            maxResults: 10,
+            maxResults: 5,
 
-            q: `
-                newer_than:10m
-                (
-                    from:${remitente}
-                )
-            `
+            q: `from:${remitente} newer_than:15m`
 
         });
 
@@ -242,7 +237,8 @@ app.get("/otp", async (req, res) => {
 
         }
 
-        let message = null;
+        
+let message = null;
 
 for (const msg of messages) {
 
@@ -255,9 +251,6 @@ for (const msg of messages) {
 
     });
 
-    const snippet =
-    tempMessage.data.snippet || "";
-
     const internalDate =
     parseInt(tempMessage.data.internalDate);
 
@@ -266,9 +259,9 @@ for (const msg of messages) {
     const diferencia =
     (ahora - internalDate) / 1000;
 
-    // SOLO correos últimos 120 segundos
+    // SOLO últimos 10 minutos
 
-    if (diferencia <= 120) {
+    if (diferencia <= 600) {
 
         message = tempMessage;
         break;
