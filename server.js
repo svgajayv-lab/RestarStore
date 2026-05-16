@@ -5,25 +5,35 @@ const mongoose = require("mongoose");
 mongoose.set("bufferCommands", false);
 
 mongoose.connect(process.env.MONGO_URI)
+
 .then(() => {
+
     console.log("🔥 MongoDB conectado");
+
 })
+
 .catch((err) => {
+
     console.log(err);
+
 });
 
 const express = require("express");
 const session = require("express-session");
-const fs = require("fs");
 const path = require("path");
-const USERS_FILE = "users.json";
-const HISTORY_FILE = "history.json";
 const { google } = require("googleapis");
+
 const History = require("./models/History");
+
 const app = express();
+
+/* ========================= */
+/* SESSION */
+/* ========================= */
+
 app.use(session({
 
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || "restarstore",
 
     resave: false,
 
@@ -37,7 +47,17 @@ app.use(session({
 
 }));
 
+/* ========================= */
+/* STATIC */
+/* ========================= */
+
 app.use(express.static(__dirname));
+
+app.use(express.urlencoded({ extended:true }));
+
+/* ========================= */
+/* GOOGLE */
+/* ========================= */
 
 const credentials = require("./credentials.json");
 
@@ -45,26 +65,39 @@ const { client_secret, client_id } =
 credentials.installed || credentials.web;
 
 const oAuth2Client = new google.auth.OAuth2(
+
     client_id,
+
     client_secret,
+
     "https://restarstore.onrender.com/oauth2callback"
+
 );
 
 const SCOPES = [
+
     "https://www.googleapis.com/auth/gmail.readonly"
+
 ];
 
-if (process.env.GMAIL_TOKEN) {
+/* ========================= */
+/* TOKEN */
+/* ========================= */
 
-    const token = JSON.parse(
-        process.env.GMAIL_TOKEN
-    );
+if(process.env.GMAIL_TOKEN){
+
+    const token =
+    JSON.parse(process.env.GMAIL_TOKEN);
 
     oAuth2Client.setCredentials(token);
 
     console.log("🔥 TOKEN Gmail cargado");
 
 }
+
+/* ========================= */
+/* HOME */
+/* ========================= */
 
 app.get("/", (req, res) => {
 
@@ -74,12 +107,19 @@ app.get("/", (req, res) => {
 
 });
 
+/* ========================= */
+/* AUTH */
+/* ========================= */
+
 app.get("/auth", (req, res) => {
 
     const authUrl =
     oAuth2Client.generateAuthUrl({
 
         access_type: "offline",
+
+        prompt: "consent",
+
         scope: SCOPES,
 
     });
@@ -87,6 +127,10 @@ app.get("/auth", (req, res) => {
     res.redirect(authUrl);
 
 });
+
+/* ========================= */
+/* CALLBACK */
+/* ========================= */
 
 app.get("/oauth2callback", async (req, res) => {
 
@@ -100,15 +144,13 @@ app.get("/oauth2callback", async (req, res) => {
         oAuth2Client.setCredentials(tokens);
 
         console.log(
-    "TOKEN:",
-    JSON.stringify(tokens)
-);
+            "TOKEN:",
+            JSON.stringify(tokens)
+        );
 
         console.log("🔥 TOKEN GUARDADO");
 
-        res.send(
-            "✅ Gmail conectado correctamente"
-        );
+        res.send("✅ Gmail conectado correctamente");
 
     } catch (error) {
 
@@ -120,6 +162,10 @@ app.get("/oauth2callback", async (req, res) => {
 
 });
 
+/* ========================= */
+/* OTP */
+/* ========================= */
+
 app.get("/otp", async (req, res) => {
 
     try {
@@ -127,45 +173,44 @@ app.get("/otp", async (req, res) => {
         const plataforma =
         req.query.plataforma;
 
-       let remitente = "";
+        let remitente = "";
 
-switch(plataforma){
+        switch(plataforma){
 
-    case "amazon":
-    remitente = "amazon";
-    break;
+            case "amazon":
+                remitente = "amazon";
+            break;
 
-    case "netflix":
-        remitente = "netflix";
-        break;
+            case "netflix":
+                remitente = "netflix";
+            break;
 
-    case "disney":
-        remitente = "disney";
-        break;
+            case "disney":
+                remitente = "disney";
+            break;
 
-    case "spotify":
-        remitente = "spotify";
-        break;
+            case "spotify":
+                remitente = "spotify";
+            break;
 
-    case "max":
-        remitente = "max";
-        break;
+            case "max":
+                remitente = "max";
+            break;
 
-    case "crunchyroll":
-        remitente = "crunchyroll";
-        break;
+            case "crunchyroll":
+                remitente = "crunchyroll";
+            break;
 
-    default:
-        remitente = "";
-}
-const cuentasGmail = [
+            default:
+                remitente = "";
+        }
 
-    oAuth2Client
-
-];
         const gmail = google.gmail({
+
             version: "v1",
-            auth: cuentasGmail[0],
+
+            auth: oAuth2Client,
+
         });
 
         const response =
@@ -175,27 +220,36 @@ const cuentasGmail = [
 
             maxResults: 10,
 
-            q: `from:${remitente} newer_than:2m`
+            q: `
+                newer_than:10m
+                (
+                    from:${remitente}
+                )
+            `
 
         });
 
         const messages =
         response.data.messages;
 
-        if (!messages || messages.length === 0) {
+        if(!messages || messages.length === 0){
 
             return res.json({
-                otp: "No encontrado",
+
+                otp: "No encontrado"
+
             });
 
         }
 
-        const ultimoMensaje = messages[0];
+        const ultimoMensaje =
+        messages[0];
 
         const message =
         await gmail.users.messages.get({
 
             userId: "me",
+
             id: ultimoMensaje.id,
 
         });
@@ -205,376 +259,204 @@ const cuentasGmail = [
 
         let body = "";
 
-        function extraerTexto(parts) {
+        function extraerTexto(parts){
 
-            for (const part of parts) {
+            for(const part of parts){
 
-                if (
-    (
-        part.mimeType === "text/plain"
-        ||
-        part.mimeType === "text/html"
-    )
-    &&
-    part.body.data
-) {
+                if(
+
+                    (
+                        part.mimeType === "text/plain"
+                        ||
+                        part.mimeType === "text/html"
+                    )
+
+                    &&
+
+                    part.body.data
+
+                ){
 
                     body += Buffer.from(
+
                         part.body.data,
+
                         "base64"
+
                     ).toString("utf8");
 
                 }
 
-                if (part.parts) {
+                if(part.parts){
+
                     extraerTexto(part.parts);
+
                 }
 
             }
 
         }
 
-        if (payload.parts) {
+        if(payload.parts){
 
             extraerTexto(payload.parts);
 
-        } else if (
+        }
+
+        else if(
+
             payload.body &&
             payload.body.data
-        ) {
+
+        ){
 
             body = Buffer.from(
+
                 payload.body.data,
+
                 "base64"
+
             ).toString("utf8");
 
         }
 
-        console.log(body);
-const textoPlano = body
-.replace(/<[^>]*>/g, " ")
-.replace(/&nbsp;/g, " ")
-.replace(/&#39;/g, "'")
-.replace(/\s+/g, " ");
+        const textoPlano = body
 
-let otp = "No encontrado";
+        .replace(/<[^>]*>/g, " ")
 
-const patrones = [
+        .replace(/&nbsp;/g, " ")
 
-/verification code is[:\s]+(\d{6,8})/i,
+        .replace(/&#39;/g, "'")
 
-/your verification code is[:\s]+(\d{6,8})/i,
+        .replace(/\s+/g, " ");
 
-/use this code[:\s]+(\d{6,8})/i,
+        let otp = "No encontrado";
 
-/one time password[:\s]+(\d{6,8})/i,
+        const patrones = [
 
-/otp[:\s]+(\d{6,8})/i,
+            /verification code is[:\s]+(\d{6,8})/i,
 
-/enter the following code[:\s]+(\d{6,8})/i,
+            /your verification code is[:\s]+(\d{6,8})/i,
 
-/código de verificación[:\s]+(\d{6,8})/i
+            /use this code[:\s]+(\d{6,8})/i,
 
-];
+            /one time password[:\s]+(\d{6,8})/i,
 
-for (const patron of patrones) {
+            /otp[:\s]+(\d{6,8})/i,
 
-    const match = textoPlano.match(patron);
+            /enter the following code[:\s]+(\d{6,8})/i,
 
-    if (match) {
+            /código de verificación[:\s]+(\d{6,8})/i
 
-        otp = match[1];
-        break;
+        ];
+
+        for(const patron of patrones){
+
+            const match =
+            textoPlano.match(patron);
+
+            if(match){
+
+                otp = match[1];
+
+                break;
+
+            }
+
+        }
+
+        console.log("OTP:", otp);
+
+        await History.create({
+
+            correo:
+            req.query.correo || "No definido",
+
+            plataforma,
+
+            otp,
+
+            ip: req.ip,
+
+            dispositivo:
+            req.headers["user-agent"],
+
+            fecha: new Date()
+
+        });
+
+        res.json({
+
+            otp
+
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.json({
+
+            otp: "Error"
+
+        });
 
     }
 
-}
-
-console.log("OTP:", otp);
-await History.create({
-
-    correo: req.query.correo,
-
-    plataforma: req.query.plataforma,
-
-    otp,
-
-    ip: req.ip,
-
-    dispositivo: req.headers["user-agent"]
-
-});
-/* ========================= */
-/* GUARDAR HISTORIAL */
-/* ========================= */
-
-let historial = [];
-
-if(fs.existsSync(HISTORY_FILE)){
-
-    historial = JSON.parse(
-        fs.readFileSync(HISTORY_FILE)
-    );
-
-}
-
-historial.unshift({
-
-    correo:
-    req.query.correo || "No definido",
-
-    plataforma,
-
-    otp,
-
-    fecha:
-    new Date().toLocaleString()
-
 });
 
-fs.writeFileSync(
-
-    HISTORY_FILE,
-
-    JSON.stringify(
-        historial,
-        null,
-        2
-    )
-
-);
-
-res.json({
-    otp,
-});
-
-} catch (error) {
-
-    console.log(error);
-
-    res.json({
-        otp: "Error",
-    });
-
-}
-
-});
 /* ========================= */
-/* LOGIN ADMIN */
+/* ADMIN */
 /* ========================= */
 
-app.get("/admin", (req, res) => {
+app.get("/admin", async (req, res) => {
 
     if(req.session.admin){
-/* ========================= */
-/* LEER HISTORIAL */
-/* ========================= */
 
-let historial = [];
+        const historial =
+        await History.find()
+        .sort({ fecha:-1 })
+        .limit(50);
 
-if(fs.existsSync(HISTORY_FILE)){
+        let filas = "";
 
-    historial = JSON.parse(
-        fs.readFileSync(HISTORY_FILE)
-    );
+        historial.forEach(item => {
 
-}
+            filas += `
 
-let filas = "";
-/* ========================= */
-/* CONTADOR DE PLATAFORMAS */
-/* ========================= */
+            <tr>
 
-let netflix = 0;
-let amazon = 0;
-let disney = 0;
-let spotify = 0;
-let max = 0;
-let crunchyroll = 0;
+                <td>${item.correo}</td>
 
-historial.forEach(item => {
+                <td>${item.plataforma}</td>
 
-    if(item.plataforma === "netflix"){
-        netflix++;
-    }
+                <td>${item.otp}</td>
 
-    if(item.plataforma === "amazon"){
-        amazon++;
-    }
+            </tr>
 
-    if(item.plataforma === "disney"){
-        disney++;
-    }
+            `;
 
-    if(item.plataforma === "spotify"){
-        spotify++;
-    }
+        });
 
-    if(item.plataforma === "max"){
-        max++;
-    }
-
-    if(item.plataforma === "crunchyroll"){
-        crunchyroll++;
-    }
-
-});
-historial.forEach(item => {
-
-    filas += `
-
-    <tr>
-
-        <td>
-            ${item.correo}
-        </td>
-
-        <td>
-            ${item.plataforma}
-        </td>
-
-        <td>
-            ${item.otp}
-        </td>
-
-    </tr>
-
-    `;
-
-});
         return res.send(`
 
-   
 <html>
 
 <head>
 
-<title>Panel Admin</title>
+<title>RestarStore Admin</title>
 
 <style>
 
 body{
 
-    margin:0;
-    padding:0;
-
     background:#050816;
+
+    color:white;
 
     font-family:Arial;
 
-    color:white;
-
-}
-
-/* HEADER */
-
-.header{
-
-    width:100%;
-    padding:25px;
-
-    background:rgba(0,0,0,0.5);
-
-    border-bottom:2px solid cyan;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    box-sizing:border-box;
-
-}
-
-.logo{
-
-    font-size:35px;
-    font-weight:bold;
-    color:cyan;
-
-}
-
-.logout{
-
-    background:red;
-
-    color:white;
-
-    border:none;
-
-    padding:12px 20px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-weight:bold;
-
-}
-
-/* DASHBOARD */
-
-.dashboard{
-
     padding:40px;
-
-}
-
-/* CARDS */
-
-.cards{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(250px,1fr));
-
-    gap:25px;
-
-    margin-top:30px;
-
-}
-
-.card{
-
-    background:rgba(0,0,0,0.55);
-
-    border:2px solid rgba(0,255,255,0.3);
-
-    border-radius:25px;
-
-    padding:30px;
-
-    box-shadow:0 0 20px rgba(0,255,255,0.15);
-
-}
-
-.card h2{
-
-    color:cyan;
-    margin-bottom:15px;
-
-}
-
-.big{
-
-    font-size:45px;
-    font-weight:bold;
-
-}
-
-/* TABLE */
-
-.table{
-
-    margin-top:40px;
-
-    background:rgba(0,0,0,0.55);
-
-    border-radius:25px;
-
-    padding:25px;
-
-    border:2px solid rgba(0,255,255,0.2);
 
 }
 
@@ -592,9 +474,7 @@ th,td{
 
     padding:15px;
 
-    text-align:left;
-
-    border-bottom:1px solid rgba(255,255,255,0.1);
+    border-bottom:1px solid #333;
 
 }
 
@@ -603,413 +483,161 @@ th{
     color:cyan;
 
 }
-/* TERMINAL */
 
-.terminal{
-
-    background:black;
-
-    padding:20px;
-
-    border-radius:20px;
-
-    border:2px solid cyan;
-
-    font-family:monospace;
-
-    color:#00ff99;
-
-    box-shadow:
-    0 0 20px rgba(0,255,255,0.3);
-
-}
-
-.terminal div{
-
-    margin-bottom:10px;
-
-}
 </style>
 
 </head>
 
 <body>
 
-<div class="header">
+<h1>
+🔥 RestarStore Admin
+</h1>
 
-    <div class="logo">
-        🔥 RestarStore Admin
-    </div>
+<table>
 
-    <form action="/logout" method="GET">
+<tr>
 
-        <button class="logout">
-            Cerrar sesión
-        </button>
+<th>Correo</th>
+<th>Plataforma</th>
+<th>OTP</th>
 
-    </form>
+</tr>
 
-</div>
+${filas}
 
-<div class="dashboard">
+</table>
 
-    <h1>
-        Bienvenido Administrador 😎
-    </h1>
-
-    <div class="cards">
-
-        <div class="card">
-
-            <h2>OTPs Hoy</h2>
-
-            <div class="big">
-                53
-            </div>
-
-        </div>
-
-        <div class="card">
-
-            <h2>Usuarios</h2>
-
-            <div class="big">
-                18
-            </div>
-
-        </div>
-
-        <div class="card">
-
-            <h2>Plataformas</h2>
-
-            <div class="big">
-                6
-            </div>
-
-        </div>
-
-        <div class="card">
-
-            <h2>Servidor</h2>
-
-            <div class="big">
-                ONLINE
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="table">
-
-        <h2>
-            Últimos OTP
-        </h2>
-
-        <table>
-
-            <tr>
-
-                <th>Correo</th>
-                <th>Plataforma</th>
-                <th>OTP</th>
-
-            </tr>
-
-            ${filas}
-
-        </table>
-
-    </div>
-
-</div>
-<div class="table">
-
-    <h2>
-        📊 OTP por Plataforma
-    </h2>
-
-    <canvas id="grafica"></canvas>
-<div class="table">
-
-    <h2>
-        💻 Logs del Sistema
-    </h2>
-
-    <div class="terminal">
-
-        <div>
-            [ONLINE] Sistema iniciado
-        </div>
-
-        <div>
-            [GMAIL] API conectada
-        </div>
-
-        <div>
-            [OTP] Esperando actividad...
-        </div>
-
-    </div>
-
-</div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-
-const ctx =
-document.getElementById('grafica');
-
-new Chart(ctx, {
-
-    type: 'bar',
-
-    data: {
-
-        labels: [
-
-            'Netflix',
-            'Prime',
-            'Disney',
-            'Spotify',
-            'Max',
-            'Crunchyroll'
-
-        ],
-
-        datasets: [{
-
-            label: 'OTPs',
-
-            data: [
-
-    ${netflix},
-    ${amazon},
-    ${disney},
-    ${spotify},
-    ${max},
-    ${crunchyroll}
-
-],
-
-            backgroundColor: [
-
-                '#ff0000',
-                '#00c3ff',
-                '#ffffff',
-                '#1db954',
-                '#7b2cff',
-                '#ff8800'
-
-            ],
-
-            borderWidth: 2
-
-        }]
-
-    },
-
-    options: {
-
-        responsive: true,
-
-        plugins: {
-
-            legend: {
-
-                labels: {
-
-                    color: 'white'
-
-                }
-
-            }
-
-        },
-
-        scales: {
-
-            y: {
-
-                ticks: {
-
-                    color: 'white'
-
-                }
-
-            },
-
-            x: {
-
-                ticks: {
-
-                    color: 'white'
-
-                }
-
-            }
-
-        }
-
-    }
-
-});
-
-</script>
-<script>
-
-setInterval(() => {
-
-    location.reload();
-
-}, 5000);
-
-</script>
 </body>
 
 </html>
 
 `);
-                
 
     }
 
     res.send(`
 
-    <html>
+<html>
 
-    <head>
+<head>
 
-    <title>Admin Login</title>
+<title>Admin Login</title>
 
-    <style>
+<style>
 
-    body{
+body{
 
-        background:#050816;
+    background:#050816;
 
-        display:flex;
-        justify-content:center;
-        align-items:center;
+    display:flex;
 
-        height:100vh;
+    justify-content:center;
 
-        font-family:Arial;
+    align-items:center;
 
-    }
+    height:100vh;
 
-    .login{
+    font-family:Arial;
 
-        width:350px;
+}
 
-        background:rgba(0,0,0,0.7);
+.login{
 
-        padding:40px;
+    width:350px;
 
-        border-radius:20px;
+    background:#111;
 
-        box-shadow:0 0 25px cyan;
+    padding:40px;
 
-    }
+    border-radius:20px;
 
-    h1{
+}
 
-        color:cyan;
-        text-align:center;
-        margin-bottom:30px;
+input{
 
-    }
+    width:100%;
 
-    input{
+    padding:15px;
 
-        width:100%;
-        padding:15px;
+    margin-bottom:20px;
 
-        margin-bottom:20px;
+}
 
-        border:none;
-        border-radius:10px;
+button{
 
-        font-size:16px;
+    width:100%;
 
-    }
+    padding:15px;
 
-    button{
+    background:cyan;
 
-        width:100%;
-        padding:15px;
+    border:none;
 
-        border:none;
+    font-weight:bold;
 
-        border-radius:10px;
+}
 
-        background:cyan;
+</style>
 
-        font-size:18px;
-        font-weight:bold;
+</head>
 
-        cursor:pointer;
+<body>
 
-    }
+<form
+class="login"
+method="POST"
+action="/login"
+>
 
-    </style>
+<h1 style="color:cyan;">
+🔐 Admin
+</h1>
 
-    </head>
+<input
+type="text"
+name="usuario"
+placeholder="Usuario"
+required
+>
 
-    <body>
+<input
+type="password"
+name="password"
+placeholder="Contraseña"
+required
+>
 
-    <form
-        class="login"
-        method="POST"
-        action="/login"
-    >
+<button>
+Ingresar
+</button>
 
-        <h1>
-            🔐 Admin Login
-        </h1>
+</form>
 
-        <input
-            type="text"
-            name="usuario"
-            placeholder="Usuario"
-            required
-        >
+</body>
 
-        <input
-            type="password"
-            name="password"
-            placeholder="Contraseña"
-            required
-        >
+</html>
 
-        <button>
-            Ingresar
-        </button>
-
-    </form>
-
-    </body>
-
-    </html>
-
-    `);
+`);
 
 });
 
-/* LOGIN POST */
-
-app.use(express.urlencoded({ extended:true }));
+/* ========================= */
+/* LOGIN */
+/* ========================= */
 
 app.post("/login", (req, res) => {
 
-    const { usuario, password } = req.body;
+    const { usuario, password } =
+    req.body;
 
     if(
 
-        usuario === process.env.ADMIN_USER &&
-password === process.env.ADMIN_PASS
+        usuario === process.env.ADMIN_USER
+
+        &&
+
+        password === process.env.ADMIN_PASS
 
     ){
 
@@ -1020,8 +648,12 @@ password === process.env.ADMIN_PASS
     }
 
     res.send("❌ Datos incorrectos");
-});    
+
+});
+
+/* ========================= */
 /* LOGOUT */
+/* ========================= */
 
 app.get("/logout", (req, res) => {
 
@@ -1030,6 +662,11 @@ app.get("/logout", (req, res) => {
     res.redirect("/admin");
 
 });
+
+/* ========================= */
+/* SERVER */
+/* ========================= */
+
 app.listen(3000, () => {
 
     console.log(
