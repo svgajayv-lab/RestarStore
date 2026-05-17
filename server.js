@@ -442,22 +442,23 @@ console.log(
 
         const patrones = [
 
-            /verification code is[:\s]+(\d{6,8})/i,
+    /verification code is[:\s]+(\d{6,8})/i,
 
-            /your verification code is[:\s]+(\d{6,8})/i,
+    /your verification code is[:\s]+(\d{6,8})/i,
 
-            /use this code[:\s]+(\d{6,8})/i,
+    /use this code[:\s]+(\d{6,8})/i,
 
-            /one time password[:\s]+(\d{6,8})/i,
+    /one time password[:\s]+(\d{6,8})/i,
 
-            /otp[:\s]+(\d{6,8})/i,
+    /otp[:\s]+(\d{6,8})/i,
 
-            /enter the following code[:\s]+(\d{6,8})/i,
+    /enter the following code[:\s]+(\d{6,8})/i,
 
-            /código de verificación[:\s]+(\d{6,8})/i
-            
-            /usa el siguiente código[:\s]+(\d{6,8})/i,
-        ];
+    /código de verificación[:\s]+(\d{6,8})/i,
+
+    /usa el siguiente código[:\s]+(\d{6,8})/i,
+
+];
 
         for(const patron of patrones){
 
