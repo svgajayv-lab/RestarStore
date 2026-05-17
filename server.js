@@ -527,7 +527,7 @@ console.log(
 
         const correosEncontrados =
 textoPlano.match(
-    /[a-zA-Z0-9._%+-]+@(outlook|hotmail|gmail|yahoo)\.[a-zA-Z]{2,}/g
+    /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g
 );
 
 let cuentaDetectada =
