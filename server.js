@@ -264,6 +264,8 @@ for (const msg of messages) {
 
     if(
 
+    (
+
         snippet.toLowerCase().includes("code")
 
         ||
@@ -278,7 +280,17 @@ for (const msg of messages) {
 
         snippet.toLowerCase().includes("código")
 
-    ){
+    )
+
+    &&
+
+    !snippet.toLowerCase().includes("sign-in attempt")
+
+    &&
+
+    !snippet.toLowerCase().includes("password recovery")
+
+){
 
         message = tempMessage;
 
