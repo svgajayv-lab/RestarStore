@@ -302,18 +302,6 @@ const correoCliente =
 
     )
 
-    &&
-
-    (
-
-        snippet.toLowerCase().includes(correoCliente)
-
-        ||
-
-        correoCliente === ""
-
-    )
-
 ){
 
         message = tempMessage;
@@ -491,6 +479,8 @@ console.log(
   /enter the following code[:\s]+(\d{6,8})/i,
 
 /código de verificación[:\s]+(\d{6,8})/i,
+
+/usa el siguiente código.*?(\d{6,8})/i,
 
 /usa el siguiente código.*?(\d{6,8})/i,
 
