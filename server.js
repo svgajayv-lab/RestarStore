@@ -257,19 +257,33 @@ for (const msg of messages) {
 
     });
 
-    const internalDate =
-    parseInt(tempMessage.data.internalDate);
+    const snippet =
+    tempMessage.data.snippet || "";
 
-    const ahora = Date.now();
+    console.log("📨 SNIPPET:", snippet);
 
-    const diferencia =
-    (ahora - internalDate) / 1000;
+    if(
 
-    // SOLO últimos 10 minutos
+        snippet.toLowerCase().includes("code")
 
-    if (diferencia <= 600) {
+        ||
+
+        snippet.toLowerCase().includes("otp")
+
+        ||
+
+        snippet.toLowerCase().includes("verification")
+
+        ||
+
+        snippet.toLowerCase().includes("código")
+
+    ){
 
         message = tempMessage;
+
+        console.log("🔥 CORREO OTP DETECTADO");
+
         break;
 
     }
