@@ -229,7 +229,10 @@ break;
 
         const messages =
         response.data.messages;
-
+console.log(
+    "📬 MENSAJES:",
+    messages?.length || 0
+);
         if(!messages || messages.length === 0){
 
             return res.json({
@@ -359,7 +362,10 @@ if (!message) {
 
 .replace(/\s+/g, " ");
 
-console.log("📩 TEXTO:", textoPlano);
+console.log(
+    "📩 TEXTO:",
+    textoPlano.substring(0, 500)
+);
         let otp = "No encontrado";
 
         const patrones = [
