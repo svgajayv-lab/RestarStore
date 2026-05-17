@@ -282,6 +282,18 @@ for (const msg of messages) {
 
     snippet.toLowerCase().includes("sign-in")
 
+    ||
+
+    snippet.toLowerCase().includes("contraseña")
+
+    ||
+
+    snippet.toLowerCase().includes("recuperación")
+
+    ||
+
+    snippet.toLowerCase().includes("restablecer")
+
 ){
 
         message = tempMessage;
