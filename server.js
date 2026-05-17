@@ -455,7 +455,8 @@ console.log(
             /enter the following code[:\s]+(\d{6,8})/i,
 
             /código de verificación[:\s]+(\d{6,8})/i
-
+            
+            /usa el siguiente código[:\s]+(\d{6,8})/i,
         ];
 
         for(const patron of patrones){
