@@ -488,13 +488,13 @@ console.log(
 
     /otp[:\s]+(\d{6,8})/i,
 
-    /enter the following code[:\s]+(\d{6,8})/i,
+  /enter the following code[:\s]+(\d{6,8})/i,
 
-    /código de verificación[:\s]+(\d{6,8})/i,
+/código de verificación[:\s]+(\d{6,8})/i,
 
-    /usa el siguiente código[:\s]+(\d{6,8})/i,
+/usa el siguiente código.*?(\d{6,8})/i,
 
-    /tu código de verificación es[:\s]+(\d{6,8})/i,
+/tu código de verificación es.*?(\d{6,8})/i
 
 ];
 
