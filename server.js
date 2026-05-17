@@ -525,11 +525,32 @@ console.log(
 
         });
 
+        const correosEncontrados =
+textoPlano.match(
+    /[a-zA-Z0-9._%+-]+@(outlook|hotmail|gmail|yahoo)\.[a-zA-Z]{2,}/g
+);
+
+let cuentaDetectada =
+req.query.correo;
+
+if(
+
+    correosEncontrados &&
+
+    correosEncontrados.length > 0
+
+){
+
+    cuentaDetectada =
+    correosEncontrados[0];
+
+}
+
         res.json({
 
     otp,
 
-    cuenta: req.query.correo
+    cuenta: cuentaDetectada
 
 });
 
