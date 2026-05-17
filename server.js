@@ -264,23 +264,23 @@ for (const msg of messages) {
 
     if(
 
-    (
+    snippet.toLowerCase().includes("code")
 
-        snippet.toLowerCase().includes("code")
+    ||
 
-        ||
+    snippet.toLowerCase().includes("otp")
 
-        snippet.toLowerCase().includes("otp")
+    ||
 
-        ||
+    snippet.toLowerCase().includes("verification")
 
-        snippet.toLowerCase().includes("verification")
+    ||
 
-        ||
+    snippet.toLowerCase().includes("código")
 
-        snippet.toLowerCase().includes("código")
+    ||
 
-    )
+    snippet.toLowerCase().includes("sign-in")
 
 ){
 
