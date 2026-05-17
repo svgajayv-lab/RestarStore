@@ -108,7 +108,7 @@ ultimoOTP = data.otp;
 
 Cuenta:<br>
 
-${data.cuenta}
+${correo}
 
 </small>
 
