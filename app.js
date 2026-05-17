@@ -63,19 +63,7 @@ async function consultarCodigo() {
 
         return;
     }
-const correoValido =
-"lp5118355@gmail.com";
 
-if(
-    correo.toLowerCase() !==
-    correoValido.toLowerCase()
-){
-
-    resultado.innerHTML =
-    "❌ Correo no autorizado";
-
-    return;
-}
     if(plataformaSeleccionada !== "amazon"){
 
         resultado.innerHTML =
