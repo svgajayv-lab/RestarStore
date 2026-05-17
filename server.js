@@ -282,14 +282,6 @@ for (const msg of messages) {
 
     )
 
-    &&
-
-    !snippet.toLowerCase().includes("sign-in attempt")
-
-    &&
-
-    !snippet.toLowerCase().includes("password recovery")
-
 ){
 
         message = tempMessage;
