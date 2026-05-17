@@ -262,37 +262,57 @@ for (const msg of messages) {
 
     console.log("📨 SNIPPET:", snippet);
 
+const correoCliente =
+(req.query.correo || "")
+.toLowerCase();
+
     if(
 
-    snippet.toLowerCase().includes("code")
+    (
 
-    ||
+        snippet.toLowerCase().includes("code")
 
-    snippet.toLowerCase().includes("otp")
+        ||
 
-    ||
+        snippet.toLowerCase().includes("otp")
 
-    snippet.toLowerCase().includes("verification")
+        ||
 
-    ||
+        snippet.toLowerCase().includes("verification")
 
-    snippet.toLowerCase().includes("código")
+        ||
 
-    ||
+        snippet.toLowerCase().includes("código")
 
-    snippet.toLowerCase().includes("sign-in")
+        ||
 
-    ||
+        snippet.toLowerCase().includes("sign-in")
 
-    snippet.toLowerCase().includes("contraseña")
+        ||
 
-    ||
+        snippet.toLowerCase().includes("contraseña")
 
-    snippet.toLowerCase().includes("recuperación")
+        ||
 
-    ||
+        snippet.toLowerCase().includes("recuperación")
 
-    snippet.toLowerCase().includes("restablecer")
+        ||
+
+        snippet.toLowerCase().includes("restablecer")
+
+    )
+
+    &&
+
+    (
+
+        snippet.toLowerCase().includes(correoCliente)
+
+        ||
+
+        correoCliente === ""
+
+    )
 
 ){
 
