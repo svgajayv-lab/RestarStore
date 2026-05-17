@@ -293,44 +293,43 @@ if (!message) {
 
         function extraerTexto(parts){
 
-            for(const part of parts){
+    for(const part of parts){
 
-                if(
+        if(part.parts){
 
-                    (
-                        part.mimeType === "text/plain"
-                        ||
-                        part.mimeType === "text/html"
-                    )
+            extraerTexto(part.parts);
 
-                    &&
+        }
 
-                    part.body.data
+        if(part.body && part.body.data){
 
-                ){
+            try{
 
-                    body += Buffer.from(
+                const data = Buffer.from(
 
-                        part.body.data,
+                    part.body.data,
 
-                        "base64"
+                    "base64"
 
-                    ).toString("utf8");
+                ).toString("utf8");
 
-                }
+                body += data;
 
-                if(part.parts){
+            }
 
-                    extraerTexto(part.parts);
+            catch(err){
 
-                }
+                console.log(err);
 
             }
 
         }
 
-        if(payload.parts){
+    }
 
+}
+        if(payload.parts){
+console.log("🔥 PARTS DETECTADAS");
             extraerTexto(payload.parts);
 
         }
