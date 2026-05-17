@@ -223,7 +223,7 @@ break;
 
             maxResults: 5,
 
-            q: `from:${remitente} newer_than:15m`
+            q: `newer_than:15m`
 
         });
 
@@ -350,7 +350,7 @@ if (!message) {
         }
 
         const textoPlano = body
-
+console.log("📩 TEXTO:", textoPlano);
         .replace(/<[^>]*>/g, " ")
 
         .replace(/&nbsp;/g, " ")
@@ -384,13 +384,15 @@ if (!message) {
             const match =
             textoPlano.match(patron);
 
-            if(match){
+            if(match && match[1]){
 
-                otp = match[1];
+    otp = match[1];
 
-                break;
+    console.log("🔥 OTP ENCONTRADO:", otp);
 
-            }
+    break;
+
+}
 
         }
 
