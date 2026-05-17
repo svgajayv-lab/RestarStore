@@ -110,8 +110,21 @@ if(data.otp === ultimoOTP){
 }
 
 ultimoOTP = data.otp;
-            resultado.innerHTML =
-`🔐 Código OTP: ${data.otp}`;
+            resultado.innerHTML = `
+
+🔐 Código OTP: ${data.otp}
+
+<br><br>
+
+<small>
+
+Cuenta:<br>
+
+${data.cuenta}
+
+</small>
+
+`;
 
 resultado.classList.add("otp-animation");
 

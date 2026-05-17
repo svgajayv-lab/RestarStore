@@ -537,9 +537,11 @@ console.log(
 
         res.json({
 
-            otp
+    otp,
 
-        });
+    cuenta: req.query.correo
+
+});
 
     } catch (error) {
 
