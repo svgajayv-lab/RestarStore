@@ -328,28 +328,87 @@ if (!message) {
     }
 
 }
-        if(payload.parts){
-console.log("🔥 PARTS DETECTADAS");
-            extraerTexto(payload.parts);
+        function obtenerTexto(partes){
 
-        }
+    for(const parte of partes){
 
-        else if(
+        if(
 
-            payload.body &&
-            payload.body.data
+            parte.body &&
+            parte.body.data
 
         ){
 
-            body = Buffer.from(
+            try{
 
-                payload.body.data,
+                const texto =
+                Buffer.from(
 
-                "base64"
+                    parte.body.data,
 
-            ).toString("utf8");
+                    "base64"
+
+                ).toString("utf8");
+
+                body += texto;
+
+            }
+
+            catch(err){
+
+                console.log(err);
+
+            }
 
         }
+
+        if(parte.parts){
+
+            obtenerTexto(parte.parts);
+
+        }
+
+    }
+
+}
+
+if(payload.parts){
+
+    obtenerTexto(payload.parts);
+
+}
+
+if(
+
+    payload.body &&
+    payload.body.data
+
+){
+
+    try{
+
+        body += Buffer.from(
+
+            payload.body.data,
+
+            "base64"
+
+        ).toString("utf8");
+
+    }
+
+    catch(err){
+
+        console.log(err);
+
+    }
+
+}
+
+console.log(
+    "📩 BODY LENGTH:",
+    body.length
+);
 
         const textoPlano = body
 
