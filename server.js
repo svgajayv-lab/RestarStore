@@ -136,6 +136,154 @@ app.get("/cuentas", async (req, res) => {
 });
 
 /* ========================= */
+/* ADMIN CUENTAS */
+/* ========================= */
+
+app.get("/admin/cuentas", async (req, res) => {
+
+    try {
+
+        const cuentas =
+        await Account.find()
+        .sort({ fecha: -1 });
+
+        let filas = "";
+
+        cuentas.forEach(cuenta => {
+
+            filas += `
+
+            <tr>
+
+                <td>${cuenta.plataforma}</td>
+
+                <td>${cuenta.plan}</td>
+
+                <td>${cuenta.correo}</td>
+
+                <td>${cuenta.password}</td>
+
+                <td>${cuenta.estado}</td>
+
+                <td>${cuenta.cliente}</td>
+
+            </tr>
+
+            `;
+
+        });
+
+        res.send(`
+
+<html>
+
+<head>
+
+<title>RestarStore Cuentas</title>
+
+<style>
+
+body{
+
+    background:#050816;
+
+    color:white;
+
+    font-family:Arial;
+
+    padding:40px;
+
+}
+
+h1{
+
+    color:cyan;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+
+    background:#111;
+
+}
+
+th,td{
+
+    padding:15px;
+
+    border-bottom:1px solid #333;
+
+    text-align:left;
+
+}
+
+th{
+
+    color:cyan;
+
+}
+
+tr:hover{
+
+    background:#1a1a1a;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>
+📦 RestarStore Accounts
+</h1>
+
+<table>
+
+<tr>
+
+<th>Plataforma</th>
+
+<th>Plan</th>
+
+<th>Correo</th>
+
+<th>Password</th>
+
+<th>Estado</th>
+
+<th>Cliente</th>
+
+</tr>
+
+${filas}
+
+</table>
+
+</body>
+
+</html>
+
+`);
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.send("Error cargando cuentas");
+
+    }
+
+});
+
+/* ========================= */
 /* SESSION */
 /* ========================= */
 
@@ -433,7 +581,7 @@ if (!message) {
 
         let body = "";
 
-        {
+        function extraerTexto(parts){
 
     for(const part of parts){
 
