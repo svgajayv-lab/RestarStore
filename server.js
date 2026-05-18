@@ -19,13 +19,121 @@ mongoose.connect(process.env.MONGO_URI)
 });
 
 const express = require("express");
+
 const session = require("express-session");
+
 const path = require("path");
+
 const { google } = require("googleapis");
 
-const History = require("./models/History");
+const Account =
+require("./models/Account");
+
+const History =
+require("./models/History");
 
 const app = express();
+
+app.use(express.json());
+
+app.use(express.urlencoded({
+    extended: true
+}));
+
+/* ========================= */
+/* CREAR CUENTA */
+/* ========================= */
+
+app.post("/crear-cuenta", async (req, res) => {
+
+    try {
+
+        const {
+
+            plataforma,
+
+            plan,
+
+            correo,
+
+            password,
+
+            cliente,
+
+            estado,
+
+            vencimiento
+
+        } = req.body;
+
+        const nuevaCuenta =
+        new Account({
+
+            plataforma,
+
+            plan,
+
+            correo,
+
+            password,
+
+            cliente,
+
+            estado,
+
+            vencimiento
+
+        });
+
+        await nuevaCuenta.save();
+
+        res.json({
+
+            success: true,
+
+            message: "Cuenta creada"
+
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.json({
+
+            success: false,
+
+            message: "Error creando cuenta"
+
+        });
+
+    }
+
+});
+
+/* ========================= */
+/* LISTAR CUENTAS */
+/* ========================= */
+
+app.get("/cuentas", async (req, res) => {
+
+    try {
+
+        const cuentas =
+        await Account.find()
+        .sort({ fecha: -1 });
+
+        res.json(cuentas);
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.json([]);
+
+    }
+
+});
 
 /* ========================= */
 /* SESSION */
@@ -262,10 +370,6 @@ for (const msg of messages) {
 
     console.log("📨 SNIPPET:", snippet);
 
-const correoCliente =
-(req.query.correo || "")
-.toLowerCase();
-
     if(
 
     (
@@ -329,7 +433,7 @@ if (!message) {
 
         let body = "";
 
-        function extraerTexto(parts){
+        {
 
     for(const part of parts){
 
@@ -482,7 +586,7 @@ console.log(
 
 /usa el siguiente código.*?(\d{6,8})/i,
 
-/usa el siguiente código.*?(\d{6,8})/i,
+/usa el siguiente codigo.*?(\d{6,8})/i,
 
 /tu código de verificación es.*?(\d{6,8})/i
 
