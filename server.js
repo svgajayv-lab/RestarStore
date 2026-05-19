@@ -115,7 +115,8 @@ app.post("/crear-cuenta", async (req, res) => {
 /* CREAR CUENTA WEB */
 /* ========================= */
 
-app.post("/crear-cuenta-web", async (req, res) => {
+app.post("/crear-cuenta-web"
+, async (req, res) => {
 
     try {
 
@@ -133,6 +134,9 @@ app.post("/crear-cuenta-web", async (req, res) => {
 
             password:
             req.body.password,
+
+            vencimiento:
+            req.body.vencimiento,
 
             cliente: "Libre",
 
@@ -155,12 +159,346 @@ app.post("/crear-cuenta-web", async (req, res) => {
 });
 
 /* ========================= */
+/* ELIMINAR CUENTA */
+/* ========================= */
+
+app.post("/eliminar-cuenta/:id", async (req, res) => {
+
+    try {
+
+        await Account.findByIdAndDelete(
+            req.params.id
+        );
+
+        res.redirect("/admin/cuentas");
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.send("Error eliminando cuenta");
+
+    }
+
+});
+
+/* ========================= */
+/* FORM EDITAR */
+/* ========================= */
+
+app.get("/editar-cuenta/:id", async (req, res) => {
+
+    try {
+
+        const cuenta =
+        await Account.findById(
+            req.params.id
+        );
+
+        if(!cuenta){
+
+            return res.send(
+                "Cuenta no encontrada"
+            );
+
+        }
+
+        res.send(`
+
+<html>
+
+<head>
+
+<title>Editar Cuenta</title>
+
+<style>
+
+body{
+
+    background:#050816;
+
+    color:white;
+
+    font-family:Arial;
+
+    padding:40px;
+
+}
+
+form{
+
+    background:#111;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    width:500px;
+
+}
+
+input{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+    border:none;
+
+    border-radius:10px;
+
+}
+
+button{
+
+    padding:15px 25px;
+
+    background:cyan;
+
+    border:none;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>
+✏️ Editar Cuenta
+</h1>
+
+<form
+method="POST"
+action="/editar-cuenta/${cuenta._id}"
+>
+
+<input
+name="plataforma"
+value="${cuenta.plataforma}"
+required
+>
+
+<input
+name="plan"
+value="${cuenta.plan}"
+required
+>
+
+<input
+name="correo"
+value="${cuenta.correo}"
+required
+>
+
+<input
+name="password"
+value="${cuenta.password}"
+required
+>
+
+<button>
+
+Guardar Cambios
+
+</button>
+
+</form>
+
+</body>
+
+</html>
+
+`);
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        res.send("Error");
+
+    }
+
+});
+
+/* ========================= */
+/* GUARDAR EDICION */
+/* ========================= */
+
+app.post("/editar-cuenta/:id", async (req, res) => {
+
+    try {
+
+        await Account.findByIdAndUpdate(
+
+            req.params.id,
+
+            {
+
+                plataforma:
+                req.body.plataforma,
+
+                plan:
+                req.body.plan,
+
+                correo:
+                req.body.correo,
+
+                password:
+                req.body.password
+
+            }
+
+        );
+
+        res.redirect("/admin/cuentas");
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        res.send("Error actualizando");
+
+    }
+
+});
+
+/* ========================= */
+/* CAMBIAR ESTADO */
+/* ========================= */
+
+app.post("/cambiar-estado/:id", async (req, res) => {
+
+    try {
+
+        const cuenta =
+        await Account.findById(
+            req.params.id
+        );
+
+        if(!cuenta){
+
+            return res.send(
+                "Cuenta no encontrada"
+            );
+
+        }
+
+        cuenta.estado =
+
+        cuenta.estado === "Libre"
+
+        ?
+
+        "Usada"
+
+        :
+
+        "Libre";
+
+        await cuenta.save();
+
+        res.redirect("/admin/cuentas");
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        res.send(
+            "Error cambiando estado"
+        );
+
+    }
+
+});
+
+app.post("/editar-cuenta/:id", async (req, res) => {
+
+    try {
+
+        await Account.findByIdAndUpdate(
+
+            req.params.id,
+
+            {
+
+                plataforma:
+                req.body.plataforma,
+
+                plan:
+                req.body.plan,
+
+                correo:
+                req.body.correo,
+
+                password:
+                req.body.password
+
+            }
+
+        );
+
+        res.redirect("/admin/cuentas");
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        res.send("Error actualizando");
+
+    }
+
+});
+
+/* ========================= */
 /* LISTAR CUENTAS */
 /* ========================= */
 
 app.get("/cuentas", async (req, res) => {
 
     try {
+
+        /* ========================= */
+        /* ACTUALIZAR VENCIDAS */
+        /* ========================= */
+
+        const cuentasVencidas =
+        await Account.find({
+
+            vencimiento: {
+
+                $lt: new Date()
+
+            },
+
+            estado: "Usada"
+
+        });
+
+        for(const cuenta of cuentasVencidas){
+
+            cuenta.estado = "Libre";
+
+            cuenta.cliente = "Libre";
+
+            await cuenta.save();
+
+        }
 
         const cuentas =
         await Account.find()
@@ -204,11 +542,178 @@ app.get("/admin/cuentas", async (req, res) => {
 
                 <td>${cuenta.correo}</td>
 
-                <td>${cuenta.password}</td>
+                <td>
 
-                <td>${cuenta.estado}</td>
+<span
+id="pass-${cuenta._id}"
+style="
+display:none;
+"
+>
+
+${cuenta.password}
+
+</span>
+
+<span
+id="hidden-${cuenta._id}"
+>
+
+••••••••
+
+</span>
+
+<button
+onclick="togglePassword('${cuenta._id}')"
+style="
+margin-left:10px;
+background:none;
+border:none;
+cursor:pointer;
+color:cyan;
+font-size:18px;
+"
+>
+
+👁️
+
+</button>
+
+</td>
+
+                <td>
+
+<form
+method="POST"
+action="/cambiar-estado/${cuenta._id}"
+>
+
+<button
+style="
+padding:8px 12px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:
+
+${cuenta.estado === "Libre"
+? "#00c853"
+: "#ff5252"};
+
+color:white;
+font-weight:bold;
+"
+>
+
+${cuenta.estado}
+
+</button>
+
+</form>
+
+</td>
+
+<td>
+
+<span
+style="
+padding:8px 12px;
+border-radius:10px;
+font-weight:bold;
+color:white;
+background:
+
+${
+
+!cuenta.vencimiento
+
+?
+
+'#757575'
+
+:
+
+new Date(cuenta.vencimiento)
+< new Date()
+
+?
+
+'#ff1744'
+
+:
+
+(
+
+(new Date(cuenta.vencimiento)
+- new Date())
+
+/
+
+(1000 * 60 * 60 * 24)
+
+< 3
+
+?
+
+'#ff9100'
+
+:
+
+'#00c853'
+
+)
+
+};
+"
+>
+
+${
+
+cuenta.vencimiento
+
+?
+
+new Date(
+cuenta.vencimiento
+).toLocaleDateString()
+
+:
+
+"Sin fecha"
+
+}
+
+</span>
+
+</td>
 
                 <td>${cuenta.cliente}</td>
+
+                <td>
+
+<form
+method="POST"
+action="/eliminar-cuenta/${cuenta._id}"
+>
+
+<button
+style="
+background:red;
+color:white;
+border:none;
+padding:10px;
+cursor:pointer;
+border-radius:8px;
+"
+>
+
+Eliminar
+
+</button>
+
+</form>
+
+</td>
 
             </tr>
 
@@ -288,6 +793,85 @@ tr:hover{
 📦 RestarStore Accounts
 </h1>
 
+<div
+style="
+display:flex;
+gap:20px;
+margin-bottom:30px;
+"
+>
+
+<div
+style="
+background:#111;
+padding:20px;
+border-radius:15px;
+width:220px;
+"
+>
+
+<h2 style="color:cyan;">
+📦 Total
+</h2>
+
+<h1>
+${cuentas.length}
+</h1>
+
+</div>
+
+<div
+style="
+background:#111;
+padding:20px;
+border-radius:15px;
+width:220px;
+"
+>
+
+<h2 style="color:#00e676;">
+🟢 Libres
+</h2>
+
+<h1>
+
+${
+cuentas.filter(
+c => c.estado === "Libre"
+).length
+}
+
+</h1>
+
+</div>
+
+<div
+style="
+background:#111;
+padding:20px;
+border-radius:15px;
+width:220px;
+"
+>
+
+<h2 style="color:#ff5252;">
+🔴 Usadas
+</h2>
+
+<h1>
+
+${
+cuentas.filter(
+c => c.estado === "Usada"
+).length
+}
+
+</h1>
+
+</div>
+
+</div>
+
 <form
 method="POST"
 action="/crear-cuenta-web"
@@ -343,6 +927,17 @@ width:180px;
 "
 >
 
+<input
+type="date"
+name="vencimiento"
+required
+style="
+padding:12px;
+margin:5px;
+width:200px;
+"
+>
+
 <button
 style="
 padding:12px 20px;
@@ -359,6 +954,50 @@ Guardar Cuenta
 
 </form>
 
+<input
+type="text"
+id="buscador"
+placeholder="🔎 Buscar cuenta..."
+onkeyup="filtrarTabla()"
+style="
+width:300px;
+padding:15px;
+margin-bottom:20px;
+border:none;
+border-radius:10px;
+background:#111;
+color:white;
+font-size:16px;
+"
+>
+
+<select
+id="filtroEstado"
+onchange="filtrarTabla()"
+style="
+padding:15px;
+border:none;
+border-radius:10px;
+background:#111;
+color:white;
+margin-left:10px;
+"
+>
+
+<option value="">
+Todos
+</option>
+
+<option value="Libre">
+Libres
+</option>
+
+<option value="Usada">
+Usadas
+</option>
+
+</select>
+
 <table>
 
 <tr>
@@ -373,13 +1012,106 @@ Guardar Cuenta
 
 <th>Estado</th>
 
+<th>Vencimiento</th>
+
 <th>Cliente</th>
+
+<th>Acciones</th>
 
 </tr>
 
 ${filas}
 
 </table>
+
+<script>
+
+function togglePassword(id){
+
+    const pass =
+    document.getElementById(
+        "pass-" + id
+    );
+
+    const hidden =
+    document.getElementById(
+        "hidden-" + id
+    );
+
+    if(pass.style.display === "none"){
+
+        pass.style.display = "inline";
+
+        hidden.style.display = "none";
+
+    }
+
+    else{
+
+        pass.style.display = "none";
+
+        hidden.style.display = "inline";
+
+    }
+
+}
+
+<script>
+
+function filtrarTabla(){
+
+    const input =
+    document.getElementById(
+        "buscador"
+    );
+
+    const filtro =
+    input.value.toLowerCase();
+
+    const estado =
+    document.getElementById(
+        "filtroEstado"
+    ).value;
+
+    const filas =
+    document.querySelectorAll("table tr");
+
+    filas.forEach((fila, index) => {
+
+        if(index === 0) return;
+
+        const texto =
+        fila.innerText.toLowerCase();
+
+        const coincideTexto =
+        texto.includes(filtro);
+
+        const coincideEstado =
+
+        estado === ""
+
+        ||
+
+        fila.innerText.includes(estado);
+
+        fila.style.display =
+
+        coincideTexto &&
+        coincideEstado
+
+        ?
+
+        ""
+
+        :
+
+        "none";
+
+    });
+
+}
+
+</script>
 
 </body>
 
@@ -422,8 +1154,6 @@ app.use(session({
 /* ========================= */
 
 app.use(express.static(__dirname));
-
-app.use(express.urlencoded({ extended:true }));
 
 /* ========================= */
 /* GOOGLE */
@@ -875,11 +1605,64 @@ if(
 
 }
 
-        res.json({
+        const cuentaLibre =
+await Account.findOne({
+
+    plataforma:
+
+    plataforma === "amazon"
+
+    ?
+
+    "Prime Video"
+
+    :
+
+    plataforma,
+
+    estado: "Libre"
+
+});
+
+if(cuentaLibre){
+
+    cuentaLibre.estado = "Usada";
+
+    cuentaLibre.cliente =
+    req.query.correo || "Cliente";
+
+    await cuentaLibre.save();
+
+}
+
+res.json({
 
     otp,
 
-    cuenta: cuentaDetectada
+    cuenta: cuentaDetectada,
+
+    acceso:
+
+    cuentaLibre
+
+    ?
+
+    {
+
+        correo:
+        cuentaLibre.correo,
+
+        password:
+        cuentaLibre.password,
+
+        plan:
+        cuentaLibre.plan
+
+    }
+
+    :
+
+    null
 
 });
 
@@ -1076,6 +1859,24 @@ button{
 
 <body>
 
+<a
+href="/editar-cuenta/${cuenta._id}"
+style="
+background:orange;
+color:black;
+padding:10px;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+margin-right:10px;
+display:inline-block;
+"
+>
+
+Editar
+
+</a>
+
 <form
 class="login"
 method="POST"
@@ -1159,10 +1960,13 @@ app.get("/logout", (req, res) => {
 /* SERVER */
 /* ========================= */
 
-app.listen(3000, () => {
+const PORT =
+process.env.PORT || 3000;
+
+app.listen(PORT, () => {
 
     console.log(
-        "🔥 Servidor activo en puerto 3000"
+        "🔥 Servidor activo en puerto " + PORT
     );
 
 });

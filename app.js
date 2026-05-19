@@ -98,7 +98,8 @@ if(data.otp === ultimoOTP){
 }
 
 ultimoOTP = data.otp;
-            resultado.innerHTML = `
+
+resultado.innerHTML = `
 
 🔐 Código OTP: ${data.otp}
 
@@ -106,27 +107,82 @@ ultimoOTP = data.otp;
 
 <small>
 
-Cuenta:<br>
+Cuenta OTP:<br>
 
 ${correo}
 
 </small>
 
+${
+data.acceso
+
+?
+
+`
+
+<hr style="margin:20px 0;">
+
+<h3 style="color:cyan;">
+🎬 Cuenta Asignada
+</h3>
+
+Correo:
+<b>
+${data.acceso.correo}
+</b>
+
+<br><br>
+
+Password:
+<b>
+${data.acceso.password}
+</b>
+
+<br><br>
+
+Plan:
+<b>
+${data.acceso.plan}
+</b>
+
+`
+
+:
+
+`
+
+<br><br>
+
+<span style="color:red;">
+❌ No hay cuentas libres
+</span>
+
+`
+
+}
 `;
 
-resultado.classList.add("otp-animation");
+resultado.classList.add(
+    "otp-animation"
+);
 
 const sonido =
-document.getElementById("otpSound");
+document.getElementById(
+    "otpSound"
+);
 
 sonido.currentTime = 0;
 
 sonido.play()
+
 .then(() => {
 
-    console.log("Sonido OTP OK");
+    console.log(
+        "Sonido OTP OK"
+    );
 
 })
+
 .catch((error) => {
 
     console.log(
@@ -137,7 +193,11 @@ sonido.play()
 });
 
 setTimeout(() => {
-    resultado.classList.remove("otp-animation");
+
+    resultado.classList.remove(
+        "otp-animation"
+    );
+
 }, 1500);
 
         } else {
