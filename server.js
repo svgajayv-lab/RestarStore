@@ -674,16 +674,6 @@ ${cuenta.estado}
 
 <td>
 
-<span
-style="
-padding:8px 12px;
-border-radius:10px;
-font-weight:bold;
-color:white;
-background:
-
-<td>
-
 ${
 
 cuenta.inicio
