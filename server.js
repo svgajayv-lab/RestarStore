@@ -112,6 +112,49 @@ app.post("/crear-cuenta", async (req, res) => {
 });
 
 /* ========================= */
+/* CREAR CUENTA WEB */
+/* ========================= */
+
+app.post("/crear-cuenta-web", async (req, res) => {
+
+    try {
+
+        const nuevaCuenta =
+        new Account({
+
+            plataforma:
+            req.body.plataforma,
+
+            plan:
+            req.body.plan,
+
+            correo:
+            req.body.correo,
+
+            password:
+            req.body.password,
+
+            cliente: "Libre",
+
+            estado: "Libre"
+
+        });
+
+        await nuevaCuenta.save();
+
+        res.redirect("/admin/cuentas");
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.send("Error creando cuenta");
+
+    }
+
+});
+
+/* ========================= */
 /* LISTAR CUENTAS */
 /* ========================= */
 
@@ -244,6 +287,77 @@ tr:hover{
 <h1>
 📦 RestarStore Accounts
 </h1>
+
+<form
+method="POST"
+action="/crear-cuenta-web"
+style="
+margin-bottom:30px;
+background:#111;
+padding:20px;
+border-radius:15px;
+"
+>
+
+<input
+name="plataforma"
+placeholder="Plataforma"
+required
+style="
+padding:12px;
+margin:5px;
+width:180px;
+"
+>
+
+<input
+name="plan"
+placeholder="Plan"
+required
+style="
+padding:12px;
+margin:5px;
+width:180px;
+"
+>
+
+<input
+name="correo"
+placeholder="Correo"
+required
+style="
+padding:12px;
+margin:5px;
+width:250px;
+"
+>
+
+<input
+name="password"
+placeholder="Password"
+required
+style="
+padding:12px;
+margin:5px;
+width:180px;
+"
+>
+
+<button
+style="
+padding:12px 20px;
+background:cyan;
+border:none;
+font-weight:bold;
+cursor:pointer;
+"
+>
+
+Guardar Cuenta
+
+</button>
+
+</form>
 
 <table>
 
@@ -479,7 +593,7 @@ break;
 
             maxResults: 5,
 
-            q: `newer_than:15m`
+            q: `from:${remitente} newer_than:15m`
 
         });
 
@@ -581,43 +695,6 @@ if (!message) {
 
         let body = "";
 
-        function extraerTexto(parts){
-
-    for(const part of parts){
-
-        if(part.parts){
-
-            extraerTexto(part.parts);
-
-        }
-
-        if(part.body && part.body.data){
-
-            try{
-
-                const data = Buffer.from(
-
-                    part.body.data,
-
-                    "base64"
-
-                ).toString("utf8");
-
-                body += data;
-
-            }
-
-            catch(err){
-
-                console.log(err);
-
-            }
-
-        }
-
-    }
-
-}
         function obtenerTexto(partes){
 
     for(const parte of partes){
