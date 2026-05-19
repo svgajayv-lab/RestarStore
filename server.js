@@ -136,7 +136,12 @@ app.post("/crear-cuenta-web"
             req.body.password,
 
             inicio:
-            req.body.inicio,
+
+req.body.inicio
+
+||
+
+new Date(),
 
             vencimiento:
             req.body.vencimiento,
@@ -876,6 +881,23 @@ new Date(cuenta.vencimiento)
 
                 <td>
 
+<a
+href="/editar-cuenta/${cuenta._id}"
+style="
+background:orange;
+color:black;
+padding:10px;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+margin-right:10px;
+display:inline-block;
+"
+>
+
+✏️ Editar
+
+</a>
 
 <form
 method="POST"
@@ -901,7 +923,7 @@ border-radius:8px;
 "
 >
 
-Eliminar
+🗑️ Eliminar
 
 </button>
 
