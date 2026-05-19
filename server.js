@@ -67,23 +67,36 @@ app.post("/crear-cuenta", async (req, res) => {
         } = req.body;
 
         const nuevaCuenta =
-        new Account({
+new Account({
 
-            plataforma,
+    plataforma:
+    req.body.plataforma,
 
-            plan,
+    plan:
+    req.body.plan,
 
-            correo,
+    correo:
+    req.body.correo,
 
-            password,
+    password:
+    req.body.password,
 
-            cliente,
+    inicio:
 
-            estado,
+    req.body.inicio
 
-            vencimiento
+    ||
 
-        });
+    new Date(),
+
+    vencimiento:
+    req.body.vencimiento,
+
+    cliente: "Libre",
+
+    estado: "Libre"
+
+});
 
         await nuevaCuenta.save();
 
@@ -312,6 +325,48 @@ value="${cuenta.password}"
 required
 >
 
+<input
+type="date"
+name="inicio"
+
+value="${
+cuenta.inicio
+
+?
+
+new Date(cuenta.inicio)
+.toISOString()
+.split('T')[0]
+
+:
+
+''
+}"
+
+required
+>
+
+<input
+type="date"
+name="vencimiento"
+
+value="${
+cuenta.vencimiento
+
+?
+
+new Date(cuenta.vencimiento)
+.toISOString()
+.split('T')[0]
+
+:
+
+''
+}"
+
+required
+>
+
 <button>
 
 Guardar Cambios
@@ -362,7 +417,13 @@ app.post("/editar-cuenta/:id", async (req, res) => {
                 req.body.correo,
 
                 password:
-                req.body.password
+req.body.password,
+
+inicio:
+req.body.inicio,
+
+vencimiento:
+req.body.vencimiento
 
             }
 
