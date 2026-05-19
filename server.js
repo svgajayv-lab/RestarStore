@@ -536,7 +536,63 @@ app.get("/admin/cuentas", async (req, res) => {
 
             <tr>
 
-                <td>${cuenta.plataforma}</td>
+                <td>
+
+${
+
+cuenta.plataforma === "Netflix"
+
+?
+
+"🎬 Netflix"
+
+:
+
+cuenta.plataforma === "Prime Video"
+
+?
+
+"📦 Prime Video"
+
+:
+
+cuenta.plataforma === "Spotify"
+
+?
+
+"🎵 Spotify"
+
+:
+
+cuenta.plataforma === "Disney+"
+
+?
+
+"🪄 Disney+"
+
+:
+
+cuenta.plataforma === "Max"
+
+?
+
+"🎥 Max"
+
+:
+
+cuenta.plataforma === "Crunchyroll"
+
+?
+
+"🍥 Crunchyroll"
+
+:
+
+cuenta.plataforma
+
+}
+
+</td>
 
                 <td>${cuenta.plan}</td>
 
@@ -691,10 +747,56 @@ cuenta.vencimiento
 
                 <td>
 
+<a
+href="/editar-cuenta/${cuenta._id}"
+style="
+background:orange;
+color:black;
+padding:10px;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+margin-right:10px;
+display:inline-block;
+"
+>
+
+✏️ Editar
+
+</a>
+
 <form
 method="POST"
 action="/eliminar-cuenta/${cuenta._id}"
+style="
+display:inline-block;
+"
+onsubmit="
+return confirm(
+'¿Seguro que deseas eliminar esta cuenta?'
+)
+"
 >
+
+<button
+style="
+background:red;
+color:white;
+padding:10px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+"
+>
+
+🗑️ Eliminar
+
+</button>
+
+</form>
+
+</td>
 
 <button
 style="
