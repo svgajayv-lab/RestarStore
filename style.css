@@ -927,3 +927,66 @@ body::after{
     }
 
 }
+.loader {
+
+    display: inline-block;
+
+    font-weight: bold;
+
+    color: cyan;
+
+    animation: glow 1s infinite alternate;
+
+}
+
+.loader::after {
+
+    content: "";
+
+    animation: dots 1.5s steps(4, end) infinite;
+
+}
+
+@keyframes dots {
+
+    0% {
+        content: "";
+    }
+
+    25% {
+        content: ".";
+    }
+
+    50% {
+        content: "..";
+    }
+
+    75% {
+        content: "...";
+    }
+
+    100% {
+        content: "";
+    }
+
+}
+
+@keyframes glow {
+
+    from {
+
+        text-shadow:
+        0 0 5px cyan,
+        0 0 10px cyan;
+
+    }
+
+    to {
+
+        text-shadow:
+        0 0 10px #00ffff,
+        0 0 20px #00ffff;
+
+    }
+
+}
