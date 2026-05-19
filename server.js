@@ -135,6 +135,9 @@ app.post("/crear-cuenta-web"
             password:
             req.body.password,
 
+            inicio:
+            req.body.inicio,
+
             vencimiento:
             req.body.vencimiento,
 
@@ -679,6 +682,36 @@ font-weight:bold;
 color:white;
 background:
 
+<td>
+
+${
+
+cuenta.inicio
+
+?
+
+new Date(
+cuenta.inicio
+).toLocaleDateString()
+
+:
+
+"Sin fecha"
+
+}
+
+</td>
+
+<td>
+
+<span
+style="
+padding:8px 12px;
+border-radius:10px;
+font-weight:bold;
+color:white;
+background:
+
 ${
 
 !cuenta.vencimiento
@@ -738,6 +771,116 @@ cuenta.vencimiento
 "Sin fecha"
 
 }
+
+</span>
+
+<br><br>
+
+<small
+style="
+color:#aaa;
+"
+>
+
+${
+
+cuenta.vencimiento
+
+?
+
+(
+
+new Date(cuenta.vencimiento)
+< new Date()
+
+?
+
+"🔴 Venció hace "
+
++
+
+Math.abs(
+
+Math.ceil(
+
+(
+
+new Date(cuenta.vencimiento)
+- new Date()
+
+)
+
+/
+
+(1000 * 60 * 60 * 24)
+
+)
+
+)
+
++
+
+" días"
+
+:
+
+Math.ceil(
+
+(
+
+new Date(cuenta.vencimiento)
+- new Date()
+
+)
+
+/
+
+(1000 * 60 * 60 * 24)
+
+)
+
+=== 0
+
+?
+
+"🟡 Vence hoy"
+
+:
+
+"🟢 Faltan "
+
++
+
+Math.ceil(
+
+(
+
+new Date(cuenta.vencimiento)
+- new Date()
+
+)
+
+/
+
+(1000 * 60 * 60 * 24)
+
+)
+
++
+
+" días"
+
+)
+
+:
+
+""
+
+}
+
+</small>
+
+</td>
 
 </span>
 
@@ -1031,6 +1174,38 @@ width:180px;
 
 <input
 type="date"
+name="inicio"
+required
+style="
+padding:12px;
+margin:5px;
+width:200px;
+"
+>
+
+<input
+type="date"
+name="inicio"
+
+value="${
+cuenta.inicio
+
+?
+
+new Date(cuenta.inicio)
+.toISOString()
+.split('T')[0]
+
+:
+
+''
+}"
+
+required
+>
+
+<input
+type="date"
 name="vencimiento"
 required
 style="
@@ -1113,6 +1288,8 @@ Usadas
 <th>Password</th>
 
 <th>Estado</th>
+
+<th>Inicio</th>
 
 <th>Vencimiento</th>
 
