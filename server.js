@@ -137,36 +137,31 @@ app.post("/crear-cuenta-web"
     try {
 
         const nuevaCuenta =
-        new Account({
+new Account({
 
-            plataforma:
-            req.body.plataforma,
+    plataforma:
+    req.body.plataforma,
 
-            plan:
-            req.body.plan,
+    plan:
+    req.body.plan,
 
-            correo:
-            req.body.correo,
+    correo:
+    req.body.correo,
 
-            password:
-            req.body.password,
+    password:
+    req.body.password,
 
-            inicio:
+    inicio:
+    req.body.inicio,
 
-req.body.inicio
+    vencimiento:
+    req.body.vencimiento,
 
-||
+    cliente: "Libre",
 
-new Date(),
+    estado: "Libre"
 
-            vencimiento:
-            req.body.vencimiento,
-
-            cliente: "Libre",
-
-            estado: "Libre"
-
-        });
+});
 
         await nuevaCuenta.save();
 
