@@ -886,7 +886,7 @@ new Date(cuenta.vencimiento)
 
                 <td>
 
-                
+
 <form
 method="POST"
 action="/eliminar-cuenta/${cuenta._id}"
@@ -1142,26 +1142,6 @@ width:200px;
 "
 >
 
-<input
-type="date"
-name="inicio"
-
-value="${
-cuenta.inicio
-
-?
-
-new Date(cuenta.inicio)
-.toISOString()
-.split('T')[0]
-
-:
-
-''
-}"
-
-required
->
 
 <input
 type="date"
