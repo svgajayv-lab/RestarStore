@@ -3,40 +3,21 @@ const mongoose = require("mongoose");
 const AccountSchema =
 new mongoose.Schema({
 
-    plataforma: {
-        type: String
-    },
+    plataforma: String,
 
-    plan: {
-        type: String
-    },
+    plan: String,
 
-    correo: {
-        type: String
-    },
+    correo: String,
 
-    password: {
-        type: String
-    },
+    password: String,
 
-    cliente: {
-        type: String,
-        default: "Libre"
-    },
+    cliente: String,
 
-    estado: {
-        type: String,
-        default: "Libre"
-    },
+    estado: String,
 
-    vencimiento: {
-        type: Date
-    },
+    inicio: Date,
 
-    fecha: {
-        type: Date,
-        default: Date.now
-    }
+    vencimiento: Date
 
 });
 
