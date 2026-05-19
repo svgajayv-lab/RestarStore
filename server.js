@@ -882,10 +882,6 @@ new Date(cuenta.vencimiento)
 
 </td>
 
-</span>
-
-</td>
-
                 <td>${cuenta.cliente}</td>
 
                 <td>
@@ -920,26 +916,6 @@ return confirm(
 )
 "
 >
-
-<button
-style="
-background:red;
-color:white;
-padding:10px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
-"
->
-
-🗑️ Eliminar
-
-</button>
-
-</form>
-
-</td>
 
 <button
 style="
@@ -2137,24 +2113,6 @@ button{
 </head>
 
 <body>
-
-<a
-href="/editar-cuenta/${cuenta._id}"
-style="
-background:orange;
-color:black;
-padding:10px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-margin-right:10px;
-display:inline-block;
-"
->
-
-Editar
-
-</a>
 
 <form
 class="login"
