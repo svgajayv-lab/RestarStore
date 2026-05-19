@@ -469,7 +469,16 @@ app.post("/editar-cuenta/:id", async (req, res) => {
                 req.body.correo,
 
                 password:
-                req.body.password
+                req.body.password,
+
+                cliente:
+                req.body.cliente,
+
+                inicio:
+                req.body.inicio,
+
+                vencimiento:
+                req.body.vencimiento
 
             }
 
