@@ -79,7 +79,10 @@ new Account({
     req.body.correo,
 
     password:
-    req.body.password,
+req.body.password,
+
+cliente:
+req.body.cliente,
 
     inicio:
 
@@ -326,6 +329,12 @@ required
 >
 
 <input
+name="cliente"
+value="${cuenta.cliente}"
+required
+>
+
+<input
 type="date"
 name="inicio"
 
@@ -418,6 +427,9 @@ app.post("/editar-cuenta/:id", async (req, res) => {
 
                 password:
 req.body.password,
+
+cliente:
+req.body.cliente,
 
 inicio:
 req.body.inicio,
@@ -671,17 +683,6 @@ cuenta.plataforma
 
 <span
 id="pass-${cuenta._id}"
-style="
-display:none;
-"
->
-
-${cuenta.password}
-
-</span>
-
-<span
-id="hidden-${cuenta._id}"
 >
 
 ••••••••
@@ -689,14 +690,20 @@ id="hidden-${cuenta._id}"
 </span>
 
 <button
-onclick="togglePassword('${cuenta._id}')"
+onclick="
+togglePassword(
+'${cuenta._id}',
+'${cuenta.password}'
+)
+"
+
 style="
-margin-left:10px;
 background:none;
 border:none;
 cursor:pointer;
-color:cyan;
 font-size:18px;
+margin-left:10px;
+color:white;
 "
 >
 
@@ -1317,88 +1324,29 @@ ${filas}
 
 <script>
 
-function togglePassword(id){
+function togglePassword(id,password){
 
-    const pass =
+    const elemento =
     document.getElementById(
         "pass-" + id
     );
 
-    const hidden =
-    document.getElementById(
-        "hidden-" + id
-    );
+    if(
+        elemento.innerHTML
+        === "••••••••"
+    ){
 
-    if(pass.style.display === "none"){
-
-        pass.style.display = "inline";
-
-        hidden.style.display = "none";
+        elemento.innerHTML =
+        password;
 
     }
 
     else{
 
-        pass.style.display = "none";
-
-        hidden.style.display = "inline";
+        elemento.innerHTML =
+        "••••••••";
 
     }
-
-}
-
-<script>
-
-function filtrarTabla(){
-
-    const input =
-    document.getElementById(
-        "buscador"
-    );
-
-    const filtro =
-    input.value.toLowerCase();
-
-    const estado =
-    document.getElementById(
-        "filtroEstado"
-    ).value;
-
-    const filas =
-    document.querySelectorAll("table tr");
-
-    filas.forEach((fila, index) => {
-
-        if(index === 0) return;
-
-        const texto =
-        fila.innerText.toLowerCase();
-
-        const coincideTexto =
-        texto.includes(filtro);
-
-        const coincideEstado =
-
-        estado === ""
-
-        ||
-
-        fila.innerText.includes(estado);
-
-        fila.style.display =
-
-        coincideTexto &&
-        coincideEstado
-
-        ?
-
-        ""
-
-        :
-
-        "none";
-
-    });
 
 }
 
