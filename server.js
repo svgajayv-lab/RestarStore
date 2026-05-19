@@ -699,6 +699,53 @@ ${cuenta.estado}
 
 <td>
 
+<span
+style="
+padding:8px 12px;
+border-radius:10px;
+font-weight:bold;
+color:white;
+background:
+
+${
+
+!cuenta.inicio
+
+?
+
+'#757575'
+
+:
+
+new Date(cuenta.inicio)
+> new Date()
+
+?
+
+'#00c853'
+
+:
+
+new Date(cuenta.inicio)
+.toDateString()
+
+===
+
+new Date()
+.toDateString()
+
+?
+
+'#ff9100'
+
+:
+
+'#03a9f4'
+
+};
+"
+>
+
 ${
 
 cuenta.inicio
@@ -714,6 +761,8 @@ cuenta.inicio
 "Sin fecha"
 
 }
+
+</span>
 
 </td>
 
