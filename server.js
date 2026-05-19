@@ -397,58 +397,6 @@ Guardar Cambios
 
 });
 
-/* ========================= */
-/* GUARDAR EDICION */
-/* ========================= */
-
-app.post("/editar-cuenta/:id", async (req, res) => {
-
-    try {
-
-        await Account.findByIdAndUpdate(
-
-            req.params.id,
-
-            {
-
-                plataforma:
-                req.body.plataforma,
-
-                plan:
-                req.body.plan,
-
-                correo:
-                req.body.correo,
-
-                password:
-req.body.password,
-
-cliente:
-req.body.cliente,
-
-inicio:
-req.body.inicio,
-
-vencimiento:
-req.body.vencimiento
-
-            }
-
-        );
-
-        res.redirect("/admin/cuentas");
-
-    }
-
-    catch(error){
-
-        console.log(error);
-
-        res.send("Error actualizando");
-
-    }
-
-});
 
 /* ========================= */
 /* CAMBIAR ESTADO */
