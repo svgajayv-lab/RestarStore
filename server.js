@@ -886,24 +886,7 @@ new Date(cuenta.vencimiento)
 
                 <td>
 
-<a
-href="/editar-cuenta/${cuenta._id}"
-style="
-background:orange;
-color:black;
-padding:10px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-margin-right:10px;
-display:inline-block;
-"
->
-
-✏️ Editar
-
-</a>
-
+                
 <form
 method="POST"
 action="/eliminar-cuenta/${cuenta._id}"
