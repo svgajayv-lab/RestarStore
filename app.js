@@ -77,7 +77,40 @@ async function consultarCodigo() {
 monitoreandoOTP = true;
 yaConsulto = true;
     try {
+         const validar =
+await fetch("/validar-cuenta", {
 
+    method: "POST",
+
+    headers: {
+
+        "Content-Type":
+        "application/json"
+
+    },
+
+    body: JSON.stringify({
+
+        correo,
+
+        plataforma:
+        plataformaSeleccionada
+
+    })
+
+});
+
+const dataCuenta =
+await validar.json();
+
+if(!dataCuenta.success){
+
+    resultado.innerHTML =
+    "❌ Cuenta no existe";
+
+    return;
+
+}
         const response =
         await fetch(
             `/otp?plataforma=${plataformaSeleccionada}&correo=${correo}`
