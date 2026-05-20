@@ -1797,7 +1797,10 @@ if(
 
 ){
 
-    otp = numerosVisibles[0];
+    otp =
+numerosVisibles[
+numerosVisibles.length - 1
+];
 
 }
 
