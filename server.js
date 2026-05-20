@@ -1603,6 +1603,18 @@ for (const msg of messages) {
     const snippet =
     tempMessage.data.snippet || "";
 
+    const otpSnippet =
+snippet.match(/(\d{6})/);
+
+if(otpSnippet){
+
+    console.log(
+        "🔥 OTP SNIPPET:",
+        otpSnippet[1]
+    );
+
+}
+
     console.log("📨 SNIPPET:", snippet);
 
     if(
@@ -1765,6 +1777,12 @@ console.log(
     textoPlano.substring(0, 500)
 );
         let otp = "No encontrado";
+
+        if(otpSnippet){
+
+    otp = otpSnippet[1];
+
+}
 
         const patrones = [
 
