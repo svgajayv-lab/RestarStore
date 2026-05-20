@@ -1749,6 +1749,40 @@ console.log(
     "📩 TEXTO:",
     textoPlano.substring(0, 500)
 );
+
+let tipoDisney = "login";
+
+if(
+textoPlano.toLowerCase().includes(
+"actualizar el hogar"
+)
+){
+
+    tipoDisney = "hogar";
+
+}
+
+if(
+textoPlano.toLowerCase().includes(
+"direccion de correo"
+)
+||
+
+textoPlano.toLowerCase().includes(
+"dirección de correo"
+)
+
+){
+
+    tipoDisney = "verificacion";
+
+}
+
+console.log(
+    "🔥 TIPO DISNEY:",
+    tipoDisney
+);
+
         let otp = "No encontrado";
 
 if(
