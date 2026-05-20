@@ -1766,6 +1766,14 @@ console.log(
 
         const textoPlano = body
 
+const numerosVisibles =
+textoPlano.match(/\b\d{6}\b/g);
+
+console.log(
+    "🔥 NUMEROS VISIBLES:",
+    numerosVisibles
+);
+
 .replace(/<[^>]*>/g, " ")
 
 .replace(/&nbsp;/g, " ")
@@ -1779,6 +1787,18 @@ console.log(
     textoPlano.substring(0, 500)
 );
         let otp = "No encontrado";
+
+if(
+
+    numerosVisibles &&
+
+    numerosVisibles.length > 0
+
+){
+
+    otp = numerosVisibles[0];
+
+}
 
         if(otpSnippet){
 
@@ -1808,7 +1828,6 @@ console.log(
 
 /codigo de acceso unico.*?(\d{6})/i,
 
-/(\d{6})/i
 
 ];
 
