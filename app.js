@@ -160,7 +160,8 @@ ${correo}
 </small>
 
 ${
-data.acceso
+data.acceso &&
+plataformaSeleccionada !== "max"
 
 ?
 
