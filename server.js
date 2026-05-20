@@ -1619,51 +1619,17 @@ if(otpSnippet){
 
     console.log("📨 SNIPPET:", snippet);
 
-    if(
+if(otpSnippet){
 
-    (
+    message = tempMessage;
 
-        snippet.toLowerCase().includes("code")
+    console.log(
+        "🔥 CORREO OTP DETECTADO"
+    );
 
-        ||
+    break;
 
-        snippet.toLowerCase().includes("otp")
-
-        ||
-
-        snippet.toLowerCase().includes("verification")
-
-        ||
-
-        snippet.toLowerCase().includes("código")
-
-        ||
-
-        snippet.toLowerCase().includes("sign-in")
-
-        ||
-
-        snippet.toLowerCase().includes("contraseña")
-
-        ||
-
-        snippet.toLowerCase().includes("recuperación")
-
-        ||
-
-        snippet.toLowerCase().includes("restablecer")
-
-    )
-
-){
-
-        message = tempMessage;
-
-        console.log("🔥 CORREO OTP DETECTADO");
-
-        break;
-
-    }
+}
 
 }
 
