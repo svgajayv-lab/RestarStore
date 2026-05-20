@@ -1589,6 +1589,8 @@ console.log(
         
 let message = null;
 
+let otpSnippet = null;
+
 for (const msg of messages) {
 
     const tempMessage =
@@ -1603,7 +1605,7 @@ for (const msg of messages) {
     const snippet =
     tempMessage.data.snippet || "";
 
-    const otpSnippet =
+    otpSnippet =
 snippet.match(/(\d{6})/);
 
 if(otpSnippet){
