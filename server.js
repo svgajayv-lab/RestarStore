@@ -1619,17 +1619,13 @@ if(otpSnippet){
 
     console.log("📨 SNIPPET:", snippet);
 
-if(otpSnippet){
+message = tempMessage;
 
-    message = tempMessage;
+console.log(
+    "🔥 CORREO OTP DETECTADO"
+);
 
-    console.log(
-        "🔥 CORREO OTP DETECTADO"
-    );
-
-    break;
-
-}
+break;
 
 }
 
