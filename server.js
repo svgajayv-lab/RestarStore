@@ -1529,8 +1529,11 @@ break;
             break;
 
             case "disney":
-                remitente = "disney";
-            break;
+
+    remitente =
+    "trx.mail2.disneyplus.com";
+
+break;
 
             case "spotify":
                 remitente = "spotify";
@@ -2175,6 +2178,67 @@ app.get("/logout", (req, res) => {
     req.session.destroy();
 
     res.redirect("/admin");
+
+});
+
+/* ========================= */
+/* VALIDAR CUENTA */
+/* ========================= */
+
+app.post("/validar-cuenta", async (req, res) => {
+
+    try {
+
+        const {
+            correo,
+            plataforma
+        } = req.body;
+
+        const cuenta =
+        await Account.findOne({
+
+            correo,
+            plataforma
+
+        });
+
+        if(!cuenta){
+
+            return res.json({
+
+                success: false,
+
+                message:
+                "Cuenta no encontrada"
+
+            });
+
+        }
+
+        res.json({
+
+            success: true,
+
+            cuenta
+
+        });
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        res.json({
+
+            success: false,
+
+            message:
+            "Error servidor"
+
+        });
+
+    }
 
 });
 
