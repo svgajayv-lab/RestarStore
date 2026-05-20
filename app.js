@@ -64,13 +64,22 @@ async function consultarCodigo() {
         return;
     }
 
-    if(plataformaSeleccionada !== "amazon"){
+    if(
 
-        resultado.innerHTML =
-        "⚠️ Esta plataforma aún no tiene OTP automático";
+    plataformaSeleccionada !== "amazon"
 
-        return;
-    }
+    &&
+
+    plataformaSeleccionada !== "disney"
+
+){
+
+    resultado.innerHTML =
+    "⚠️ Esta plataforma aún no tiene OTP automático";
+
+    return;
+
+}
 
     resultado.innerHTML =
 '<span class="loader">🔎 Buscando código</span>';
