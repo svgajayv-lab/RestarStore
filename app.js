@@ -72,6 +72,10 @@ async function consultarCodigo() {
 
     plataformaSeleccionada !== "disney"
 
+    &&
+
+    plataformaSeleccionada !== "max"
+
 ){
 
     resultado.innerHTML =
