@@ -1750,6 +1750,20 @@ console.log(
     textoPlano.substring(0, 500)
 );
 
+console.log(
+    "🔥 HOGAR?:",
+    textoPlano.toLowerCase().includes(
+        "actualizar el hogar"
+    )
+);
+
+console.log(
+    "🔥 CORREO?:",
+    textoPlano.toLowerCase().includes(
+        "dirección de correo"
+    )
+);
+
 let tipoDisney = "login";
 
 if(
