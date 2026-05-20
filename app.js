@@ -190,16 +190,7 @@ ${data.acceso.plan}
 `
 
 :
-
-`
-
-<br><br>
-
-<span style="color:red;">
-❌ No hay cuentas libres
-</span>
-
-`
+''
 
 }
 `;
