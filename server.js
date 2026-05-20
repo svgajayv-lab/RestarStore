@@ -1768,25 +1768,23 @@ console.log(
 
         const patrones = [
 
-    /verification code is[:\s]+(\d{6,8})/i,
+/verification code is[:\s]+(\d{6,8})/i,
 
-    /your verification code is[:\s]+(\d{6,8})/i,
+/your verification code is[:\s]+(\d{6,8})/i,
 
-    /use this code[:\s]+(\d{6,8})/i,
+/use this code[:\s]+(\d{6,8})/i,
 
-    /one time password[:\s]+(\d{6,8})/i,
+/one time password[:\s]+(\d{6,8})/i,
 
-    /otp[:\s]+(\d{6,8})/i,
+/otp[:\s]+(\d{6,8})/i,
 
-  /enter the following code[:\s]+(\d{6,8})/i,
+/enter the following code[:\s]+(\d{6,8})/i,
 
-/código de verificación[:\s]+(\d{6,8})/i,
-
-/usa el siguiente código.*?(\d{6,8})/i,
+/codigo de verificacion[:\s]+(\d{6,8})/i,
 
 /usa el siguiente codigo.*?(\d{6,8})/i,
 
-/tu código de verificación es.*?(\d{6,8})/i,
+/tu codigo de verificacion es.*?(\d{6,8})/i,
 
 /codigo de acceso unico.*?(\d{6})/i,
 
