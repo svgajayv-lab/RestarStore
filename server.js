@@ -1786,7 +1786,7 @@ console.log(
 
 /usa el siguiente codigo.*?(\d{6,8})/i,
 
-/tu código de verificación es.*?(\d{6,8})/i
+/tu código de verificación es.*?(\d{6,8})/i,
 
 /(\d{6})/i
 
