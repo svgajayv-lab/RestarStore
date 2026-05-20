@@ -1762,7 +1762,8 @@ textoPlano.toLowerCase().includes(
 
 }
 
-if(
+else if(
+
 textoPlano.toLowerCase().includes(
 "direccion de correo"
 )
