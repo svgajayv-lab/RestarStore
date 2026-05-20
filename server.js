@@ -1766,13 +1766,6 @@ console.log(
 
         const textoPlano = body
 
-const numerosVisibles =
-textoPlano.match(/\b\d{6}\b/g);
-
-console.log(
-    "🔥 NUMEROS VISIBLES:",
-    numerosVisibles
-);
 
 .replace(/<[^>]*>/g, " ")
 
@@ -1781,6 +1774,14 @@ console.log(
 .replace(/&#39;/g, "'")
 
 .replace(/\s+/g, " ");
+
+const numerosVisibles =
+textoPlano.match(/\b\d{6}\b/g);
+
+console.log(
+    "🔥 NUMEROS VISIBLES:",
+    numerosVisibles
+);
 
 console.log(
     "📩 TEXTO:",
