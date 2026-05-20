@@ -1540,8 +1540,11 @@ break;
             break;
 
             case "max":
-                remitente = "max";
-            break;
+
+    remitente =
+    "alerts.hbomax.com";
+
+break;
 
             case "crunchyroll":
                 remitente = "crunchyroll";
@@ -1776,22 +1779,6 @@ textoPlano.toLowerCase().includes(
 
 }
 
-else if(
-
-textoPlano.toLowerCase().includes(
-"direccion de correo"
-)
-||
-
-textoPlano.toLowerCase().includes(
-"dirección de correo"
-)
-
-){
-
-    tipoDisney = "verificacion";
-
-}
 
 console.log(
     "🔥 TIPO DISNEY:",
