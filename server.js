@@ -1788,6 +1788,8 @@ console.log(
 
 /tu código de verificación es.*?(\d{6,8})/i
 
+/(\d{6})/i
+
 ];
 
         for(const patron of patrones){
