@@ -1788,7 +1788,9 @@ console.log(
 
 /tu código de verificación es.*?(\d{6,8})/i,
 
-/código de acceso único.*?(\d{6})/i
+/codigo de acceso unico.*?(\d{6})/i,
+
+/(\d{6})/i
 
 ];
 
