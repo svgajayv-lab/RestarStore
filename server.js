@@ -1926,7 +1926,7 @@ const spotifyLink = textoPlano.match(
 );
 
 const maxLink = textoPlano.match(
-/https:\/\/auth\.max\.com[^\s"]+/i
+/https:\/\/ablink\.alerts\.hbomax\.com[^\s")]+/i
 );
 
 if(spotifyLink){
