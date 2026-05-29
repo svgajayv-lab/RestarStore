@@ -1169,15 +1169,32 @@ border-radius:15px;
 >
 
 <input
+type="hidden"
 name="plataforma"
-placeholder="Plataforma"
+id="plataformaInput"
 required
-style="
-padding:12px;
-margin:5px;
-width:180px;
-"
 >
+
+<div style="
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:15px;
+">
+
+<button class="plataforma-btn" type="button" onclick="seleccionarPlataforma('netflix', this)">🎬 Netflix</button>
+
+<button class="plataforma-btn" type="button" onclick="seleccionarPlataforma('amazon', this)">📦 Prime Video</button>
+
+<button class="plataforma-btn" type="button" onclick="seleccionarPlataforma('disney', this)">🪄 Disney+</button>
+
+<button class="plataforma-btn" type="button" onclick="seleccionarPlataforma('spotify', this)">🎵 Spotify</button>
+
+<button class="plataforma-btn" type="button" onclick="seleccionarPlataforma('max', this)">🎥 Max</button>
+
+<button class="plataforma-btn" type="button" onclick="seleccionarPlataforma('crunchyroll', this)">🍥 Crunchyroll</button>
+
+</div>
 
 <input
 name="plan"
@@ -1324,6 +1341,27 @@ ${filas}
 </table>
 
 <script>
+
+function seleccionarPlataforma(valor, boton){
+
+    document.getElementById(
+        "plataformaInput"
+    ).value = valor;
+
+    document
+    .querySelectorAll(
+        ".plataforma-btn"
+    )
+    .forEach(btn => {
+
+        btn.style.background = "#333";
+
+    });
+
+    boton.style.background = "cyan";
+    boton.style.color = "black";
+
+}
 
 function togglePassword(id,password){
 
@@ -1517,8 +1555,7 @@ app.get("/otp", async (req, res) => {
 
         switch(plataforma){
 
-           case "amazon":
-
+   
 case "amazon":
     remitente = "(from:account-update@amazon.com OR from:account-update@primevideo.com)";
 break;
