@@ -639,8 +639,7 @@ body::before{
 
     border:2px solid rgba(255,255,255,.9);
 
-    box-shadow:
-    0 0 8px rgba(0,255,204,.25);
+    box-shadow:none;
 
     transform:scale(1.02);
 }
