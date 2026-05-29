@@ -1569,7 +1569,9 @@ break;
 
             maxResults: 5,
 
-            q: `from:${remitente} newer_than:15m`
+            q: plataforma === "amazon"
+    ? `${remitente} newer_than:15m`
+    : `from:${remitente} newer_than:15m`
 
         });
 
@@ -1769,6 +1771,8 @@ console.log(
 
 let tipoDisney = "login";
 
+let tipoSpotify = "login";
+
 if(
 textoPlano.toLowerCase().includes(
 "actualizar el hogar"
@@ -1779,13 +1783,37 @@ textoPlano.toLowerCase().includes(
 
 }
 
+if(
+
+textoPlano.toLowerCase().includes(
+"restablece tu contraseña de spotify"
+)
+
+||
+
+textoPlano.toLowerCase().includes(
+"restablecer contraseña"
+)
+
+){
+
+    tipoSpotify = "reset";
+
+}
 
 console.log(
     "🔥 TIPO DISNEY:",
     tipoDisney
 );
 
+console.log(
+    "🔥 TIPO SPOTIFY:",
+    tipoSpotify
+);
+
         let otp = "No encontrado";
+
+        let linkSpotify = null;
 
 if(
 
@@ -1805,6 +1833,21 @@ numerosVisibles.length - 1
         if(otpSnippet){
 
     otp = otpSnippet[1];
+
+}
+
+const spotifyLink = textoPlano.match(
+/https:\/\/accounts\.spotify\.com[^\s"]+/i
+);
+
+if(spotifyLink){
+
+    linkSpotify = spotifyLink[0];
+
+    console.log(
+        "🔥 LINK SPOTIFY:",
+        linkSpotify
+    );
 
 }
 
@@ -1918,6 +1961,28 @@ if(cuentaLibre){
     req.query.correo || "Cliente";
 
     await cuentaLibre.save();
+
+}
+
+if(
+
+plataforma === "spotify"
+
+&&
+
+tipoSpotify === "reset"
+
+){
+
+    return res.json({
+
+        link:
+
+        linkSpotify ||
+
+        "Link no encontrado"
+
+    });
 
 }
 

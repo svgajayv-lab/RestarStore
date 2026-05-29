@@ -1,5 +1,33 @@
 let plataformaSeleccionada = "amazon";
 let ultimoOTP = "";
+let tipoSpotify = "login";
+
+function seleccionarSpotify(tipo){
+
+    tipoSpotify = tipo;
+
+    document.getElementById(
+    "btnLogin"
+    ).style.background =
+
+    tipo === "login"
+
+    ? "#00ffcc"
+
+    : "#222";
+
+    document.getElementById(
+    "btnPassword"
+    ).style.background =
+
+    tipo === "password"
+
+    ? "#00ffcc"
+
+    : "#222";
+
+}
+
 function seleccionar(plataforma) {
 
     plataformaSeleccionada = plataforma;
@@ -29,9 +57,33 @@ function seleccionar(plataforma) {
     }
 
     if (plataforma === "spotify") {
+
         document
         .querySelector(".spotify")
         .classList.add("active");
+
+        document.getElementById(
+            "spotifyOpciones"
+        ).style.display = "block";
+
+        seleccionarSpotify(
+            tipoSpotify
+        );
+
+    } else {
+
+        const spotifyBox =
+        document.getElementById(
+            "spotifyOpciones"
+        );
+
+        if(spotifyBox){
+
+            spotifyBox.style.display =
+            "none";
+
+        }
+
     }
 
     if (plataforma === "max") {
@@ -66,15 +118,19 @@ async function consultarCodigo() {
 
     if(
 
-    plataformaSeleccionada !== "amazon"
+plataformaSeleccionada !== "amazon"
 
-    &&
+&&
 
-    plataformaSeleccionada !== "disney"
+plataformaSeleccionada !== "disney"
 
-    &&
+&&
 
-    plataformaSeleccionada !== "max"
+plataformaSeleccionada !== "max"
+
+&&
+
+plataformaSeleccionada !== "spotify"
 
 ){
 
@@ -125,9 +181,9 @@ if(!dataCuenta.success){
 
 }
         const response =
-        await fetch(
-            `/otp?plataforma=${plataformaSeleccionada}&correo=${correo}`
-        );
+await fetch(
+`/otp?plataforma=${plataformaSeleccionada}&correo=${correo}&tipo=${tipoSpotify}`
+);
 
         const data =
         await response.json();
@@ -144,6 +200,44 @@ if(data.otp === ultimoOTP){
 }
 
 ultimoOTP = data.otp;
+
+if(
+plataformaSeleccionada === "spotify"
+&&
+tipoSpotify === "password"
+){
+
+resultado.innerHTML = `
+
+🔓 Link de restablecimiento
+
+<br><br>
+
+<a href="${data.otp}"
+target="_blank"
+style="
+color:cyan;
+font-size:18px;
+word-break:break-all;
+">
+
+Abrir enlace de recuperación
+
+</a>
+
+<br><br>
+
+<small>
+
+Cuenta:<br>
+
+${correo}
+
+</small>
+
+`;
+
+}else{
 
 resultado.innerHTML = `
 
@@ -195,10 +289,14 @@ ${data.acceso.plan}
 `
 
 :
+
 ''
 
 }
+
 `;
+
+}
 
 resultado.classList.add(
     "otp-animation"
