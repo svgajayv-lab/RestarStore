@@ -6,11 +6,25 @@ function seleccionarSpotify(tipo){
 
     tipoSpotify = tipo;
 
-    document.getElementById("btnLogin").style.background =
-    tipo === "login" ? "#00ffcc" : "#222";
+    document.getElementById("btnLogin")
+.classList.toggle(
+    "active",
+    tipo === "login"
+);
 
-    document.getElementById("btnPassword").style.background =
-    tipo === "password" ? "#00ffcc" : "#222";
+document.getElementById("btnPassword")
+.classList.toggle(
+    "active",
+    tipo === "password"
+);
+
+document.getElementById("btnLogin")
+.style.opacity =
+tipo === "login" ? "1" : ".65";
+
+document.getElementById("btnPassword")
+.style.opacity =
+tipo === "password" ? "1" : ".65";
 
     const botonConsultar =
     document.querySelector(".consultar");
