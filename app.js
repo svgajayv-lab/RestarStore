@@ -1,6 +1,7 @@
 let plataformaSeleccionada = "amazon";
 let ultimoOTP = "";
 let tipoSpotify = "login";
+let tipoMax = "login";
 
 function seleccionarSpotify(tipo){
 
@@ -20,6 +21,45 @@ function seleccionarSpotify(tipo){
 
         document
         .getElementById("btnPassword")
+        .classList.add("active");
+
+    }
+
+    const botonConsultar =
+    document.querySelector(".consultar");
+
+    if(tipo === "password"){
+
+        botonConsultar.innerText =
+        "Obtener Link";
+
+    }else{
+
+        botonConsultar.innerText =
+        "Consultar Código";
+
+    }
+
+}
+
+function seleccionarMax(tipo){
+
+    tipoMax = tipo;
+
+    document
+    .querySelectorAll(".max-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+    if(tipo === "login"){
+
+        document
+        .getElementById("btnMaxLogin")
+        .classList.add("active");
+
+    }else{
+
+        document
+        .getElementById("btnMaxPassword")
         .classList.add("active");
 
     }
@@ -100,10 +140,34 @@ function seleccionar(plataforma) {
     }
 
     if (plataforma === "max") {
-        document
-        .querySelector(".max")
-        .classList.add("active");
+
+    document
+    .querySelector(".max")
+    .classList.add("active");
+
+    document.getElementById(
+        "maxOpciones"
+    ).style.display = "block";
+
+    seleccionarMax(
+        tipoMax
+    );
+
+} else {
+
+    const maxBox =
+    document.getElementById(
+        "maxOpciones"
+    );
+
+    if(maxBox){
+
+        maxBox.style.display =
+        "none";
+
     }
+
+}
 
     if (plataforma === "crunchyroll") {
         document
@@ -193,9 +257,23 @@ if(!dataCuenta.success){
     return;
 
 }
-        const response =
+const tipoActual =
+
+plataformaSeleccionada === "spotify"
+? tipoSpotify
+
+:
+
+plataformaSeleccionada === "max"
+? tipoMax
+
+:
+
+"login";
+
+const response =
 await fetch(
-`/otp?plataforma=${plataformaSeleccionada}&correo=${correo}&tipo=${tipoSpotify}`
+`/otp?plataforma=${plataformaSeleccionada}&correo=${correo}&tipo=${tipoActual}`
 );
 
         const data =

@@ -1839,6 +1839,8 @@ let tipoDisney = "login";
 
 let tipoSpotify = "login";
 
+let tipoMax = "login";
+
 if(
 textoPlano.toLowerCase().includes(
 "actualizar el hogar"
@@ -1864,6 +1866,23 @@ textoPlano.toLowerCase().includes(
 ){
 
     tipoSpotify = "reset";
+
+}
+
+if(
+textoPlano.toLowerCase().includes(
+"restablecer contraseña"
+)
+
+||
+
+textoPlano.toLowerCase().includes(
+"reset your password"
+)
+
+){
+
+    tipoMax = "reset";
 
 }
 
@@ -1906,12 +1925,27 @@ const spotifyLink = textoPlano.match(
 /https:\/\/accounts\.spotify\.com[^\s"]+/i
 );
 
+const maxLink = textoPlano.match(
+/https:\/\/auth\.max\.com[^\s"]+/i
+);
+
 if(spotifyLink){
 
     linkSpotify = spotifyLink[0];
 
     console.log(
         "🔥 LINK SPOTIFY:",
+        linkSpotify
+    );
+
+}
+
+if(maxLink){
+
+    linkSpotify = maxLink[0];
+
+    console.log(
+        "🔥 LINK MAX:",
         linkSpotify
     );
 
@@ -2048,6 +2082,18 @@ tipoSpotify === "reset"
 
         "Link no encontrado"
 
+    });
+
+}
+
+if(
+plataforma === "max"
+&&
+tipoMax === "reset"
+){
+
+    return res.json({
+        link: linkSpotify || "Link no encontrado"
     });
 
 }
