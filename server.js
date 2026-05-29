@@ -230,59 +230,6 @@ app.get("/editar-cuenta/:id", async (req, res) => {
 
 <title>Editar Cuenta</title>
 
-.plataforma-btn{
-
-    border:none;
-    border-radius:12px;
-    padding:12px 20px;
-    cursor:pointer;
-    font-weight:bold;
-    color:white;
-    transition:.3s;
-    min-width:140px;
-
-}
-
-.plataforma-btn:hover{
-
-    transform:translateY(-2px);
-
-}
-
-.netflix{
-    background:#e50914;
-}
-
-.prime{
-    background:#2196f3;
-}
-
-.disney{
-    background:#111;
-    border:2px solid white;
-}
-
-.spotify{
-    background:#1db954;
-}
-
-.max{
-    background:#6c2cff;
-}
-
-.crunchy{
-    background:#ff8c00;
-}
-
-.activa{
-
-    box-shadow:
-    0 0 15px cyan,
-    0 0 30px cyan;
-
-    transform:scale(1.05);
-
-}
 
 <style>
 
@@ -1068,6 +1015,41 @@ border-radius:8px;
 
 <title>RestarStore Cuentas</title>
 
+tr:hover{
+    background:#1a1a1a;
+}
+
+.plataforma-btn{
+    border:none;
+    border-radius:14px;
+    padding:14px 22px;
+    cursor:pointer;
+    font-weight:bold;
+    color:white;
+    transition:.25s;
+    min-width:150px;
+    font-size:15px;
+}
+
+.plataforma-btn:hover{
+    transform:translateY(-2px);
+}
+
+.plataforma-btn.netflix{ background:#e50914; }
+.plataforma-btn.prime{ background:#2196f3; }
+.plataforma-btn.disney{ background:#111; border:2px solid white; }
+.plataforma-btn.spotify{ background:#1db954; }
+.plataforma-btn.max{ background:#6c2cff; }
+.plataforma-btn.crunchy{ background:#ff8c00; }
+
+.plataforma-btn.activa{
+    box-shadow:0 0 15px cyan, 0 0 35px cyan;
+    transform:scale(1.06);
+    outline:3px solid cyan;
+}
+
+</style>
+
 <style>
 
 body{
@@ -1422,26 +1404,13 @@ ${filas}
 
 function seleccionarPlataforma(valor, boton){
 
-    document.getElementById(
-        "plataformaInput"
-    ).value = valor;
+    document.getElementById("plataformaInput").value = valor;
 
-    document
-    .querySelectorAll(
-        ".plataforma-btn"
-    )
-    .forEach(btn => {
-
-        btn.classList.remove(
-            "activa"
-        );
-
+    document.querySelectorAll(".plataforma-btn").forEach(btn => {
+        btn.classList.remove("activa");
     });
 
-    boton.classList.add(
-        "activa"
-    );
-
+    boton.classList.add("activa");
 }
 
 function togglePassword(id,password){
