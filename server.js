@@ -1080,60 +1080,6 @@ tr:hover{
 
 </style>
 
-body{
-
-    background:#050816;
-
-    color:white;
-
-    font-family:Arial;
-
-    padding:40px;
-
-}
-
-h1{
-
-    color:cyan;
-
-}
-
-table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-    margin-top:20px;
-
-    background:#111;
-
-}
-
-th,td{
-
-    padding:15px;
-
-    border-bottom:1px solid #333;
-
-    text-align:left;
-
-}
-
-th{
-
-    color:cyan;
-
-}
-
-tr:hover{
-
-    background:#1a1a1a;
-
-}
-
-</style>
-
 </head>
 
 <body>
