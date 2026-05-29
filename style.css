@@ -637,10 +637,10 @@ body::before{
     background:linear-gradient(135deg,#00ffcc,#00c896) !important;
     color:#111 !important;
 
-    border:2px solid rgba(255,255,255,.8);
+    border:2px solid rgba(255,255,255,.9);
 
     box-shadow:
-    0 0 12px rgba(0,255,204,.35);
+    0 0 8px rgba(0,255,204,.25);
 
     transform:scale(1.02);
 }
