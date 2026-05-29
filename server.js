@@ -1519,9 +1519,8 @@ app.get("/otp", async (req, res) => {
 
            case "amazon":
 
-    remitente =
-    "account-update@amazon.com";
-
+case "amazon":
+    remitente = "(from:account-update@amazon.com OR from:account-update@primevideo.com)";
 break;
 
             case "netflix":
@@ -1561,6 +1560,12 @@ break;
             auth: oAuth2Client,
 
         });
+
+console.log("🔍 QUERY GMAIL:", 
+    plataforma === "amazon"
+    ? `${remitente} newer_than:15m`
+    : `from:${remitente} newer_than:15m`
+);
 
         const response =
         await gmail.users.messages.list({
@@ -1943,7 +1948,7 @@ await Account.findOne({
 
     ?
 
-    "Prime Video"
+    "amazon"
 
     :
 
