@@ -239,15 +239,7 @@ ${correo}
 
 }else{
 
-resultado.innerHTML = `
-
-🔐 Código OTP: ${data.otp}
-
-
-
-''
-
-`;
+resultado.innerHTML = `🔐 Código OTP: ${data.otp}`;
 
 }
 
