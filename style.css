@@ -624,15 +624,26 @@ body::before{
 }
 
 #btnLogin{
-    background:linear-gradient(135deg,#00ffcc,#00c896);
-    color:#111;
-    box-shadow:0 8px 25px rgba(0,255,204,.25);
+    background:#1b1b1b;
+    color:white;
 }
 
 #btnPassword{
-    background:linear-gradient(135deg,#1e1e1e,#2b2b2b);
+    background:#1b1b1b;
     color:white;
-    box-shadow:0 8px 25px rgba(255,255,255,.08);
+}
+
+.spotify-btn.active{
+    background:linear-gradient(135deg,#00ffcc,#00c896) !important;
+    color:#111 !important;
+    border:2px solid #00ffcc;
+
+    box-shadow:
+    0 0 15px #00ffcc,
+    0 0 30px #00ffcc,
+    0 0 50px #00ffcc;
+
+    transform:scale(1.05);
 }
 
 .spotify-btn:hover{

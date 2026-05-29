@@ -6,34 +6,39 @@ function seleccionarSpotify(tipo){
 
     tipoSpotify = tipo;
 
-    document.getElementById("btnLogin")
-.classList.toggle(
-    "active",
-    tipo === "login"
-);
+    document
+    .querySelectorAll(".spotify-btn")
+    .forEach(btn => btn.classList.remove("active"));
 
-document.getElementById("btnPassword")
-.classList.toggle(
-    "active",
-    tipo === "password"
-);
+    if(tipo === "login"){
 
-document.getElementById("btnLogin")
-.style.opacity =
-tipo === "login" ? "1" : ".65";
+        document
+        .getElementById("btnLogin")
+        .classList.add("active");
 
-document.getElementById("btnPassword")
-.style.opacity =
-tipo === "password" ? "1" : ".65";
+    }else{
+
+        document
+        .getElementById("btnPassword")
+        .classList.add("active");
+
+    }
 
     const botonConsultar =
     document.querySelector(".consultar");
 
     if(tipo === "password"){
-        botonConsultar.innerText = "Obtener Link";
+
+        botonConsultar.innerText =
+        "Obtener Link";
+
     }else{
-        botonConsultar.innerText = "Consultar Código";
+
+        botonConsultar.innerText =
+        "Consultar Código";
+
     }
+
 }
 
 function seleccionar(plataforma) {
