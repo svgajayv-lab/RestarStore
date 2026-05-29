@@ -6,26 +6,20 @@ function seleccionarSpotify(tipo){
 
     tipoSpotify = tipo;
 
-    document.getElementById(
-    "btnLogin"
-    ).style.background =
+    document.getElementById("btnLogin").style.background =
+    tipo === "login" ? "#00ffcc" : "#222";
 
-    tipo === "login"
+    document.getElementById("btnPassword").style.background =
+    tipo === "password" ? "#00ffcc" : "#222";
 
-    ? "#00ffcc"
+    const botonConsultar =
+    document.querySelector(".consultar");
 
-    : "#222";
-
-    document.getElementById(
-    "btnPassword"
-    ).style.background =
-
-    tipo === "password"
-
-    ? "#00ffcc"
-
-    : "#222";
-
+    if(tipo === "password"){
+        botonConsultar.innerText = "Obtener Link";
+    }else{
+        botonConsultar.innerText = "Consultar Código";
+    }
 }
 
 function seleccionar(plataforma) {
@@ -187,6 +181,35 @@ await fetch(
 
         const data =
         await response.json();
+
+if(
+plataformaSeleccionada === "spotify"
+&&
+tipoSpotify === "password"
+){
+
+    resultado.innerHTML = `
+
+🔓 Enlace de recuperación
+
+<br><br>
+
+<a href="${data.link}"
+target="_blank"
+style="
+color:cyan;
+font-size:20px;
+font-weight:bold;
+">
+
+Abrir enlace de recuperación
+
+</a>
+
+`;
+
+    return;
+}
 
         if (
             data.otp &&
