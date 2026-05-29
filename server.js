@@ -1852,17 +1852,9 @@ textoPlano.toLowerCase().includes(
 }
 
 if(
-
 textoPlano.toLowerCase().includes(
 "restablece tu contraseña de spotify"
 )
-
-||
-
-textoPlano.toLowerCase().includes(
-"restablecer contraseña"
-)
-
 ){
 
     tipoSpotify = "reset";
@@ -1894,6 +1886,11 @@ console.log(
 console.log(
     "🔥 TIPO SPOTIFY:",
     tipoSpotify
+);
+
+console.log(
+    "🔥 TIPO MAX:",
+    tipoMax
 );
 
         let otp = "No encontrado";

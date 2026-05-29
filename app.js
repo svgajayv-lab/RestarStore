@@ -280,9 +280,15 @@ await fetch(
         await response.json();
 
 if(
-plataformaSeleccionada === "spotify"
-&&
-tipoSpotify === "password"
+
+(plataformaSeleccionada === "spotify"
+&& tipoSpotify === "password")
+
+||
+
+(plataformaSeleccionada === "max"
+&& tipoMax === "password")
+
 ){
 
     resultado.innerHTML = `
@@ -322,9 +328,15 @@ if(data.otp === ultimoOTP){
 ultimoOTP = data.otp;
 
 if(
-plataformaSeleccionada === "spotify"
-&&
-tipoSpotify === "password"
+
+(plataformaSeleccionada === "spotify"
+&& tipoSpotify === "password")
+
+||
+
+(plataformaSeleccionada === "max"
+&& tipoMax === "password")
+
 ){
 
 resultado.innerHTML = `
