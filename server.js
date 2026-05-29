@@ -230,6 +230,60 @@ app.get("/editar-cuenta/:id", async (req, res) => {
 
 <title>Editar Cuenta</title>
 
+.plataforma-btn{
+
+    border:none;
+    border-radius:12px;
+    padding:12px 20px;
+    cursor:pointer;
+    font-weight:bold;
+    color:white;
+    transition:.3s;
+    min-width:140px;
+
+}
+
+.plataforma-btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.netflix{
+    background:#e50914;
+}
+
+.prime{
+    background:#2196f3;
+}
+
+.disney{
+    background:#111;
+    border:2px solid white;
+}
+
+.spotify{
+    background:#1db954;
+}
+
+.max{
+    background:#6c2cff;
+}
+
+.crunchy{
+    background:#ff8c00;
+}
+
+.activa{
+
+    box-shadow:
+    0 0 15px cyan,
+    0 0 30px cyan;
+
+    transform:scale(1.05);
+
+}
+
 <style>
 
 body{
@@ -1182,17 +1236,41 @@ flex-wrap:wrap;
 margin-bottom:15px;
 ">
 
-<button class="plataforma-btn" type="button" onclick="seleccionarPlataforma('netflix', this)">🎬 Netflix</button>
+<button class="plataforma-btn netflix"
+type="button"
+onclick="seleccionarPlataforma('netflix', this)">
+🎬 Netflix
+</button>
 
-<button class="plataforma-btn" type="button" onclick="seleccionarPlataforma('amazon', this)">📦 Prime Video</button>
+<button class="plataforma-btn prime"
+type="button"
+onclick="seleccionarPlataforma('amazon', this)">
+📦 Prime Video
+</button>
 
-<button class="plataforma-btn" type="button" onclick="seleccionarPlataforma('disney', this)">🪄 Disney+</button>
+<button class="plataforma-btn disney"
+type="button"
+onclick="seleccionarPlataforma('disney', this)">
+🪄 Disney+
+</button>
 
-<button class="plataforma-btn" type="button" onclick="seleccionarPlataforma('spotify', this)">🎵 Spotify</button>
+<button class="plataforma-btn spotify"
+type="button"
+onclick="seleccionarPlataforma('spotify', this)">
+🎵 Spotify
+</button>
 
-<button class="plataforma-btn" type="button" onclick="seleccionarPlataforma('max', this)">🎥 Max</button>
+<button class="plataforma-btn max"
+type="button"
+onclick="seleccionarPlataforma('max', this)">
+🎥 Max
+</button>
 
-<button class="plataforma-btn" type="button" onclick="seleccionarPlataforma('crunchyroll', this)">🍥 Crunchyroll</button>
+<button class="plataforma-btn crunchy"
+type="button"
+onclick="seleccionarPlataforma('crunchyroll', this)">
+🍥 Crunchyroll
+</button>
 
 </div>
 
@@ -1354,12 +1432,15 @@ function seleccionarPlataforma(valor, boton){
     )
     .forEach(btn => {
 
-        btn.style.background = "#333";
+        btn.classList.remove(
+            "activa"
+        );
 
     });
 
-    boton.style.background = "cyan";
-    boton.style.color = "black";
+    boton.classList.add(
+        "activa"
+    );
 
 }
 
