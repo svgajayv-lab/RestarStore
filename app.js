@@ -243,56 +243,9 @@ resultado.innerHTML = `
 
 🔐 Código OTP: ${data.otp}
 
-<br><br>
 
-<small>
-
-Cuenta OTP:<br>
-
-${correo}
-
-</small>
-
-${
-data.acceso &&
-plataformaSeleccionada !== "max"
-
-?
-
-`
-
-<hr style="margin:20px 0;">
-
-<h3 style="color:cyan;">
-🎬 Cuenta Asignada
-</h3>
-
-Correo:
-<b>
-${data.acceso.correo}
-</b>
-
-<br><br>
-
-Password:
-<b>
-${data.acceso.password}
-</b>
-
-<br><br>
-
-Plan:
-<b>
-${data.acceso.plan}
-</b>
-
-`
-
-:
 
 ''
-
-}
 
 `;
 
