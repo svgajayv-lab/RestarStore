@@ -239,6 +239,8 @@ function seleccionar(plataforma) {
 
 }
 
+}
+
 async function consultarCodigo() {
 
     const resultado =
@@ -360,6 +362,10 @@ if(
 (plataformaSeleccionada === "max"
 && tipoMax === "password")
 
+||
+
+(plataformaSeleccionada === "crunchyroll")
+
 ){
 
     resultado.innerHTML = `
@@ -407,6 +413,10 @@ if(
 
 (plataformaSeleccionada === "max"
 && tipoMax === "password")
+
+||
+
+(plataformaSeleccionada === "crunchyroll")
 
 ){
 
