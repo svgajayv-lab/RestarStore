@@ -1332,6 +1332,49 @@ margin-left:10px;
 "
 >
 
+<select
+id="filtroPlataforma"
+onchange="filtrarTabla()"
+style="
+padding:15px;
+border:none;
+border-radius:10px;
+background:#111;
+color:white;
+margin-left:10px;
+"
+>
+
+<option value="">
+Todas las plataformas
+</option>
+
+<option value="netflix">
+Netflix
+</option>
+
+<option value="amazon">
+Prime Video
+</option>
+
+<option value="disney">
+Disney+
+</option>
+
+<option value="spotify">
+Spotify
+</option>
+
+<option value="max">
+Max
+</option>
+
+<option value="crunchyroll">
+Crunchyroll
+</option>
+
+</select>
+
 <option value="">
 Todos
 </option>
@@ -1375,6 +1418,47 @@ ${filas}
 </table>
 
 <script>
+
+function filtrarTabla(){
+
+    const buscador =
+    document.getElementById("buscador").value.toLowerCase();
+
+    const estado =
+    document.getElementById("filtroEstado").value.toLowerCase();
+
+    const plataforma =
+    document.getElementById("filtroPlataforma").value.toLowerCase();
+
+    const filas =
+    document.querySelectorAll("table tr");
+
+    filas.forEach((fila, index) => {
+
+        if(index === 0) return;
+
+        const texto =
+        fila.innerText.toLowerCase();
+
+        const coincideBuscador =
+        texto.includes(buscador);
+
+        const coincideEstado =
+        estado === "" || texto.includes(estado);
+
+        const coincidePlataforma =
+        plataforma === "" || texto.includes(plataforma);
+
+        fila.style.display =
+        coincideBuscador &&
+        coincideEstado &&
+        coincidePlataforma
+        ? ""
+        : "none";
+
+    });
+
+}
 
 function seleccionarPlataforma(valor, boton){
 
