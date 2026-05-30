@@ -974,11 +974,20 @@ font-weight:bold;
 }
 </td>
 
-<td>
+<td style="white-space:nowrap;">
 
 <a
 href="/editar-cuenta/${cuenta._id}"
-...
+style="
+background:orange;
+color:black;
+padding:10px;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+margin-right:10px;
+display:inline-block;
+"
 >
 ✏️ Editar
 </a>
@@ -986,13 +995,26 @@ href="/editar-cuenta/${cuenta._id}"
 <form
 method="POST"
 action="/eliminar-cuenta/${cuenta._id}"
-...
+style="
+display:inline-block;
+margin:0;
+"
+onsubmit="
+return confirm(
+'¿Seguro que deseas eliminar esta cuenta?'
+)
+"
 >
 
 <button
 style="
 background:red;
-...
+color:white;
+border:none;
+padding:10px;
+cursor:pointer;
+border-radius:8px;
+font-weight:bold;
 "
 >
 🗑️ Eliminar
