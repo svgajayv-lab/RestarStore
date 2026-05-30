@@ -1575,6 +1575,9 @@ app.get("/otp", async (req, res) => {
         const plataforma =
         req.query.plataforma;
 
+        const tipo =
+req.query.tipo || "login";
+
         let remitente = "";
 
         switch(plataforma){
@@ -1635,9 +1638,26 @@ console.log("🔍 QUERY GMAIL:",
 
             maxResults: 5,
 
-            q: plataforma === "amazon"
-    ? `${remitente} newer_than:15m`
-    : `from:${remitente} newer_than:15m`
+            q:
+plataforma === "amazon"
+
+? `${remitente} newer_than:15m`
+
+:
+
+plataforma === "disney" && tipo === "hogar"
+
+? `from:${remitente} "actualizar tu Hogar de Disney+" newer_than:15m`
+
+:
+
+plataforma === "disney" && tipo === "login"
+
+? `from:${remitente} "código de acceso único" newer_than:15m`
+
+:
+
+`from:${remitente} newer_than:15m`
 
         });
 

@@ -1,5 +1,6 @@
 let plataformaSeleccionada = "amazon";
 let ultimoOTP = "";
+let tipoDisney = "login";
 let tipoSpotify = "login";
 let tipoMax = "login";
 let tipoCrunchy = "login";
@@ -121,6 +122,34 @@ function seleccionarCrunchy(tipo){
 
 }
 
+function seleccionarDisney(tipo){
+
+    tipoDisney = tipo;
+
+    document
+    .querySelectorAll(".disney-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+    if(tipo === "login"){
+
+        document
+        .getElementById("btnDisneyLogin")
+        .classList.add("active");
+
+    }else{
+
+        document
+        .getElementById("btnDisneyHome")
+        .classList.add("active");
+
+    }
+
+    document
+    .querySelector(".consultar")
+    .innerText = "Consultar Código";
+
+}
+
 function seleccionar(plataforma) {
 
     plataformaSeleccionada = plataforma;
@@ -144,10 +173,34 @@ function seleccionar(plataforma) {
     }
 
     if (plataforma === "disney") {
-        document
-        .querySelector(".disney")
-        .classList.add("active");
+
+    document
+    .querySelector(".disney")
+    .classList.add("active");
+
+    document.getElementById(
+        "disneyOpciones"
+    ).style.display = "block";
+
+    seleccionarDisney(
+        tipoDisney
+    );
+
+} else {
+
+    const disneyBox =
+    document.getElementById(
+        "disneyOpciones"
+    );
+
+    if(disneyBox){
+
+        disneyBox.style.display =
+        "none";
+
     }
+
+}
 
     if (plataforma === "spotify") {
 
@@ -326,6 +379,11 @@ if(!dataCuenta.success){
 
 }
 const tipoActual =
+
+plataformaSeleccionada === "disney"
+? tipoDisney
+
+:
 
 plataformaSeleccionada === "spotify"
 ? tipoSpotify

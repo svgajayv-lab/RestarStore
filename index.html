@@ -27,6 +27,20 @@
 
     <input type="email" id="correo" placeholder="Ingresa tu correo">
 
+<div id="disneyOpciones" class="disney-options" style="display:none;">
+  <button class="disney-btn" onclick="seleccionarDisney('login')" id="btnDisneyLogin">
+    🔑 Código de Acceso
+    <br>
+    <small>Código de 6 dígitos</small>
+  </button>
+
+  <button class="disney-btn" onclick="seleccionarDisney('hogar')" id="btnDisneyHome">
+    🏠 Código Hogar
+    <br>
+    <small>Código para actualizar Hogar</small>
+  </button>
+</div>
+
     <div id="spotifyOpciones" class="spotify-options" style="display:none;">
       <button class="spotify-btn" onclick="seleccionarSpotify('login')" id="btnLogin">
         🔑 Código de acceso
