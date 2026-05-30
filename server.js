@@ -49,55 +49,40 @@ app.post("/crear-cuenta", async (req, res) => {
     try {
 
         const {
+    plataforma,
+    plan,
+    correo,
+    password,
+    cliente,
 
-            plataforma,
+    whatsapp,
+    perfiles,
+    perfil,
+    pin,
 
-            plan,
-
-            correo,
-
-            password,
-
-            cliente,
-
-            estado,
-
-            vencimiento
-
-        } = req.body;
+    estado,
+    inicio,
+    vencimiento
+} = req.body;
 
         const nuevaCuenta =
 new Account({
 
-    plataforma:
-    req.body.plataforma,
+    plataforma: req.body.plataforma,
+    plan: req.body.plan,
+    correo: req.body.correo,
+    password: req.body.password,
 
-    plan:
-    req.body.plan,
+    cliente: req.body.cliente || "Libre",
+    whatsapp: req.body.whatsapp,
+    perfiles: req.body.perfiles,
+    perfil: req.body.perfil,
+    pin: req.body.pin,
 
-    correo:
-    req.body.correo,
+    inicio: req.body.inicio || new Date(),
+    vencimiento: req.body.vencimiento,
 
-    password:
-req.body.password,
-
-cliente:
-req.body.cliente,
-
-    inicio:
-
-    req.body.inicio
-
-    ||
-
-    new Date(),
-
-    vencimiento:
-    req.body.vencimiento,
-
-    cliente: "Libre",
-
-    estado: "Libre"
+    estado: req.body.estado || "Libre"
 
 });
 
@@ -139,26 +124,20 @@ app.post("/crear-cuenta-web"
         const nuevaCuenta =
 new Account({
 
-    plataforma:
-    req.body.plataforma,
+    plataforma: req.body.plataforma,
+    plan: req.body.plan,
+    correo: req.body.correo,
+    password: req.body.password,
 
-    plan:
-    req.body.plan,
+    whatsapp: req.body.whatsapp,
+    perfiles: req.body.perfiles,
+    perfil: req.body.perfil,
+    pin: req.body.pin,
 
-    correo:
-    req.body.correo,
-
-    password:
-    req.body.password,
-
-    inicio:
-    req.body.inicio,
-
-    vencimiento:
-    req.body.vencimiento,
+    inicio: req.body.inicio,
+    vencimiento: req.body.vencimiento,
 
     cliente: "Libre",
-
     estado: "Libre"
 
 });
@@ -967,52 +946,56 @@ new Date(cuenta.vencimiento)
 
                 <td>${cuenta.cliente}</td>
 
-                <td>
+<td>
+${cuenta.whatsapp || "-"}
+
+${
+cuenta.whatsapp
+?
+`
+<button
+onclick="copiarTexto('${cuenta.whatsapp}')"
+style="
+background:#25d366;
+color:white;
+border:none;
+border-radius:6px;
+padding:6px 8px;
+margin-left:8px;
+cursor:pointer;
+font-weight:bold;
+"
+>
+📋
+</button>
+`
+:
+""
+}
+</td>
+
+<td>
 
 <a
 href="/editar-cuenta/${cuenta._id}"
-style="
-background:orange;
-color:black;
-padding:10px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-margin-right:10px;
-display:inline-block;
-"
+...
 >
-
 ✏️ Editar
-
 </a>
 
 <form
 method="POST"
 action="/eliminar-cuenta/${cuenta._id}"
-style="
-display:inline-block;
-"
-onsubmit="
-return confirm(
-'¿Seguro que deseas eliminar esta cuenta?'
-)
-"
+...
 >
 
 <button
 style="
 background:red;
-color:white;
-border:none;
-padding:10px;
-cursor:pointer;
-border-radius:8px;
+...
 "
 >
-
 🗑️ Eliminar
-
 </button>
 
 </form>
@@ -1281,6 +1264,46 @@ width:180px;
 "
 >
 
+  <input
+name="whatsapp"
+placeholder="WhatsApp cliente"
+style="
+padding:12px;
+margin:5px;
+width:180px;
+"
+>
+
+<input
+name="perfiles"
+placeholder="Cantidad perfiles"
+style="
+padding:12px;
+margin:5px;
+width:160px;
+"
+>
+
+<input
+name="perfil"
+placeholder="Perfil asignado"
+style="
+padding:12px;
+margin:5px;
+width:160px;
+"
+>
+
+<input
+name="pin"
+placeholder="PIN"
+style="
+padding:12px;
+margin:5px;
+width:100px;
+"
+>  
+
 <input
 type="date"
 name="inicio"
@@ -1426,6 +1449,8 @@ Crunchyroll
 <th>Vencimiento</th>
 
 <th>Cliente</th>
+
+<th>WhatsApp</th>
 
 <th>Acciones</th>
 

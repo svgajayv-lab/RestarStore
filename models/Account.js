@@ -13,6 +13,11 @@ new mongoose.Schema({
 
     cliente: String,
 
+    whatsapp: String,
+perfil: String,
+pin: String,
+perfiles: String,
+
     estado: String,
 
     inicio: Date,
@@ -25,4 +30,4 @@ module.exports =
 mongoose.model(
     "Account",
     AccountSchema
-);
+);+
