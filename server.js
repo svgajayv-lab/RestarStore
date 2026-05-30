@@ -1645,6 +1645,36 @@ plataforma === "amazon"
 
 :
 
+plataforma === "netflix" && tipo === "login"
+
+? `from:${remitente} "Tu código de inicio de sesión" newer_than:15m`
+
+:
+
+plataforma === "netflix" && tipo === "password"
+
+? `from:${remitente} "restablecimiento de contraseña" newer_than:15m`
+
+:
+
+plataforma === "netflix" && tipo === "temporal"
+
+? `from:${remitente} "código de acceso temporal" newer_than:15m`
+
+:
+
+plataforma === "netflix" && tipo === "hogar"
+
+? `from:${remitente} "actualizar tu Hogar con Netflix" newer_than:15m`
+
+:
+
+plataforma === "netflix" && tipo === "aprobar"
+
+? `from:${remitente} "Nueva solicitud de inicio de sesión" newer_than:15m`
+
+:
+
 plataforma === "disney" && tipo === "hogar"
 
 ? `from:${remitente} "actualizar tu Hogar de Disney+" newer_than:15m`
@@ -1981,12 +2011,16 @@ const crunchyLink = textoPlano.match(
 /https?:\/\/[^\s")]+crunchyroll[^\s")]+/i
 );
 
+const netflixLink = textoPlano.match(
+/https?:\/\/(?:www\.)?netflix\.com[^\s\]\)"]+/i
+);
+
 if(spotifyLink){
 
     linkSpotify = spotifyLink[0];
 
     console.log(
-        "🔥 LINK SPOTIFY:",
+        "🔥 LINK NETFLIX:",
         linkSpotify
     );
 
@@ -2009,6 +2043,17 @@ if(crunchyLink){
 
     console.log(
         "🔥 LINK CRUNCHY:",
+        linkSpotify
+    );
+
+}
+
+if(netflixLink){
+
+    linkSpotify = netflixLink[0];
+
+    console.log(
+        "🔥 LINK NETFLIX:",
         linkSpotify
     );
 
@@ -2163,6 +2208,18 @@ tipoMax === "reset"
 
 if(
 plataforma === "crunchyroll"
+){
+
+    return res.json({
+        link: linkSpotify || "Link no encontrado"
+    });
+
+}
+
+if(
+plataforma === "netflix"
+&&
+tipo !== "login"
 ){
 
     return res.json({
