@@ -2,6 +2,7 @@ let plataformaSeleccionada = "amazon";
 let ultimoOTP = "";
 let tipoSpotify = "login";
 let tipoMax = "login";
+let tipoCrunchy = "login";
 
 function seleccionarSpotify(tipo){
 
@@ -76,6 +77,45 @@ function seleccionarMax(tipo){
 
         botonConsultar.innerText =
         "Consultar Código";
+
+    }
+
+}
+
+function seleccionarCrunchy(tipo){
+
+    tipoCrunchy = tipo;
+
+    document
+    .querySelectorAll(".crunchy-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+    if(tipo === "login"){
+
+        document
+        .getElementById("btnCrunchyLogin")
+        .classList.add("active");
+
+    }else{
+
+        document
+        .getElementById("btnCrunchyPassword")
+        .classList.add("active");
+
+    }
+
+    const botonConsultar =
+    document.querySelector(".consultar");
+
+    if(tipo === "password"){
+
+        botonConsultar.innerText =
+        "Obtener Link";
+
+    }else{
+
+        botonConsultar.innerText =
+        "Obtener Link";
 
     }
 
@@ -170,9 +210,31 @@ function seleccionar(plataforma) {
 }
 
     if (plataforma === "crunchyroll") {
-        document
-        .querySelector(".crunchy")
-        .classList.add("active");
+
+    document
+    .querySelector(".crunchy")
+    .classList.add("active");
+
+    document.getElementById(
+        "crunchyOpciones"
+    ).style.display = "block";
+
+    seleccionarCrunchy(
+        tipoCrunchy
+    );
+
+} else {
+
+    const crunchyBox =
+    document.getElementById(
+        "crunchyOpciones"
+    );
+
+    if(crunchyBox){
+
+        crunchyBox.style.display =
+        "none";
+
     }
 
 }
@@ -208,6 +270,10 @@ plataformaSeleccionada !== "max"
 &&
 
 plataformaSeleccionada !== "spotify"
+
+&&
+
+plataformaSeleccionada !== "crunchyroll"
 
 ){
 
@@ -266,6 +332,11 @@ plataformaSeleccionada === "spotify"
 
 plataformaSeleccionada === "max"
 ? tipoMax
+
+:
+
+plataformaSeleccionada === "crunchyroll"
+? tipoCrunchy
 
 :
 

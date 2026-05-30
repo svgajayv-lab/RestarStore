@@ -1841,6 +1841,8 @@ let tipoSpotify = "login";
 
 let tipoMax = "login";
 
+let tipoCrunchy = "login";
+
 if(
 textoPlano.toLowerCase().includes(
 "actualizar el hogar"
@@ -1878,6 +1880,30 @@ textoPlano.toLowerCase().includes(
 
 }
 
+if(
+plataforma === "crunchyroll"
+&&
+textoPlano.toLowerCase().includes(
+"restablecer contraseña"
+)
+){
+
+    tipoCrunchy = "reset";
+
+}
+
+if(
+plataforma === "crunchyroll"
+&&
+textoPlano.toLowerCase().includes(
+"nuevo inicio de sesión"
+)
+){
+
+    tipoCrunchy = "login";
+
+}
+
 console.log(
     "🔥 TIPO DISNEY:",
     tipoDisney
@@ -1891,6 +1917,11 @@ console.log(
 console.log(
     "🔥 TIPO MAX:",
     tipoMax
+);
+
+console.log(
+    "🔥 TIPO CRUNCHY:",
+    tipoCrunchy
 );
 
         let otp = "No encontrado";
@@ -1926,6 +1957,10 @@ const maxLink = textoPlano.match(
 /https:\/\/ablink\.alerts\.hbomax\.com[^\s")]+/i
 );
 
+const crunchyLink = textoPlano.match(
+/https?:\/\/[^\s")]+crunchyroll[^\s")]+/i
+);
+
 if(spotifyLink){
 
     linkSpotify = spotifyLink[0];
@@ -1943,6 +1978,17 @@ if(maxLink){
 
     console.log(
         "🔥 LINK MAX:",
+        linkSpotify
+    );
+
+}
+
+if(crunchyLink){
+
+    linkSpotify = crunchyLink[0];
+
+    console.log(
+        "🔥 LINK CRUNCHY:",
         linkSpotify
     );
 
@@ -2087,6 +2133,16 @@ if(
 plataforma === "max"
 &&
 tipoMax === "reset"
+){
+
+    return res.json({
+        link: linkSpotify || "Link no encontrado"
+    });
+
+}
+
+if(
+plataforma === "crunchyroll"
 ){
 
     return res.json({
