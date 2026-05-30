@@ -83,6 +83,40 @@
   </button>
 </div>
 
+<div id="netflixOpciones" class="netflix-options" style="display:none;">
+
+  <button class="netflix-btn" onclick="seleccionarNetflix('login')" id="btnNetflixLogin">
+    🔑 Código de Acceso
+    <br>
+    <small>Código de 4 dígitos</small>
+  </button>
+
+  <button class="netflix-btn" onclick="seleccionarNetflix('password')" id="btnNetflixPassword">
+    🔓 Recuperar Contraseña
+    <br>
+    <small>Link de recuperación</small>
+  </button>
+
+  <button class="netflix-btn" onclick="seleccionarNetflix('temporal')" id="btnNetflixTemporal">
+    ✈️ Acceso Temporal
+    <br>
+    <small>Link para viajes</small>
+  </button>
+
+  <button class="netflix-btn" onclick="seleccionarNetflix('hogar')" id="btnNetflixHogar">
+    🏠 Código Hogar
+    <br>
+    <small>Link de código hogar</small>
+  </button>
+
+  <button class="netflix-btn" onclick="seleccionarNetflix('aprobar')" id="btnNetflixAprobar">
+    ✅ Aprobar Ingresos
+    <br>
+    <small>Link de aprobación</small>
+  </button>
+
+</div>
+
     <button class="consultar" onclick="consultarCodigo()">
       Consultar Código
     </button>

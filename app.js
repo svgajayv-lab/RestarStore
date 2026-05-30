@@ -1,5 +1,6 @@
 let plataformaSeleccionada = "amazon";
 let ultimoOTP = "";
+let tipoNetflix = "login";
 let tipoDisney = "login";
 let tipoSpotify = "login";
 let tipoMax = "login";
@@ -150,6 +151,39 @@ function seleccionarDisney(tipo){
 
 }
 
+function seleccionarNetflix(tipo){
+
+    tipoNetflix = tipo;
+
+    document
+    .querySelectorAll(".netflix-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+    document
+    .getElementById("btnNetflixLogin")
+    .classList.toggle("active", tipo === "login");
+
+    document
+    .getElementById("btnNetflixPassword")
+    .classList.toggle("active", tipo === "password");
+
+    document
+    .getElementById("btnNetflixTemporal")
+    .classList.toggle("active", tipo === "temporal");
+
+    document
+    .getElementById("btnNetflixHogar")
+    .classList.toggle("active", tipo === "hogar");
+
+    document
+    .getElementById("btnNetflixAprobar")
+    .classList.toggle("active", tipo === "aprobar");
+
+    document.querySelector(".consultar").innerText =
+    tipo === "login" ? "Consultar Código" : "Obtener Link";
+
+}
+
 function seleccionar(plataforma) {
 
     plataformaSeleccionada = plataforma;
@@ -199,6 +233,28 @@ function seleccionar(plataforma) {
         "none";
 
     }
+
+}
+
+if (plataforma === "netflix") {
+
+    document
+    .querySelector(".netflix")
+    .classList.add("active");
+
+    document.getElementById(
+        "netflixOpciones"
+    ).style.display = "block";
+
+    seleccionarNetflix(
+        tipoNetflix
+    );
+
+} else {
+
+    document.getElementById(
+        "netflixOpciones"
+    ).style.display = "none";
 
 }
 
@@ -316,6 +372,10 @@ plataformaSeleccionada !== "amazon"
 
 &&
 
+plataformaSeleccionada !== "netflix"
+
+&&
+
 plataformaSeleccionada !== "disney"
 
 &&
@@ -380,6 +440,11 @@ if(!dataCuenta.success){
 }
 const tipoActual =
 
+plataformaSeleccionada === "netflix"
+? tipoNetflix
+
+:
+
 plataformaSeleccionada === "disney"
 ? tipoDisney
 
@@ -423,6 +488,11 @@ if(
 ||
 
 (plataformaSeleccionada === "crunchyroll")
+
+||
+
+(plataformaSeleccionada === "netflix"
+&& tipoNetflix !== "login")
 
 ){
 
@@ -475,6 +545,11 @@ if(
 ||
 
 (plataformaSeleccionada === "crunchyroll")
+
+||
+
+(plataformaSeleccionada === "netflix"
+&& tipoNetflix !== "login")
 
 ){
 
