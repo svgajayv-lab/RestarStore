@@ -1332,6 +1332,20 @@ margin-left:10px;
 "
 >
 
+<option value="">
+Todos
+</option>
+
+<option value="Libre">
+Libres
+</option>
+
+<option value="Usada">
+Usadas
+</option>
+
+</select>
+
 <select
 id="filtroPlataforma"
 onchange="filtrarTabla()"
@@ -1371,20 +1385,6 @@ Max
 
 <option value="crunchyroll">
 Crunchyroll
-</option>
-
-</select>
-
-<option value="">
-Todos
-</option>
-
-<option value="Libre">
-Libres
-</option>
-
-<option value="Usada">
-Usadas
 </option>
 
 </select>
@@ -2405,7 +2405,29 @@ app.get("/admin", async (req, res) => {
 
                 <td>${item.correo}</td>
 
-                <td>${item.plataforma}</td>
+                <td>
+${
+cuenta.plataforma === "amazon"
+? "Prime Video"
+:
+cuenta.plataforma === "disney"
+? "Disney+"
+:
+cuenta.plataforma === "crunchyroll"
+? "Crunchyroll"
+:
+cuenta.plataforma === "max"
+? "Max"
+:
+cuenta.plataforma === "spotify"
+? "Spotify"
+:
+cuenta.plataforma === "netflix"
+? "Netflix"
+:
+cuenta.plataforma
+}
+</td>
 
                 <td>${item.otp}</td>
 
