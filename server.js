@@ -1848,14 +1848,9 @@ console.log(
 );
 
         const textoPlano = body
-
-
 .replace(/<[^>]*>/g, " ")
-
 .replace(/&nbsp;/g, " ")
-
 .replace(/&#39;/g, "'")
-
 .replace(/\s+/g, " ");
 
 const numerosVisibles =
@@ -1870,6 +1865,32 @@ console.log(
     "📩 TEXTO:",
     textoPlano.substring(0, 500)
 );
+
+if(
+    plataforma === "netflix"
+    &&
+    tipo === "login"
+){
+
+    const netflixOTP =
+    textoPlano.match(
+        /Ingresa este código para iniciar sesión\s+(\d{4})/i
+    );
+
+    if(netflixOTP){
+
+        console.log(
+            "🔥 OTP NETFLIX:",
+            netflixOTP[1]
+        );
+
+        return res.json({
+            otp: netflixOTP[1]
+        });
+
+    }
+
+}
 
 console.log(
     "🔥 HOGAR?:",
@@ -1993,7 +2014,11 @@ numerosVisibles.length - 1
 
 }
 
-        if(otpSnippet){
+        if(
+    otpSnippet &&
+    plataforma !== "netflix" &&
+    plataforma !== "disney"
+){
 
     otp = otpSnippet[1];
 
