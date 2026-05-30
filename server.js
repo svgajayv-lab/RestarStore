@@ -130,9 +130,7 @@ new Account({
     password: req.body.password,
 
     whatsapp: req.body.whatsapp,
-    perfiles: req.body.perfiles,
-    perfil: req.body.perfil,
-    pin: req.body.pin,
+cuentaCompleta: req.body.cuentaCompleta,
 
     inicio: req.body.inicio,
     vencimiento: req.body.vencimiento,
@@ -310,6 +308,18 @@ required
 >
 
 <input
+name="whatsapp"
+placeholder="WhatsApp cliente"
+value="${cuenta.whatsapp || ''}"
+>
+
+<input
+name="cuentaCompleta"
+placeholder="Cuenta completa"
+value="${cuenta.cuentaCompleta || ''}"
+>
+
+<input
 type="date"
 name="inicio"
 
@@ -453,6 +463,12 @@ app.post("/editar-cuenta/:id", async (req, res) => {
 
                 cliente:
                 req.body.cliente,
+
+                whatsapp:
+                req.body.whatsapp,
+
+                cuentaCompleta:
+                req.body.cuentaCompleta,
 
                 inicio:
                 req.body.inicio,
@@ -1297,34 +1313,14 @@ width:180px;
 >
 
 <input
-name="perfiles"
-placeholder="Cantidad perfiles"
+name="cuentaCompleta"
+placeholder="Cuenta completa"
 style="
 padding:12px;
 margin:5px;
-width:160px;
+width:180px;
 "
->
-
-<input
-name="perfil"
-placeholder="Perfil asignado"
-style="
-padding:12px;
-margin:5px;
-width:160px;
-"
->
-
-<input
-name="pin"
-placeholder="PIN"
-style="
-padding:12px;
-margin:5px;
-width:100px;
-"
->  
+> 
 
 <input
 type="date"

@@ -14,6 +14,9 @@ new mongoose.Schema({
     cliente: String,
 
     whatsapp: String,
+
+    cuentaCompleta: String,
+    
 perfil: String,
 pin: String,
 perfiles: String,
