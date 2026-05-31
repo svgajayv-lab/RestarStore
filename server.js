@@ -1951,7 +1951,67 @@ app.get("/otp", async (req, res) => {
         const tipo =
 req.query.tipo || "login";
 
-        let remitente = "";
+const correoCliente =
+(req.query.correo || "").trim();
+
+const nombreCliente =
+(req.query.cliente || "").trim();
+
+if(!correoCliente || !nombreCliente){
+
+    return res.json({
+        otp: "🚫 Acceso no autorizado"
+    });
+
+}
+
+const cuentaAutorizada =
+await Account.findOne({
+
+    correo: correoCliente,
+
+    plataforma:
+
+    plataforma === "amazon"
+    ?
+
+    "amazon"
+
+    :
+
+    plataforma,
+
+    vencimiento: {
+        $gte: new Date()
+    }
+
+});
+
+if(
+
+    !cuentaAutorizada ||
+
+    !cuentaAutorizada.cliente ||
+
+    cuentaAutorizada.cliente
+    .toLowerCase()
+    .trim()
+
+    !==
+
+    nombreCliente
+    .toLowerCase()
+    .trim()
+
+){
+
+    return res.json({
+        otp: "🚫 Acceso no autorizado"
+    });
+
+}
+
+let remitente = "";
 
         switch(plataforma){
 

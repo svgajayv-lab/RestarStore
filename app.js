@@ -366,6 +366,17 @@ async function consultarCodigo() {
         return;
     }
 
+const cliente =
+prompt("🔐 Ingresa tu nombre de cliente");
+
+if(!cliente || cliente.trim() === ""){
+
+    resultado.innerHTML =
+    "🚫 Debes ingresar tu nombre de cliente";
+
+    return;
+}
+
     if(
 
 plataformaSeleccionada !== "amazon"
@@ -469,7 +480,7 @@ plataformaSeleccionada === "crunchyroll"
 
 const response =
 await fetch(
-`/otp?plataforma=${plataformaSeleccionada}&correo=${correo}&tipo=${tipoActual}`
+`/otp?plataforma=${plataformaSeleccionada}&correo=${correo}&cliente=${encodeURIComponent(cliente)}&tipo=${tipoActual}`
 );
 
         const data =
