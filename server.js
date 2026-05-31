@@ -1022,7 +1022,7 @@ font-weight:bold;
 margin-right:10px;
 "
 >
-📋 Copiar Entrega
+📋 Entrega
 </button>
 
 <button
@@ -1619,36 +1619,57 @@ vencimiento,
 
 function enviarRenovacion(btn){
 
-    const whatsapp = btn.dataset.whatsapp;
     const plataforma = btn.dataset.plataforma;
     const vencimiento = btn.dataset.vencimiento;
 
-    if(!whatsapp){
-        alert("⚠️ Esta cuenta no tiene WhatsApp");
-        return;
+    let nombrePlataforma = plataforma.toUpperCase();
+
+    if(plataforma === "amazon"){
+        nombrePlataforma = "AMAZON PRIME VIDEO";
     }
 
-    const numero = whatsapp.replace(/\D/g,'');
+    if(plataforma === "netflix"){
+        nombrePlataforma = "NETFLIX";
+    }
+
+    if(plataforma === "disney"){
+        nombrePlataforma = "DISNEY+";
+    }
+
+    if(plataforma === "spotify"){
+        nombrePlataforma = "SPOTIFY PREMIUM";
+    }
+
+    if(plataforma === "max"){
+        nombrePlataforma = "MAX";
+    }
+
+    if(plataforma === "crunchyroll"){
+        nombrePlataforma = "CRUNCHYROLL";
+    }
 
     const mensaje = [
-        "*RENOVACION " + plataforma.toUpperCase() + "*",
+        "*🔄 RENOVACIÓN " + nombrePlataforma + "*",
         "",
-        "Tu servicio vence el:",
+        "━━━━━━━━━━━━━━━━━━━",
         "",
+        "⏳ Tu servicio vence:",
         vencimiento,
         "",
-        "Si deseas renovar responde este mensaje.",
+        "━━━━━━━━━━━━━━━━━━━",
         "",
-        "EE Streaming Peru"
+        "💳 Si deseas renovar responde este mensaje.",
+        "",
+        "✅ Mantén tu acceso activo sin interrupciones.",
+        "",
+        "━━━━━━━━━━━━━━━━━━━",
+        "",
+        "*✨ Gracias por confiar en EE Streaming Peru ✨*"
     ].join("\\n");
 
-    const url =
-    "https://wa.me/" +
-    numero +
-    "?text=" +
-    encodeURIComponent(mensaje);
+    navigator.clipboard.writeText(mensaje);
 
-    window.open(url, "_blank");
+    alert("✅ Mensaje de renovación copiado.");
 
 }
 
