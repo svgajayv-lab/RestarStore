@@ -1018,19 +1018,6 @@ margin-right:10px;
 💬 Entregar
 </button>
 
-<a
-href="/editar-cuenta/${cuenta._id}"
-style="
-background:orange;
-color:black;
-padding:10px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-margin-right:10px;
-display:inline-block;
-"
-
 <button
 onclick="enviarRenovacion(this)"
 data-whatsapp="${cuenta.whatsapp || ""}"
