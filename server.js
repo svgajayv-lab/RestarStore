@@ -1511,32 +1511,32 @@ function enviarEntrega(whatsapp, plataforma, correo, password, cuentaCompleta, i
         return;
     }
 
-    const numero =
-    whatsapp.replace(/\D/g, "");
+    const numero = whatsapp.replace(/\D/g, "");
 
-    const mensaje =
-`🎬 ENTREGA DE CUENTA ${plataforma.toUpperCase()}
-
-━━━━━━━━━━━━━━━━━━━
-📧 Correo: ${correo}
-🔑 Contraseña: ${password}
-📦 Cuenta: ${cuentaCompleta || "Cuenta completa"}
-
-━━━━━━━━━━━━━━━━━━━
-📅 Fecha de inicio: ${inicio}
-⏳ Fecha de vencimiento: ${vencimiento}
-
-━━━━━━━━━━━━━━━━━━━
-⚠️ RECOMENDACIONES IMPORTANTES
-
-✅ No cambiar correo ni contraseña
-✅ No modificar datos de la cuenta
-✅ No compartir con terceros
-✅ Usar correctamente el servicio
-
-━━━━━━━━━━━━━━━━━━━
-🍿 ¡Disfruta tu suscripción!
-✨ Gracias por confiar en EE Streaming Peru ✨`;
+    const mensaje = [
+        "🎬 ENTREGA DE CUENTA " + plataforma.toUpperCase(),
+        "",
+        "━━━━━━━━━━━━━━━━━━━",
+        "📧 Correo: " + correo,
+        "🔑 Contraseña: " + password,
+        "📦 Cuenta: " + (cuentaCompleta || "Cuenta completa"),
+        "",
+        "━━━━━━━━━━━━━━━━━━━",
+        "📅 Fecha de inicio: " + inicio,
+        "⏳ Fecha de vencimiento: " + vencimiento,
+        "",
+        "━━━━━━━━━━━━━━━━━━━",
+        "⚠️ RECOMENDACIONES IMPORTANTES",
+        "",
+        "✅ No cambiar correo ni contraseña",
+        "✅ No modificar datos de la cuenta",
+        "✅ No compartir con terceros",
+        "✅ Usar correctamente el servicio",
+        "",
+        "━━━━━━━━━━━━━━━━━━━",
+        "🍿 ¡Disfruta tu suscripción!",
+        "✨ Gracias por confiar en EE Streaming Peru ✨"
+    ].join("\\n");
 
     const url =
     "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensaje);
