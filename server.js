@@ -764,7 +764,7 @@ cuenta.inicio
 
 new Date(
 cuenta.inicio
-).toLocaleDateString()
+).toLocaleDateString("es-PE")
 
 :
 
@@ -1004,8 +1004,8 @@ data-cliente="${cuenta.cliente || ""}"
 data-correo="${cuenta.correo || ""}"
 data-password="${cuenta.password || ""}"
 data-cuenta="${cuenta.cuentaCompleta || ""}"
-data-inicio="${cuenta.inicio ? new Date(cuenta.inicio).toLocaleDateString() : ""}"
-data-vencimiento="${cuenta.vencimiento ? new Date(cuenta.vencimiento).toLocaleDateString() : ""}"
+data-inicio="${cuenta.inicio ? new Date(cuenta.inicio).toLocaleDateString("es-PE") : ""}"
+data-vencimiento="${cuenta.vencimiento ? new Date(cuenta.vencimiento).toLocaleDateString("es-PE") : ""}"
 style="
 background:#25d366;
 color:white;
