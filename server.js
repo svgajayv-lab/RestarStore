@@ -1022,6 +1022,7 @@ margin-right:10px;
 
 <button
 onclick="enviarRenovacion(this)"
+data-cliente="${cuenta.cliente || ''}"
 data-whatsapp="${cuenta.whatsapp || ""}"
 data-plataforma="${cuenta.plataforma || ""}"
 data-vencimiento="${cuenta.vencimiento ? new Date(cuenta.vencimiento).toLocaleDateString() : ""}"
@@ -1637,7 +1638,7 @@ function enviarRenovacion(btn){
 
     const plataforma = btn.dataset.plataforma;
     const vencimiento = btn.dataset.vencimiento;
-const cliente = btn.dataset.cliente;
+const cliente = btn.dataset.cliente || "cliente";
 
 
     let nombrePlataforma = plataforma.toUpperCase();
