@@ -1542,8 +1542,34 @@ function enviarEntrega(btn){
 
     const numero = whatsapp.replace(/\D/g, "");
 
+let nombrePlataforma = plataforma.toUpperCase();
+
+if(plataforma === "amazon"){
+    nombrePlataforma = "AMAZON PRIME VIDEO";
+}
+
+if(plataforma === "netflix"){
+    nombrePlataforma = "NETFLIX";
+}
+
+if(plataforma === "disney"){
+    nombrePlataforma = "DISNEY+";
+}
+
+if(plataforma === "spotify"){
+    nombrePlataforma = "SPOTIFY PREMIUM";
+}
+
+if(plataforma === "max"){
+    nombrePlataforma = "MAX";
+}
+
+if(plataforma === "crunchyroll"){
+    nombrePlataforma = "CRUNCHYROLL";
+}
+
     const mensaje = [
-        "🎬 ENTREGA DE CUENTA " + plataforma.toUpperCase(),
+        "🎬 ENTREGA DE CUENTA " + nombrePlataforma,
         "",
         "━━━━━━━━━━━━━━━━━━━",
         "📧 Correo: " + correo,
