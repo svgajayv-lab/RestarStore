@@ -1022,7 +1022,7 @@ font-weight:bold;
 margin-right:10px;
 "
 >
-💬 Entregar
+📋 Copiar Entrega
 </button>
 
 <button
@@ -1541,7 +1541,6 @@ ${filas}
 
 function enviarEntrega(btn){
 
-    const whatsapp = btn.dataset.whatsapp;
     const plataforma = btn.dataset.plataforma;
     const correo = btn.dataset.correo;
     const password = btn.dataset.password;
@@ -1549,60 +1548,72 @@ function enviarEntrega(btn){
     const inicio = btn.dataset.inicio;
     const vencimiento = btn.dataset.vencimiento;
 
-    if(!whatsapp){
-        alert("⚠️ Esta cuenta no tiene WhatsApp");
-        return;
+    let nombrePlataforma = plataforma.toUpperCase();
+
+    if(plataforma === "amazon"){
+        nombrePlataforma = "AMAZON PRIME VIDEO";
     }
 
-    const numero = whatsapp.replace(/\D/g, "");
+    if(plataforma === "netflix"){
+        nombrePlataforma = "NETFLIX";
+    }
 
-let nombrePlataforma = plataforma.toUpperCase();
+    if(plataforma === "disney"){
+        nombrePlataforma = "DISNEY+";
+    }
 
-if(plataforma === "amazon"){
-    nombrePlataforma = "AMAZON PRIME VIDEO";
-}
+    if(plataforma === "spotify"){
+        nombrePlataforma = "SPOTIFY PREMIUM";
+    }
 
-if(plataforma === "netflix"){
-    nombrePlataforma = "NETFLIX";
-}
+    if(plataforma === "max"){
+        nombrePlataforma = "MAX";
+    }
 
-if(plataforma === "disney"){
-    nombrePlataforma = "DISNEY+";
-}
+    if(plataforma === "crunchyroll"){
+        nombrePlataforma = "CRUNCHYROLL";
+    }
 
-if(plataforma === "spotify"){
-    nombrePlataforma = "SPOTIFY PREMIUM";
-}
+    const mensaje = [
+"*🎬 ENTREGA DE CUENTA " + nombrePlataforma + "*",
+"",
+"━━━━━━━━━━━━━━━━━━━",
+"",
+"📧 Correo:",
+correo,
+"",
+"🔑 Contraseña:",
+password,
+"",
+"📦 Cuenta:",
+(cuentaCompleta || "Cuenta completa"),
+"",
+"━━━━━━━━━━━━━━━━━━━",
+"",
+"📅 Inicio:",
+inicio,
+"",
+"⏳ Vencimiento:",
+vencimiento,
+"",
+"━━━━━━━━━━━━━━━━━━━",
+"",
+"⚠️ RECOMENDACIONES",
+"",
+"✅ No cambiar correo",
+"✅ No cambiar contraseña",
+"✅ No compartir la cuenta",
+"",
+"━━━━━━━━━━━━━━━━━━━",
+"",
+"🍿 ¡Disfruta tu suscripción!",
+"",
+"*✨ Gracias por confiar en EE Streaming Peru ✨*"
+].join("\\n");
 
-if(plataforma === "max"){
-    nombrePlataforma = "MAX";
-}
+    navigator.clipboard.writeText(mensaje);
 
-if(plataforma === "crunchyroll"){
-    nombrePlataforma = "CRUNCHYROLL";
-}
-
-const iconoVideo = String.fromCodePoint(0x1F3AC);
-const iconoCorreo = String.fromCodePoint(0x1F4E7);
-const iconoClave = String.fromCodePoint(0x1F511);
-const iconoCaja = String.fromCodePoint(0x1F4E6);
-const iconoCalendario = String.fromCodePoint(0x1F4C5);
-
-const mensaje =
-String.fromCodePoint(0x2705) +
-" Password: " +
-password;
-
-    const numeroLimpio = whatsapp.replace(/\D/g, "");
-
-const url =
-"https://wa.me/" + numeroLimpio + "?text=" + encodeURIComponent(mensaje);
-
-console.log(mensaje);
-
-console.log(url);
-
-    window.open(url, "_blank");
+    alert("✅ Mensaje copiado. Ahora pégalo en WhatsApp.");
 
 }
 
