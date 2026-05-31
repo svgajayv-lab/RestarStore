@@ -995,6 +995,11 @@ font-weight:bold;
 
 <td style="white-space:nowrap;">
 
+${
+cuenta.whatsapp
+?
+`
+
 <button
 onclick="enviarEntrega(this)"
 data-whatsapp="${cuenta.whatsapp || ""}"
@@ -1036,6 +1041,11 @@ margin-right:10px;
 >
 🔄 Renovar
 </button>
+
+`
+:
+""
+}
 
 <a
 href="/editar-cuenta/${cuenta._id}"
