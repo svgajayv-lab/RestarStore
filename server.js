@@ -1618,8 +1618,10 @@ const iconoBrillo = "\u2728";
     iconoBrillo + " Gracias por confiar en EE Streaming Peru " + iconoBrillo
 ].join("\\n");
 
-    const url =
-    "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensaje);
+    const numeroLimpio = whatsapp.replace(/\D/g, "");
+
+const url =
+"https://wa.me/" + numeroLimpio + "?text=" + encodeURIComponent(mensaje);
 
 console.log(mensaje);
 
