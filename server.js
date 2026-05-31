@@ -1588,18 +1588,9 @@ const iconoClave = String.fromCodePoint(0x1F511);
 const iconoCaja = String.fromCodePoint(0x1F4E6);
 const iconoCalendario = String.fromCodePoint(0x1F4C5);
 
-    const mensaje = [
-    iconoVideo + " ENTREGA DE CUENTA " + nombrePlataforma,
-    "",
-    "-------------------",
-    iconoCorreo + " Correo: " + correo,
-    iconoClave + " Contraseña: " + password,
-    iconoCaja + " Cuenta: " + (cuentaCompleta || "Cuenta completa"),
-    "",
-    "-------------------",
-    iconoCalendario + " Fecha de inicio: " + inicio,
-    iconoCalendario + " Fecha de vencimiento: " + vencimiento
-].join("\\n");
+const mensaje =
+"Correo: " + correo +
+"\nContraseña: " + password;
 
     const numeroLimpio = whatsapp.replace(/\D/g, "");
 
