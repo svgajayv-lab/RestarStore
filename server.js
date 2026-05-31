@@ -1604,7 +1604,7 @@ const iconoBrillo = "\u2728";
     "-------------------",
     "📅 Fecha de inicio: " + inicio,
     "⏳ Fecha de vencimiento: " + vencimiento
-].join("\n");
+].join("\\n");
 
     const numeroLimpio = whatsapp.replace(/\D/g, "");
 
