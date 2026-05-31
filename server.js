@@ -1594,29 +1594,17 @@ const iconoPopcorn = "\uD83C\uDF7F";
 const iconoBrillo = "\u2728";
 
     const mensaje = [
-    iconoVideo + " ENTREGA DE CUENTA " + nombrePlataforma,
+    "🎬 ENTREGA DE CUENTA " + nombrePlataforma,
     "",
-    "━━━━━━━━━━━━━━━━━━━",
-    iconoCorreo + " Correo: " + correo,
-    iconoClave + " Contraseña: " + password,
-    iconoCaja + " Cuenta: " + (cuentaCompleta || "Cuenta completa"),
+    "-------------------",
+    "📧 Correo: " + correo,
+    "🔑 Contraseña: " + password,
+    "📦 Cuenta: " + cuentaCompleta,
     "",
-    "━━━━━━━━━━━━━━━━━━━",
-    iconoCalendario + " Fecha de inicio: " + inicio,
-    iconoReloj + " Fecha de vencimiento: " + vencimiento,
-    "",
-    "━━━━━━━━━━━━━━━━━━━",
-    iconoAlerta + " RECOMENDACIONES IMPORTANTES",
-    "",
-    iconoCheck + " No cambiar correo ni contraseña",
-    iconoCheck + " No modificar datos de la cuenta",
-    iconoCheck + " No compartir con terceros",
-    iconoCheck + " Usar correctamente el servicio",
-    "",
-    "━━━━━━━━━━━━━━━━━━━",
-    iconoPopcorn + " ¡Disfruta tu suscripción!",
-    iconoBrillo + " Gracias por confiar en EE Streaming Peru " + iconoBrillo
-].join("\\n");
+    "-------------------",
+    "📅 Fecha de inicio: " + inicio,
+    "⏳ Fecha de vencimiento: " + vencimiento
+].join("\n");
 
     const numeroLimpio = whatsapp.replace(/\D/g, "");
 
