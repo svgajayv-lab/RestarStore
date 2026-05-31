@@ -1000,6 +1000,7 @@ cuenta.whatsapp
 onclick="enviarEntrega(this)"
 data-whatsapp="${cuenta.whatsapp || ""}"
 data-plataforma="${cuenta.plataforma || ""}"
+data-cliente="${cuenta.cliente || ""}"
 data-correo="${cuenta.correo || ""}"
 data-password="${cuenta.password || ""}"
 data-cuenta="${cuenta.cuentaCompleta || ""}"
@@ -1250,6 +1251,33 @@ width:220px;
 ${
 cuentas.filter(
 c => c.estado === "Usada"
+).length
+}
+
+</h1>
+
+</div>
+
+<div
+style="
+background:#111;
+padding:20px;
+border-radius:15px;
+width:220px;
+"
+>
+
+<h2 style="color:#ff9100;">
+⚠️ Vencidas
+</h2>
+
+<h1>
+
+${
+cuentas.filter(
+c =>
+c.vencimiento &&
+new Date(c.vencimiento) < new Date()
 ).length
 }
 
@@ -1609,6 +1637,8 @@ function enviarRenovacion(btn){
 
     const plataforma = btn.dataset.plataforma;
     const vencimiento = btn.dataset.vencimiento;
+const cliente = btn.dataset.cliente;
+
 
     let nombrePlataforma = plataforma.toUpperCase();
 
@@ -1637,23 +1667,20 @@ function enviarRenovacion(btn){
     }
 
     const mensaje = [
-        "*🔄 RENOVACIÓN " + nombrePlataforma + "*",
-        "",
-        "━━━━━━━━━━━━━━━━━━━",
-        "",
-        "⏳ Tu servicio vence:",
-        vencimiento,
-        "",
-        "━━━━━━━━━━━━━━━━━━━",
-        "",
-        "💳 Si deseas renovar responde este mensaje.",
-        "",
-        "✅ Mantén tu acceso activo sin interrupciones.",
-        "",
-        "━━━━━━━━━━━━━━━━━━━",
-        "",
-        "*✨ Gracias por confiar en EE Streaming Peru ✨*"
-    ].join("\\n");
+"*🔄 RENOVACIÓN " + nombrePlataforma + "*",
+"",
+"Hola " + cliente + ", 👋",
+"",
+"⏳ Tu servicio vence:",
+vencimiento,
+"",
+"⚠️ Para evitar interrupciones",
+"puedes renovar hoy mismo.",
+"",
+"💳 Escríbenos para continuar.",
+"",
+"*✨ Gracias por confiar en EE Streaming Peru ✨*"
+].join("\\n");
 
     navigator.clipboard.writeText(mensaje);
 
