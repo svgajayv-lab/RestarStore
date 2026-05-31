@@ -1582,28 +1582,23 @@ if(plataforma === "crunchyroll"){
     nombrePlataforma = "CRUNCHYROLL";
 }
 
-const iconoVideo = "\uD83C\uDFAC";
-const iconoCorreo = "\uD83D\uDCE7";
-const iconoClave = "\uD83D\uDD11";
-const iconoCaja = "\uD83D\uDCE6";
-const iconoCalendario = "\uD83D\uDCC5";
-const iconoReloj = "\u23F3";
-const iconoAlerta = "\u26A0\uFE0F";
-const iconoCheck = "\u2705";
-const iconoPopcorn = "\uD83C\uDF7F";
-const iconoBrillo = "\u2728";
+const iconoVideo = String.fromCodePoint(0x1F3AC);
+const iconoCorreo = String.fromCodePoint(0x1F4E7);
+const iconoClave = String.fromCodePoint(0x1F511);
+const iconoCaja = String.fromCodePoint(0x1F4E6);
+const iconoCalendario = String.fromCodePoint(0x1F4C5);
 
     const mensaje = [
-    "🎬 ENTREGA DE CUENTA " + nombrePlataforma,
+    iconoVideo + " ENTREGA DE CUENTA " + nombrePlataforma,
     "",
     "-------------------",
-    "📧 Correo: " + correo,
-    "🔑 Contraseña: " + password,
-    "📦 Cuenta: " + cuentaCompleta,
+    iconoCorreo + " Correo: " + correo,
+    iconoClave + " Contraseña: " + password,
+    iconoCaja + " Cuenta: " + (cuentaCompleta || "Cuenta completa"),
     "",
     "-------------------",
-    "📅 Fecha de inicio: " + inicio,
-    "⏳ Fecha de vencimiento: " + vencimiento
+    iconoCalendario + " Fecha de inicio: " + inicio,
+    iconoCalendario + " Fecha de vencimiento: " + vencimiento
 ].join("\\n");
 
     const numeroLimpio = whatsapp.replace(/\D/g, "");
