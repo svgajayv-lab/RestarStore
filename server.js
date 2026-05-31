@@ -992,6 +992,30 @@ font-weight:bold;
 
 <td style="white-space:nowrap;">
 
+<button
+onclick="enviarEntrega(
+'${cuenta.whatsapp || ""}',
+'${cuenta.plataforma || ""}',
+'${cuenta.correo || ""}',
+'${cuenta.password || ""}',
+'${cuenta.cuentaCompleta || ""}',
+'${cuenta.inicio ? new Date(cuenta.inicio).toLocaleDateString() : ""}',
+'${cuenta.vencimiento ? new Date(cuenta.vencimiento).toLocaleDateString() : ""}'
+)"
+style="
+background:#25d366;
+color:white;
+border:none;
+padding:10px;
+cursor:pointer;
+border-radius:8px;
+font-weight:bold;
+margin-right:10px;
+"
+>
+💬 Entregar
+</button>
+
 <a
 href="/editar-cuenta/${cuenta._id}"
 style="
@@ -1479,6 +1503,47 @@ ${filas}
 </table>
 
 <script>
+
+function enviarEntrega(whatsapp, plataforma, correo, password, cuentaCompleta, inicio, vencimiento){
+
+    if(!whatsapp){
+        alert("⚠️ Esta cuenta no tiene WhatsApp");
+        return;
+    }
+
+    const numero =
+    whatsapp.replace(/\D/g, "");
+
+    const mensaje =
+`🎬 ENTREGA DE CUENTA ${plataforma.toUpperCase()}
+
+━━━━━━━━━━━━━━━━━━━
+📧 Correo: ${correo}
+🔑 Contraseña: ${password}
+📦 Cuenta: ${cuentaCompleta || "Cuenta completa"}
+
+━━━━━━━━━━━━━━━━━━━
+📅 Fecha de inicio: ${inicio}
+⏳ Fecha de vencimiento: ${vencimiento}
+
+━━━━━━━━━━━━━━━━━━━
+⚠️ RECOMENDACIONES IMPORTANTES
+
+✅ No cambiar correo ni contraseña
+✅ No modificar datos de la cuenta
+✅ No compartir con terceros
+✅ Usar correctamente el servicio
+
+━━━━━━━━━━━━━━━━━━━
+🍿 ¡Disfruta tu suscripción!
+✨ Gracias por confiar en EE Streaming Peru ✨`;
+
+    const url =
+    "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensaje);
+
+    window.open(url, "_blank");
+
+}
 
 function copiarTexto(texto){
 
