@@ -1446,7 +1446,9 @@ Libres
 Usadas
 </option>
 
-<option value="vencida">Vencidas</option>
+<option value="vencida">
+Vencidas
+</option>
 
 </select>
 
@@ -1691,8 +1693,19 @@ function filtrarTabla(){
         const coincideBuscador =
         texto.includes(buscador);
 
-        const coincideEstado =
-        estado === "" || texto.includes(estado);
+        let coincideEstado = true;
+
+if(estado === "libre"){
+    coincideEstado = texto.includes("libre");
+}
+
+if(estado === "usada"){
+    coincideEstado = texto.includes("usada");
+}
+
+if(estado === "vencida"){
+    coincideEstado = texto.includes("venció hace");
+}
 
         const coincidePlataforma =
         plataforma === "" || texto.includes(plataforma);
