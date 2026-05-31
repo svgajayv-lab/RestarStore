@@ -969,15 +969,14 @@ ${cuenta.whatsapp || "-"}
 <td style="white-space:nowrap;">
 
 <button
-onclick="enviarEntrega(
-'${cuenta.whatsapp || ""}',
-'${cuenta.plataforma || ""}',
-'${cuenta.correo || ""}',
-'${cuenta.password || ""}',
-'${cuenta.cuentaCompleta || ""}',
-'${cuenta.inicio ? new Date(cuenta.inicio).toLocaleDateString() : ""}',
-'${cuenta.vencimiento ? new Date(cuenta.vencimiento).toLocaleDateString() : ""}'
-)"
+onclick="enviarEntrega(this)"
+data-whatsapp="${cuenta.whatsapp || ""}"
+data-plataforma="${cuenta.plataforma || ""}"
+data-correo="${cuenta.correo || ""}"
+data-password="${cuenta.password || ""}"
+data-cuenta="${cuenta.cuentaCompleta || ""}"
+data-inicio="${cuenta.inicio ? new Date(cuenta.inicio).toLocaleDateString() : ""}"
+data-vencimiento="${cuenta.vencimiento ? new Date(cuenta.vencimiento).toLocaleDateString() : ""}"
 style="
 background:#25d366;
 color:white;
@@ -1480,7 +1479,15 @@ ${filas}
 
 <script>
 
-function enviarEntrega(whatsapp, plataforma, correo, password, cuentaCompleta, inicio, vencimiento){
+function enviarEntrega(btn){
+
+    const whatsapp = btn.dataset.whatsapp;
+    const plataforma = btn.dataset.plataforma;
+    const correo = btn.dataset.correo;
+    const password = btn.dataset.password;
+    const cuentaCompleta = btn.dataset.cuenta;
+    const inicio = btn.dataset.inicio;
+    const vencimiento = btn.dataset.vencimiento;
 
     if(!whatsapp){
         alert("⚠️ Esta cuenta no tiene WhatsApp");
