@@ -1589,8 +1589,9 @@ const iconoCaja = String.fromCodePoint(0x1F4E6);
 const iconoCalendario = String.fromCodePoint(0x1F4C5);
 
 const mensaje =
-"[CORREO] " + correo +
-"\\n✓ Password: " + password;
+String.fromCodePoint(0x2705) +
+" Password: " +
+password;
 
     const numeroLimpio = whatsapp.replace(/\D/g, "");
 
