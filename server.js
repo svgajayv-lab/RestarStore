@@ -1590,7 +1590,7 @@ const iconoCalendario = String.fromCodePoint(0x1F4C5);
 
 const mensaje =
 "Correo: " + correo +
-"\nContraseña: " + password;
+"\\nPassword: " + password;
 
     const numeroLimpio = whatsapp.replace(/\D/g, "");
 
@@ -1725,8 +1725,6 @@ function togglePassword(id,password){
     }
 
 }
-
-
 
 </script>
 
