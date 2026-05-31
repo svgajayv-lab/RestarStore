@@ -429,12 +429,14 @@ await fetch("/validar-cuenta", {
 
     body: JSON.stringify({
 
-        correo,
+    correo,
 
-        plataforma:
-        plataformaSeleccionada
+    plataforma:
+    plataformaSeleccionada,
 
-    })
+    cliente
+
+})
 
 });
 
