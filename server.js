@@ -205,6 +205,8 @@ app.get("/editar-cuenta/:id", async (req, res) => {
 
 <head>
 
+<meta charset="UTF-8">
+
 <title>Editar Cuenta</title>
 
 
@@ -1106,6 +1108,8 @@ font-weight:bold;
 <html>
 
 <head>
+
+<meta charset="UTF-8">
 
 <title>RestarStore Cuentas</title>
 
@@ -2771,6 +2775,8 @@ ${filas}
 <html>
 
 <head>
+
+<meta charset="UTF-8">
 
 <title>Admin Login</title>
 
