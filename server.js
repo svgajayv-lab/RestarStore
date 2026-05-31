@@ -545,6 +545,36 @@ app.get("/cuentas", async (req, res) => {
 });
 
 /* ========================= */
+/* CREAR REVENDEDOR */
+/* ========================= */
+
+app.post("/crear-revendedor", async (req, res) => {
+
+    try {
+
+        await User.create({
+
+            nombre: req.body.nombre,
+            usuario: req.body.usuario,
+            password: req.body.password,
+            estado: "Activo",
+            inicio: req.body.inicio || new Date(),
+            vencimiento: req.body.vencimiento
+
+        });
+
+        res.redirect("/admin");
+
+    } catch(error){
+
+        console.log(error);
+        res.send("Error creando revendedor");
+
+    }
+
+});
+
+/* ========================= */
 /* ADMIN CUENTAS */
 /* ========================= */
 
@@ -2742,6 +2772,27 @@ app.get("/admin", async (req, res) => {
 
     if(req.session.admin){
 
+        const usuarios =
+await User.find()
+.sort({ fecha:-1 });
+
+let filasUsuarios = "";
+
+usuarios.forEach(user => {
+
+    filasUsuarios += `
+
+    <tr>
+        <td>${user.nombre}</td>
+        <td>${user.usuario}</td>
+        <td>${user.estado}</td>
+        <td>${user.vencimiento ? new Date(user.vencimiento).toLocaleDateString("es-PE") : "Sin fecha"}</td>
+    </tr>
+
+    `;
+
+});
+
         const historial =
         await History.find()
         .sort({ fecha:-1 })
@@ -2844,6 +2895,94 @@ th{
 <h1>
 🔥 RestarStore Admin
 </h1>
+
+<h2 style="color:cyan;">
+👤 Crear Revendedor
+</h2>
+
+<form
+method="POST"
+action="/crear-revendedor"
+style="
+background:#111;
+padding:20px;
+border-radius:15px;
+margin-bottom:30px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+"
+>
+
+<input
+name="nombre"
+placeholder="Nombre"
+required
+style="padding:12px;"
+>
+
+<input
+name="usuario"
+placeholder="Usuario"
+required
+style="padding:12px;"
+>
+
+<input
+name="password"
+placeholder="Password"
+required
+style="padding:12px;"
+>
+
+<input
+type="date"
+name="inicio"
+required
+style="padding:12px;"
+>
+
+<input
+type="date"
+name="vencimiento"
+required
+style="padding:12px;"
+>
+
+<button
+style="
+background:cyan;
+border:none;
+padding:12px 20px;
+font-weight:bold;
+cursor:pointer;
+"
+>
+Crear Revendedor
+</button>
+
+</form>
+
+<h2 style="color:cyan;">
+📋 Revendedores
+</h2>
+
+<table>
+
+<tr>
+<th>Nombre</th>
+<th>Usuario</th>
+<th>Estado</th>
+<th>Vencimiento</th>
+</tr>
+
+${filasUsuarios}
+
+</table>
+
+<h2 style="color:cyan;">
+📜 Historial OTP
+</h2>
 
 <table>
 
