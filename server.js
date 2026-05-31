@@ -1366,16 +1366,6 @@ width:180px;
 >
 
 <input
-name="cuentaCompleta"
-placeholder="Cuenta completa"
-style="
-padding:12px;
-margin:5px;
-width:180px;
-"
-> 
-
-<input
 type="date"
 name="inicio"
 required
