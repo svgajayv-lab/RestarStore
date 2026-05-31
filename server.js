@@ -1634,11 +1634,11 @@ function enviarRenovacion(btn){
     whatsapp.replace(/\D/g,'');
 
     const mensaje = [
-    "🎬 *ENTREGA DE CUENTA " + nombrePlataforma + "*",
+    "*ENTREGA DE CUENTA " + nombrePlataforma + "*",
     "",
     "━━━━━━━━━━━━━━━━━━",
     "",
-    "📧 *Correo:*",
+    "*Correo:*",
     correo,
     "",
     "🔐 *Contraseña:*",
