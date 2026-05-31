@@ -1649,7 +1649,7 @@ function enviarRenovacion(btn){
     "Si deseas renovar responde este mensaje.",
     "",
     "EE Streaming Perú"
-].join("\\n");
+].join("\n");
 
     const url =
     "https://wa.me/" +
