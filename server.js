@@ -1579,32 +1579,34 @@ if(plataforma === "crunchyroll"){
 }
 
     const mensaje = [
-        "🎬 ENTREGA DE CUENTA " + nombrePlataforma,
-        "",
-        "━━━━━━━━━━━━━━━━━━━",
-        "📧 Correo: " + correo,
-        "🔑 Contraseña: " + password,
-        "📦 Cuenta: " + (cuentaCompleta || "Cuenta completa"),
-        "",
-        "━━━━━━━━━━━━━━━━━━━",
-        "📅 Fecha de inicio: " + inicio,
-        "⏳ Fecha de vencimiento: " + vencimiento,
-        "",
-        "━━━━━━━━━━━━━━━━━━━",
-        "⚠️ RECOMENDACIONES IMPORTANTES",
-        "",
-        "✅ No cambiar correo ni contraseña",
-        "✅ No modificar datos de la cuenta",
-        "✅ No compartir con terceros",
-        "✅ Usar correctamente el servicio",
-        "",
-        "━━━━━━━━━━━━━━━━━━━",
-        "🍿 ¡Disfruta tu suscripción!",
-        "✨ Gracias por confiar en EE Streaming Peru ✨"
-    ].join("\\n");
+    "🎬 ENTREGA DE CUENTA " + nombrePlataforma,
+    "",
+    "━━━━━━━━━━━━━━━━━━━",
+    "📧 Correo: " + correo,
+    "🔑 Contraseña: " + password,
+    "📦 Cuenta: " + (cuentaCompleta || "Cuenta completa"),
+    "",
+    "━━━━━━━━━━━━━━━━━━━",
+    "📅 Fecha de inicio: " + inicio,
+    "⏳ Fecha de vencimiento: " + vencimiento,
+    "",
+    "━━━━━━━━━━━━━━━━━━━",
+    "⚠️ RECOMENDACIONES IMPORTANTES",
+    "",
+    "✅ No cambiar correo ni contraseña",
+    "✅ No modificar datos de la cuenta",
+    "✅ No compartir con terceros",
+    "✅ Usar correctamente el servicio",
+    "",
+    "━━━━━━━━━━━━━━━━━━━",
+    "🍿 ¡Disfruta tu suscripción!",
+    "✨ Gracias por confiar en EE Streaming Peru ✨"
+].join("\n");
 
     const url =
     "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensaje);
+
+console.log(mensaje);
 
     window.open(url, "_blank");
 
@@ -1633,44 +1635,17 @@ function enviarRenovacion(btn){
     const numero =
     whatsapp.replace(/\D/g,'');
 
-    const mensaje = [
-    "*ENTREGA DE CUENTA " + nombrePlataforma + "*",
-    "",
-    "━━━━━━━━━━━━━━━━━━",
-    "",
-    "*Correo:*",
-    correo,
-    "",
-    "🔐 *Contraseña:*",
-    password,
-    "",
-    "📦 *Tipo de cuenta:*",
-    cuentaCompleta || "Cuenta completa",
-    "",
-    "━━━━━━━━━━━━━━━━━━",
-    "",
-    "📅 *Fecha de inicio:*",
-    inicio,
-    "",
-    "⏳ *Fecha de vencimiento:*",
-    vencimiento,
-    "",
-    "━━━━━━━━━━━━━━━━━━",
-    "",
-    "⚠️ *RECOMENDACIONES IMPORTANTES*",
-    "",
-    "✅ No cambiar correo ni contraseña",
-    "✅ No modificar datos de la cuenta",
-    "✅ No compartir con terceros",
-    "✅ Usar correctamente el servicio",
-    "",
-    "━━━━━━━━━━━━━━━━━━",
-    "",
-    "🍿 *¡Disfruta tu suscripción!*",
-    "",
-    "✨ Gracias por confiar en",
-    "*EE Streaming Perú*"
-].join("\\n");
+    const mensaje = `
+*RENOVACIÓN ${plataforma.toUpperCase()}*
+
+Tu servicio vence el:
+
+${vencimiento}
+
+Si deseas renovar responde este mensaje.
+
+EE Streaming Perú
+`;
 
     const url =
     "https://wa.me/" +
