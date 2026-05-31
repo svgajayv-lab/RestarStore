@@ -1582,29 +1582,40 @@ if(plataforma === "crunchyroll"){
     nombrePlataforma = "CRUNCHYROLL";
 }
 
+const iconoVideo = "\uD83C\uDFAC";
+const iconoCorreo = "\uD83D\uDCE7";
+const iconoClave = "\uD83D\uDD11";
+const iconoCaja = "\uD83D\uDCE6";
+const iconoCalendario = "\uD83D\uDCC5";
+const iconoReloj = "\u23F3";
+const iconoAlerta = "\u26A0\uFE0F";
+const iconoCheck = "\u2705";
+const iconoPopcorn = "\uD83C\uDF7F";
+const iconoBrillo = "\u2728";
+
     const mensaje = [
-    "🎬 ENTREGA DE CUENTA " + nombrePlataforma,
+    iconoVideo + " ENTREGA DE CUENTA " + nombrePlataforma,
     "",
     "━━━━━━━━━━━━━━━━━━━",
-    "📧 Correo: " + correo,
-    "🔑 Contraseña: " + password,
-    "📦 Cuenta: " + (cuentaCompleta || "Cuenta completa"),
+    iconoCorreo + " Correo: " + correo,
+    iconoClave + " Contraseña: " + password,
+    iconoCaja + " Cuenta: " + (cuentaCompleta || "Cuenta completa"),
     "",
     "━━━━━━━━━━━━━━━━━━━",
-    "📅 Fecha de inicio: " + inicio,
-    "⏳ Fecha de vencimiento: " + vencimiento,
+    iconoCalendario + " Fecha de inicio: " + inicio,
+    iconoReloj + " Fecha de vencimiento: " + vencimiento,
     "",
     "━━━━━━━━━━━━━━━━━━━",
-    "⚠️ RECOMENDACIONES IMPORTANTES",
+    iconoAlerta + " RECOMENDACIONES IMPORTANTES",
     "",
-    "✅ No cambiar correo ni contraseña",
-    "✅ No modificar datos de la cuenta",
-    "✅ No compartir con terceros",
-    "✅ Usar correctamente el servicio",
+    iconoCheck + " No cambiar correo ni contraseña",
+    iconoCheck + " No modificar datos de la cuenta",
+    iconoCheck + " No compartir con terceros",
+    iconoCheck + " Usar correctamente el servicio",
     "",
     "━━━━━━━━━━━━━━━━━━━",
-    "🍿 ¡Disfruta tu suscripción!",
-    "✨ Gracias por confiar en EE Streaming Peru ✨"
+    iconoPopcorn + " ¡Disfruta tu suscripción!",
+    iconoBrillo + " Gracias por confiar en EE Streaming Peru " + iconoBrillo
 ].join("\\n");
 
     const url =
