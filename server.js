@@ -1623,6 +1623,8 @@ const iconoBrillo = "\u2728";
 
 console.log(mensaje);
 
+console.log(url);
+
     window.open(url, "_blank");
 
 }
