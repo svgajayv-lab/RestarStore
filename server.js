@@ -963,7 +963,34 @@ new Date(cuenta.vencimiento)
                 <td>${cuenta.cliente}</td>
 
 <td>
-${cuenta.whatsapp || "-"}
+
+📱 ${cuenta.whatsapp || "-"}
+
+${
+cuenta.whatsapp
+?
+
+`<a
+href="https://wa.me/${cuenta.whatsapp.replace(/\D/g,'')}"
+target="_blank"
+style="
+background:#25d366;
+color:white;
+padding:6px 8px;
+border-radius:6px;
+text-decoration:none;
+margin-left:8px;
+font-weight:bold;
+"
+>
+💬
+</a>`
+
+:
+
+""
+}
+
 </td>
 
 <td style="white-space:nowrap;">
@@ -989,6 +1016,38 @@ margin-right:10px;
 "
 >
 💬 Entregar
+</button>
+
+<a
+href="/editar-cuenta/${cuenta._id}"
+style="
+background:orange;
+color:black;
+padding:10px;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+margin-right:10px;
+display:inline-block;
+"
+
+<button
+onclick="enviarRenovacion(this)"
+data-whatsapp="${cuenta.whatsapp || ""}"
+data-plataforma="${cuenta.plataforma || ""}"
+data-vencimiento="${cuenta.vencimiento ? new Date(cuenta.vencimiento).toLocaleDateString() : ""}"
+style="
+background:#00bcd4;
+color:white;
+border:none;
+padding:10px;
+cursor:pointer;
+border-radius:8px;
+font-weight:bold;
+margin-right:10px;
+"
+>
+🔄 Renovar
 </button>
 
 <a
@@ -1528,6 +1587,60 @@ function enviarEntrega(btn){
 
 }
 
+function enviarRenovacion(btn){
+
+    const whatsapp =
+    btn.dataset.whatsapp;
+
+    const plataforma =
+    btn.dataset.plataforma;
+
+    const vencimiento =
+    btn.dataset.vencimiento;
+
+    if(!whatsapp){
+
+        alert(
+        "⚠️ Esta cuenta no tiene WhatsApp"
+        );
+
+        return;
+    }
+
+    const numero =
+    whatsapp.replace(/\D/g,'');
+
+    const mensaje = [
+        "⏰ AVISO DE VENCIMIENTO",
+        "",
+        "Hola 👋",
+        "",
+        "Tu suscripción de " + plataforma.toUpperCase(),
+        "vence el día:",
+        "",
+        "📅 " + vencimiento,
+        "",
+        "Si deseas renovar tu servicio,",
+        "escríbenos para reservar tu renovación.",
+        "",
+        "💰 Mantén el mismo acceso sin interrupciones.",
+        "",
+        "🤝 EE Streaming Perú"
+    ].join("\\n");
+
+    const url =
+    "https://wa.me/" +
+    numero +
+    "?text=" +
+    encodeURIComponent(mensaje);
+
+    window.open(
+    url,
+    "_blank"
+    );
+
+}
+
 function copiarTexto(texto){
 
     navigator.clipboard.writeText(texto);
@@ -1613,6 +1726,8 @@ function togglePassword(id,password){
     }
 
 }
+
+
 
 </script>
 
