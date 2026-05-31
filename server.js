@@ -32,6 +32,9 @@ require("./models/Account");
 const History =
 require("./models/History");
 
+const User =
+require("./models/User");
+
 const app = express();
 
 app.use(express.json());
