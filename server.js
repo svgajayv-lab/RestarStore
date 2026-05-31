@@ -1639,17 +1639,17 @@ function enviarRenovacion(btn){
     const numero =
     whatsapp.replace(/\D/g,'');
 
-    const mensaje = `
-*RENOVACIÓN ${plataforma.toUpperCase()}*
-
-Tu servicio vence el:
-
-${vencimiento}
-
-Si deseas renovar responde este mensaje.
-
-EE Streaming Perú
-`;
+    const mensaje = [
+    "*RENOVACIÓN " + plataforma.toUpperCase() + "*",
+    "",
+    "Tu servicio vence el:",
+    "",
+    vencimiento,
+    "",
+    "Si deseas renovar responde este mensaje.",
+    "",
+    "EE Streaming Perú"
+].join("\\n");
 
     const url =
     "https://wa.me/" +
