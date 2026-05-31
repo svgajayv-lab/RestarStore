@@ -964,30 +964,6 @@ new Date(cuenta.vencimiento)
 
 <td>
 ${cuenta.whatsapp || "-"}
-
-${
-cuenta.whatsapp
-?
-`
-<button
-onclick="copiarTexto('${cuenta.whatsapp}')"
-style="
-background:#25d366;
-color:white;
-border:none;
-border-radius:6px;
-padding:6px 8px;
-margin-left:8px;
-cursor:pointer;
-font-weight:bold;
-"
->
-📋
-</button>
-`
-:
-""
-}
 </td>
 
 <td style="white-space:nowrap;">
