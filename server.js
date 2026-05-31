@@ -838,7 +838,7 @@ cuenta.vencimiento
 
 new Date(
 cuenta.vencimiento
-).toLocaleDateString()
+).toLocaleDateString("es-PE")
 
 :
 
@@ -1025,7 +1025,7 @@ onclick="enviarRenovacion(this)"
 data-cliente="${cuenta.cliente || ''}"
 data-whatsapp="${cuenta.whatsapp || ""}"
 data-plataforma="${cuenta.plataforma || ""}"
-data-vencimiento="${cuenta.vencimiento ? new Date(cuenta.vencimiento).toLocaleDateString() : ""}"
+data-vencimiento="${cuenta.vencimiento ? new Date(cuenta.vencimiento).toLocaleDateString("es-PE") : ""}"
 style="
 background:#00bcd4;
 color:white;
