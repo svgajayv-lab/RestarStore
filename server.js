@@ -1605,7 +1605,7 @@ if(plataforma === "crunchyroll"){
     "━━━━━━━━━━━━━━━━━━━",
     "🍿 ¡Disfruta tu suscripción!",
     "✨ Gracias por confiar en EE Streaming Peru ✨"
-].join("\n");
+].join("\\n");
 
     const url =
     "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensaje);
@@ -1618,38 +1618,28 @@ console.log(mensaje);
 
 function enviarRenovacion(btn){
 
-    const whatsapp =
-    btn.dataset.whatsapp;
-
-    const plataforma =
-    btn.dataset.plataforma;
-
-    const vencimiento =
-    btn.dataset.vencimiento;
+    const whatsapp = btn.dataset.whatsapp;
+    const plataforma = btn.dataset.plataforma;
+    const vencimiento = btn.dataset.vencimiento;
 
     if(!whatsapp){
-
-        alert(
-        "⚠️ Esta cuenta no tiene WhatsApp"
-        );
-
+        alert("⚠️ Esta cuenta no tiene WhatsApp");
         return;
     }
 
-    const numero =
-    whatsapp.replace(/\D/g,'');
+    const numero = whatsapp.replace(/\D/g,'');
 
     const mensaje = [
-    "*RENOVACIÓN " + plataforma.toUpperCase() + "*",
-    "",
-    "Tu servicio vence el:",
-    "",
-    vencimiento,
-    "",
-    "Si deseas renovar responde este mensaje.",
-    "",
-    "EE Streaming Perú"
-].join("\n");
+        "*RENOVACION " + plataforma.toUpperCase() + "*",
+        "",
+        "Tu servicio vence el:",
+        "",
+        vencimiento,
+        "",
+        "Si deseas renovar responde este mensaje.",
+        "",
+        "EE Streaming Peru"
+    ].join("\\n");
 
     const url =
     "https://wa.me/" +
@@ -1657,10 +1647,7 @@ function enviarRenovacion(btn){
     "?text=" +
     encodeURIComponent(mensaje);
 
-    window.open(
-    url,
-    "_blank"
-    );
+    window.open(url, "_blank");
 
 }
 
