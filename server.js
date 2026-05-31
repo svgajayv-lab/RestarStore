@@ -316,12 +316,6 @@ value="${cuenta.whatsapp || ''}"
 >
 
 <input
-name="cuentaCompleta"
-placeholder="Cuenta completa"
-value="${cuenta.cuentaCompleta || ''}"
->
-
-<input
 type="date"
 name="inicio"
 
@@ -1586,7 +1580,7 @@ correo,
 password,
 "",
 "📦 Cuenta:",
-(cuentaCompleta || "Cuenta completa"),
+"Cuenta completa",
 "",
 "━━━━━━━━━━━━━━━━━━━",
 "",
