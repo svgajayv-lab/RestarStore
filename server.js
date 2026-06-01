@@ -45,14 +45,18 @@ app.use(express.urlencoded({
 
 app.use(session({
 
+    name: "restarstore_session",
+
     secret: process.env.SESSION_SECRET || "restarstore",
 
     resave: false,
 
-    saveUninitialized: true,
+    saveUninitialized: false,
+
+    rolling: true,
 
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24
+        maxAge: 1000 * 60 * 60 * 24 * 7
     }
 
 }));
@@ -707,6 +711,14 @@ await User.findOne({
 
 });
 
+app.get("/logout-revendedor", (req, res) => {
+
+    req.session.destroy();
+
+    res.redirect("/login-revendedor");
+
+});
+
 /* ========================= */
 /* ADMIN CUENTAS */
 /* ========================= */
@@ -1353,6 +1365,22 @@ tr:hover{
 <h1>
 📦 RestarStore Accounts
 </h1>
+
+<a
+href="/logout-revendedor"
+style="
+background:red;
+color:white;
+padding:10px 15px;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+display:inline-block;
+margin-bottom:20px;
+"
+>
+🚪 Cerrar sesión
+</a>
 
 <div
 style="
