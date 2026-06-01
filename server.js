@@ -1338,7 +1338,7 @@ new Date(cuenta.vencimiento)
 
                 <td>${cuenta.cliente}</td>
 
-<td>
+<td style="white-space:nowrap;">
 
 📱 ${cuenta.whatsapp || "-"}
 
