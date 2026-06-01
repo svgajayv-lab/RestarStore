@@ -481,11 +481,11 @@ plataformaSeleccionada === "crunchyroll"
 "login";
 
 console.log("CLIENTE ENVIADO:", cliente);
-console.log("URL OTP:", `/otp?plataforma=${plataformaSeleccionada}&correo=${correo}&cliente=${encodeURIComponent(cliente)}&tipo=${tipoActual}`);
+console.log("URL OTP:", `/otp?plataforma=${plataformaSeleccionada}&correo=${encodeURIComponent(correo)}&cliente=${encodeURIComponent(cliente)}&tipo=${tipoActual}`);
 
 const response =
 await fetch(
-`/otp?plataforma=${plataformaSeleccionada}&correo=${correo}&cliente=${encodeURIComponent(cliente)}&tipo=${tipoActual}`
+`/otp?plataforma=${plataformaSeleccionada}&correo=${encodeURIComponent(correo)}&cliente=${encodeURIComponent(cliente)}&tipo=${tipoActual}`
 );
 
         const data =
