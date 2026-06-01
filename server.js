@@ -2810,25 +2810,25 @@ usuarios.forEach(user => {
 
                 <td>
 ${
-cuenta.plataforma === "amazon"
+item.plataforma === "amazon"
 ? "Prime Video"
 :
-cuenta.plataforma === "disney"
+item.plataforma === "disney"
 ? "Disney+"
 :
-cuenta.plataforma === "crunchyroll"
+item.plataforma === "crunchyroll"
 ? "Crunchyroll"
 :
-cuenta.plataforma === "max"
+item.plataforma === "max"
 ? "Max"
 :
-cuenta.plataforma === "spotify"
+item.plataforma === "spotify"
 ? "Spotify"
 :
-cuenta.plataforma === "netflix"
+item.plataforma === "netflix"
 ? "Netflix"
 :
-cuenta.plataforma
+item.plataforma
 }
 </td>
 
