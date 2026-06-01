@@ -2609,6 +2609,10 @@ await Account.findOne({
 
 });
 
+console.log("📧 CORREO:", correoCliente);
+console.log("👤 CLIENTE WEB:", nombreCliente);
+console.log("📦 CUENTA:", cuentaAutorizada);
+
 if(
 
     !cuentaAutorizada ||
