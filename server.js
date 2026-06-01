@@ -575,6 +575,114 @@ app.post("/crear-revendedor", async (req, res) => {
 });
 
 /* ========================= */
+/* LOGIN REVENDEDOR */
+/* ========================= */
+
+app.get("/login-revendedor", (req, res) => {
+
+    res.send(`
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login Revendedor</title>
+<style>
+body{
+    background:#050816;
+    color:white;
+    font-family:Arial;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+form{
+    background:#111;
+    padding:40px;
+    border-radius:20px;
+    width:350px;
+}
+input{
+    width:100%;
+    padding:15px;
+    margin-bottom:20px;
+}
+button{
+    width:100%;
+    padding:15px;
+    background:cyan;
+    border:none;
+    font-weight:bold;
+}
+h1{ color:cyan; }
+</style>
+</head>
+
+<body>
+
+<form method="POST" action="/login-revendedor">
+
+<h1>👤 Revendedor</h1>
+
+<input
+name="usuario"
+placeholder="Usuario"
+required
+>
+
+<input
+type="password"
+name="password"
+placeholder="Password"
+required
+>
+
+<button>
+Ingresar
+</button>
+
+</form>
+
+</body>
+</html>
+
+    `);
+
+});
+
+app.post("/login-revendedor", async (req, res) => {
+
+    try {
+
+        const user =
+        await User.findOne({
+            usuario: req.body.usuario,
+            password: req.body.password,
+            estado: "Activo",
+            vencimiento: {
+                $gte: new Date()
+            }
+        });
+
+        if(!user){
+            return res.send("❌ Usuario no autorizado o vencido");
+        }
+
+        req.session.userId = user._id;
+        req.session.userNombre = user.nombre;
+
+        res.redirect("/admin/cuentas");
+
+    } catch(error){
+
+        console.log(error);
+        res.send("Error login revendedor");
+
+    }
+
+});
+
+/* ========================= */
 /* ADMIN CUENTAS */
 /* ========================= */
 
