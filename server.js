@@ -799,6 +799,21 @@ app.get("/admin/cuentas", async (req, res) => {
     return res.redirect("/login-revendedor");
 }
 
+const user =
+await User.findById(
+    req.session.userId
+);
+
+if(!user || user.estado !== "Activo"){
+
+    req.session.destroy();
+
+    return res.redirect(
+        "/login-revendedor"
+    );
+
+}
+
 const cuentas =
 await Account.find({
     ownerId: req.session.userId
@@ -3020,6 +3035,19 @@ app.get("/admin", async (req, res) => {
 await User.find()
 .sort({ fecha:-1 });
 
+const totalRevendedores =
+usuarios.length;
+
+const activos =
+usuarios.filter(
+u => u.estado === "Activo"
+).length;
+
+const suspendidos =
+usuarios.filter(
+u => u.estado === "Suspendido"
+).length;
+
 let filasUsuarios = "";
 
 usuarios.forEach(user => {
@@ -3072,6 +3100,22 @@ usuarios.forEach(user => {
             </button>
 
         </form>
+
+<a
+href="/editar-revendedor/${user._id}"
+style="
+background:#ff9800;
+color:black;
+padding:8px 12px;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+margin-left:10px;
+display:inline-block;
+"
+>
+✏️ Editar
+</a>
 
         <form
         method="POST"
@@ -3273,6 +3317,58 @@ Crear Revendedor
 </button>
 
 </form>
+
+<div
+style="
+display:flex;
+gap:20px;
+margin-bottom:25px;
+"
+>
+
+<div
+style="
+background:#111;
+padding:20px;
+border-radius:15px;
+width:220px;
+"
+>
+<h2 style="color:cyan;">
+👥 Revendedores
+</h2>
+<h1>${totalRevendedores}</h1>
+</div>
+
+<div
+style="
+background:#111;
+padding:20px;
+border-radius:15px;
+width:220px;
+"
+>
+<h2 style="color:#00e676;">
+🟢 Activos
+</h2>
+<h1>${activos}</h1>
+</div>
+
+<div
+style="
+background:#111;
+padding:20px;
+border-radius:15px;
+width:220px;
+"
+>
+<h2 style="color:#ff5252;">
+🔴 Suspendidos
+</h2>
+<h1>${suspendidos}</h1>
+</div>
+
+</div>
 
 <h2 style="color:cyan;">
 📋 Revendedores
