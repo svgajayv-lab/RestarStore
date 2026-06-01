@@ -20,9 +20,9 @@ mongoose.connect(process.env.MONGO_URI)
 
 const express = require("express");
 
-const MongoStore = require("connect-mongo")(session);
-
 const session = require("express-session");
+
+const MongoStore = require("connect-mongo")(session);
 
 const path = require("path");
 
