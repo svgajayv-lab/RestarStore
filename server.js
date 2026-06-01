@@ -3187,6 +3187,34 @@ app.get("/crear-propietario", async (req, res) => {
 
 });
 
+app.get("/entrar-propietario", async (req, res) => {
+
+    try {
+
+        const propietario =
+        await User.findOne({
+            usuario: "propietario",
+            rol: "owner"
+        });
+
+        if(!propietario){
+            return res.send("Propietario no encontrado");
+        }
+
+        req.session.userId = propietario._id;
+        req.session.userNombre = propietario.nombre;
+
+        res.redirect("/admin/cuentas");
+
+    } catch(error){
+
+        console.log(error);
+        res.send("Error entrando como propietario");
+
+    }
+
+});
+
 /* ========================= */
 /* ADMIN */
 /* ========================= */
@@ -3422,6 +3450,22 @@ th{
 <h1>
 🔥 RestarStore Admin
 </h1>
+
+<a
+href="/entrar-propietario"
+style="
+background:#ffd700;
+color:black;
+padding:12px 18px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+display:inline-block;
+margin-bottom:20px;
+"
+>
+👑 Entrar como propietario
+</a>
 
 <h2 style="color:cyan;">
 👤 Crear Revendedor
