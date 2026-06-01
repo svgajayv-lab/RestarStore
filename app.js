@@ -509,6 +509,14 @@ if(
 
 ){
 
+if(!data.link || data.link === "Link no encontrado"){
+
+    resultado.innerHTML =
+    "❌ Link no encontrado";
+
+    return;
+}
+
     resultado.innerHTML = `
 
 🔓 Enlace de recuperación
