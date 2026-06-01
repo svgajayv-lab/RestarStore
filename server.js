@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 const express = require("express");
 
-const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo")(session);
 
 const session = require("express-session");
 
@@ -57,9 +57,9 @@ app.use(session({
 
     rolling: true,
 
-    store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URI
-    }),
+    store: new MongoStore({
+    url: process.env.MONGO_URI
+}),
 
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7
