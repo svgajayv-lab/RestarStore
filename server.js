@@ -669,14 +669,11 @@ app.post("/login-revendedor", async (req, res) => {
     try {
 
         const user =
-        await User.findOne({
-            usuario: req.body.usuario,
-            password: req.body.password,
-            estado: "Activo",
-            vencimiento: {
-                $gte: new Date()
-            }
-        });
+await User.findOne({
+    usuario: req.body.usuario,
+    password: req.body.password,
+    estado: "Activo"
+});
 
         if(!user){
             return res.send("❌ Usuario no autorizado o vencido");
