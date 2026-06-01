@@ -164,8 +164,8 @@ cuentaCompleta: req.body.cuentaCompleta,
     inicio: req.body.inicio,
     vencimiento: req.body.vencimiento,
 
-    cliente: "Libre",
-    estado: "Libre"
+    cliente: req.body.cliente || "Libre",
+estado: req.body.cliente ? "Usada" : "Libre"
 
 });
 
@@ -2020,6 +2020,16 @@ margin:5px;
 width:180px;
 "
 >
+
+<input
+name="cliente"
+placeholder="Cliente"
+style="
+padding:12px;
+margin:5px;
+width:180px;
+"
+>    
 
   <input
 name="whatsapp"
