@@ -141,6 +141,8 @@ app.post("/crear-cuenta-web"
         const nuevaCuenta =
 new Account({
 
+    ownerId: req.session.userId,
+
     plataforma: req.body.plataforma,
     plan: req.body.plan,
     correo: req.body.correo,
@@ -542,9 +544,15 @@ app.get("/cuentas", async (req, res) => {
 
         }
 
-        const cuentas =
-        await Account.find()
-        .sort({ fecha: -1 });
+        if(!req.session.userId){
+    return res.redirect("/login-revendedor");
+}
+
+const cuentas =
+await Account.find({
+    ownerId: req.session.userId
+})
+.sort({ fecha: -1 });
 
         res.json(cuentas);
 
