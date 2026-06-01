@@ -709,9 +709,15 @@ app.get("/admin/cuentas", async (req, res) => {
 
     try {
 
-        const cuentas =
-        await Account.find()
-        .sort({ fecha: -1 });
+        if(!req.session.userId){
+    return res.redirect("/login-revendedor");
+}
+
+const cuentas =
+await Account.find({
+    ownerId: req.session.userId
+})
+.sort({ fecha: -1 });
 
         let filas = "";
 
