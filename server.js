@@ -613,6 +613,60 @@ app.post("/crear-revendedor", async (req, res) => {
 });
 
 /* ========================= */
+/* CAMBIAR ESTADO REVENDEDOR */
+/* ========================= */
+
+app.post("/cambiar-estado-revendedor/:id", async (req, res) => {
+
+    try {
+
+        const user =
+        await User.findById(req.params.id);
+
+        if(!user){
+            return res.send("Revendedor no encontrado");
+        }
+
+        user.estado =
+        user.estado === "Activo"
+        ? "Suspendido"
+        : "Activo";
+
+        await user.save();
+
+        res.redirect("/admin");
+
+    } catch(error){
+
+        console.log(error);
+        res.send("Error cambiando estado");
+
+    }
+
+});
+
+/* ========================= */
+/* ELIMINAR REVENDEDOR */
+/* ========================= */
+
+app.post("/eliminar-revendedor/:id", async (req, res) => {
+
+    try {
+
+        await User.findByIdAndDelete(req.params.id);
+
+        res.redirect("/admin");
+
+    } catch(error){
+
+        console.log(error);
+        res.send("Error eliminando revendedor");
+
+    }
+
+});
+
+/* ========================= */
 /* LOGIN REVENDEDOR */
 /* ========================= */
 
@@ -2973,11 +3027,78 @@ usuarios.forEach(user => {
     filasUsuarios += `
 
     <tr>
-        <td>${user.nombre}</td>
-        <td>${user.usuario}</td>
-        <td>${user.estado}</td>
-        <td>${user.vencimiento ? new Date(user.vencimiento).toLocaleDateString("es-PE") : "Sin fecha"}</td>
-    </tr>
+
+    <td>${user.nombre}</td>
+
+    <td>${user.usuario}</td>
+
+    <td>${user.estado}</td>
+
+    <td>
+        ${
+            user.vencimiento
+            ?
+            new Date(user.vencimiento).toLocaleDateString("es-PE")
+            :
+            "Sin fecha"
+        }
+    </td>
+
+    <td>
+
+        <form
+        method="POST"
+        action="/cambiar-estado-revendedor/${user._id}"
+        style="display:inline-block;"
+        >
+
+            <button
+            style="
+            background:orange;
+            border:none;
+            padding:8px 12px;
+            border-radius:8px;
+            font-weight:bold;
+            cursor:pointer;
+            "
+            >
+                ${
+                    user.estado === "Activo"
+                    ?
+                    "⛔ Suspender"
+                    :
+                    "✅ Activar"
+                }
+            </button>
+
+        </form>
+
+        <form
+        method="POST"
+        action="/eliminar-revendedor/${user._id}"
+        style="display:inline-block;margin-left:10px;"
+        onsubmit="return confirm('¿Eliminar revendedor?')"
+        >
+
+            <button
+            style="
+            background:red;
+            color:white;
+            border:none;
+            padding:8px 12px;
+            border-radius:8px;
+            font-weight:bold;
+            cursor:pointer;
+            "
+            >
+                🗑️ Eliminar
+            </button>
+
+        </form>
+
+    </td>
+
+</tr>
 
     `;
 
@@ -3164,6 +3285,7 @@ Crear Revendedor
 <th>Usuario</th>
 <th>Estado</th>
 <th>Vencimiento</th>
+<th>Acciones</th>
 </tr>
 
 ${filasUsuarios}
