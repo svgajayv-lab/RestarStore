@@ -2902,6 +2902,9 @@ console.log(
     body.length
 );
 
+console.log("🔥 HTML NETFLIX:");
+console.log(body.substring(0,3000));
+
         const textoPlano = body
 .replace(/<[^>]*>/g, " ")
 .replace(/&nbsp;/g, " ")
