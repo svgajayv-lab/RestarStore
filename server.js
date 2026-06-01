@@ -667,6 +667,125 @@ app.post("/eliminar-revendedor/:id", async (req, res) => {
 
 });
 
+app.get("/editar-revendedor/:id", async (req, res) => {
+
+    try {
+
+        const user =
+        await User.findById(req.params.id);
+
+        if(!user){
+            return res.send("Revendedor no encontrado");
+        }
+
+        res.send(`
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Editar Revendedor</title>
+<style>
+body{
+    background:#050816;
+    color:white;
+    font-family:Arial;
+    padding:40px;
+}
+form{
+    background:#111;
+    padding:30px;
+    border-radius:20px;
+    width:500px;
+}
+input{
+    width:100%;
+    padding:15px;
+    margin-bottom:20px;
+    border:none;
+    border-radius:10px;
+}
+button{
+    padding:15px 25px;
+    background:cyan;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<h1>✏️ Editar Revendedor</h1>
+
+<form method="POST" action="/editar-revendedor/${user._id}">
+
+<input name="nombre" value="${user.nombre}" required>
+
+<input name="usuario" value="${user.usuario}" required>
+
+<input name="password" value="${user.password}" required>
+
+<input name="whatsapp" value="${user.whatsapp || ""}" required>
+
+<input
+type="date"
+name="inicio"
+value="${user.inicio ? new Date(user.inicio).toISOString().split("T")[0] : ""}"
+required
+>
+
+<input
+type="date"
+name="vencimiento"
+value="${user.vencimiento ? new Date(user.vencimiento).toISOString().split("T")[0] : ""}"
+required
+>
+
+<button>Guardar Cambios</button>
+
+</form>
+
+</body>
+</html>
+
+        `);
+
+    } catch(error){
+
+        console.log(error);
+        res.send("Error editando revendedor");
+
+    }
+
+});
+
+app.post("/editar-revendedor/:id", async (req, res) => {
+
+    try {
+
+        await User.findByIdAndUpdate(
+            req.params.id,
+            {
+                nombre: req.body.nombre,
+                usuario: req.body.usuario,
+                password: req.body.password,
+                whatsapp: req.body.whatsapp,
+                inicio: req.body.inicio,
+                vencimiento: req.body.vencimiento
+            }
+        );
+
+        res.redirect("/admin");
+
+    } catch(error){
+
+        console.log(error);
+        res.send("Error actualizando revendedor");
+
+    }
+
+});
+
 /* ========================= */
 /* LOGIN REVENDEDOR */
 /* ========================= */
