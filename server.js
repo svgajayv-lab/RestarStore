@@ -22,7 +22,7 @@ const express = require("express");
 
 const session = require("express-session");
 
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo");
 
 const path = require("path");
 
@@ -57,8 +57,8 @@ app.use(session({
 
     rolling: true,
 
-    store: new MongoStore({
-    url: process.env.MONGO_URI
+    store: MongoStore.default.create({
+    mongoUrl: process.env.MONGO_URI
 }),
 
     cookie: {
