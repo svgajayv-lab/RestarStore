@@ -1549,6 +1549,11 @@ th,td{
     padding:15px;
     border-bottom:1px solid #333;
     text-align:left;
+    vertical-align:middle;
+}
+
+table{
+    table-layout:fixed;
 }
 
 th{
@@ -3196,7 +3201,7 @@ usuarios.forEach(user => {
         }
     </td>
 
-    <td>
+    <td style="white-space:nowrap;">
 
         <form
         method="POST"
@@ -3349,6 +3354,8 @@ table{
 
     margin-top:20px;
 
+    table-layout:fixed;
+
 }
 
 th,td{
@@ -3356,6 +3363,10 @@ th,td{
     padding:15px;
 
     border-bottom:1px solid #333;
+
+    text-align:center;
+
+    vertical-align:middle;
 
 }
 
