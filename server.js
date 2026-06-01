@@ -1817,6 +1817,8 @@ font-weight:bold;
 
 </div>
 
+</div>
+
 <div
 style="
 display:flex;
