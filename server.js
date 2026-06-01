@@ -864,13 +864,6 @@ Ingresar
 
 app.post("/login-revendedor", async (req, res) => {
 
-app.get("/logout-revendedor", (req, res) => {
-
-    req.session.destroy();
-
-    res.redirect("/login-revendedor");
-
-});
 
     try {
 
@@ -1540,6 +1533,7 @@ h1{
 
 table{
     width:100%;
+    min-width:1500px;
     border-collapse:collapse;
     margin-top:20px;
     background:#111;
@@ -1550,10 +1544,6 @@ th,td{
     border-bottom:1px solid #333;
     text-align:left;
     vertical-align:middle;
-}
-
-table{
-    table-layout:fixed;
 }
 
 th{
@@ -1960,6 +1950,8 @@ Crunchyroll
 
 </select>
 
+<div style="overflow-x:auto; width:100%;">
+
 <table>
 
 <tr>
@@ -1989,6 +1981,8 @@ Crunchyroll
 ${filas}
 
 </table>
+
+</div>
 
 <script>
 
