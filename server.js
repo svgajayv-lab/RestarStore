@@ -901,6 +901,192 @@ app.get("/logout-revendedor", (req, res) => {
 });
 
 /* ========================= */
+/* CAMBIAR PASSWORD REVENDEDOR */
+/* ========================= */
+
+app.get("/cambiar-password", async (req, res) => {
+
+    if(!req.session.userId){
+        return res.redirect("/login-revendedor");
+    }
+
+    res.send(`
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cambiar contraseña</title>
+
+<style>
+body{
+    background:#050816;
+    color:white;
+    font-family:Arial;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.card{
+    background:#111;
+    width:420px;
+    padding:35px;
+    border-radius:22px;
+    box-shadow:0 0 25px rgba(0,255,255,.15);
+}
+
+h1{
+    color:cyan;
+    margin-top:0;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    margin-bottom:18px;
+    border:none;
+    border-radius:10px;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    background:cyan;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:16px;
+}
+
+a{
+    display:block;
+    margin-top:18px;
+    color:#00e5ff;
+    text-align:center;
+    text-decoration:none;
+}
+
+small{
+    color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>🔐 Cambiar contraseña</h1>
+
+<small>
+Actualiza tu contraseña de acceso al panel.
+</small>
+
+<br><br>
+
+<form method="POST" action="/cambiar-password">
+
+<input
+type="password"
+name="passwordActual"
+placeholder="Contraseña actual"
+required
+>
+
+<input
+type="password"
+name="passwordNueva"
+placeholder="Nueva contraseña"
+required
+>
+
+<input
+type="password"
+name="confirmarPassword"
+placeholder="Confirmar nueva contraseña"
+required
+>
+
+<button>
+Guardar nueva contraseña
+</button>
+
+</form>
+
+<a href="/admin/cuentas">
+← Volver al panel
+</a>
+
+</div>
+
+</body>
+</html>
+
+    `);
+
+});
+
+app.post("/cambiar-password", async (req, res) => {
+
+    try {
+
+        if(!req.session.userId){
+            return res.redirect("/login-revendedor");
+        }
+
+        const user =
+        await User.findById(req.session.userId);
+
+        if(!user){
+            return res.send("Usuario no encontrado");
+        }
+
+        if(user.password !== req.body.passwordActual){
+
+            return res.send(`
+            <script>
+            alert("❌ La contraseña actual no es correcta");
+            window.location.href="/cambiar-password";
+            </script>
+            `);
+
+        }
+
+        if(req.body.passwordNueva !== req.body.confirmarPassword){
+
+            return res.send(`
+            <script>
+            alert("❌ Las nuevas contraseñas no coinciden");
+            window.location.href="/cambiar-password";
+            </script>
+            `);
+
+        }
+
+        user.password = req.body.passwordNueva;
+
+        await user.save();
+
+        res.send(`
+        <script>
+        alert("✅ Contraseña actualizada correctamente");
+        window.location.href="/admin/cuentas";
+        </script>
+        `);
+
+    } catch(error){
+
+        console.log(error);
+        res.send("Error cambiando contraseña");
+
+    }
+
+});
+
+/* ========================= */
 /* ADMIN CUENTAS */
 /* ========================= */
 
@@ -1591,6 +1777,21 @@ Panel de gestión de cuentas
 </div>
 
 </div>
+
+<a
+href="/cambiar-password"
+style="
+background:#6c2cff;
+color:white;
+padding:12px 18px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+margin-right:10px;
+"
+>
+🔐 Cambiar contraseña
+</a>
 
 <a
 href="/logout-revendedor"
