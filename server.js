@@ -1370,27 +1370,53 @@ tr:hover{
 
 <body>
 
-<h1>
-📦 RestarStore Accounts
+<div
+style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+"
+>
+
+<div>
+
+<h1
+style="
+margin:0;
+color:cyan;
+"
+>
+👋 Bienvenido, ${req.session.userNombre}
 </h1>
+
+<div
+style="
+color:#00e5ff;
+margin-top:5px;
+font-size:14px;
+"
+>
+Panel de gestión de cuentas
+</div>
+
+</div>
 
 <a
 href="/logout-revendedor"
 style="
-background:red;
+background:#ff2d2d;
 color:white;
-padding:10px 15px;
-border-radius:8px;
+padding:12px 18px;
+border-radius:10px;
 text-decoration:none;
 font-weight:bold;
-display:inline-block;
-margin-bottom:20px;
 "
 >
 🚪 Cerrar sesión
 </a>
 
-<div
+</div>
 style="
 display:flex;
 gap:20px;
