@@ -597,7 +597,8 @@ app.post("/crear-revendedor", async (req, res) => {
             password: req.body.password,
             estado: "Activo",
             inicio: req.body.inicio || new Date(),
-            vencimiento: req.body.vencimiento
+            vencimiento: req.body.vencimiento,
+            whatsapp: req.body.whatsapp
 
         });
 
@@ -3060,7 +3061,11 @@ usuarios.forEach(user => {
 
     <td>${user.usuario}</td>
 
-    <td>${user.estado}</td>
+    <td>${user.whatsapp || "-"}</td>
+
+<td>${user.estado}</td>
+
+<td>${user.inicio ? new Date(user.inicio).toLocaleDateString("es-PE") : "Sin fecha"}</td>
 
     <td>
         ${
@@ -3291,6 +3296,13 @@ style="padding:12px;"
 >
 
 <input
+name="whatsapp"
+placeholder="WhatsApp"
+required
+style="padding:12px;"
+>
+
+<input
 type="date"
 name="inicio"
 required
@@ -3379,7 +3391,9 @@ width:220px;
 <tr>
 <th>Nombre</th>
 <th>Usuario</th>
+<th>WhatsApp</th>
 <th>Estado</th>
+<th>Inicio</th>
 <th>Vencimiento</th>
 <th>Acciones</th>
 </tr>

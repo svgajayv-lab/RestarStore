@@ -11,6 +11,8 @@ const UserSchema = new mongoose.Schema({
 
     password: String,
 
+    whatsapp: String,
+
     estado: {
         type: String,
         default: "Activo"
