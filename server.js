@@ -3142,6 +3142,51 @@ res.json({
 
 });
 
+app.get("/crear-propietario", async (req, res) => {
+
+    try {
+
+        let propietario = await User.findOne({
+            usuario: "propietario"
+        });
+
+        if(!propietario){
+
+            propietario = await User.create({
+                nombre: "Propietario",
+                usuario: "propietario",
+                password: "123456",
+                whatsapp: "",
+                estado: "Activo",
+                rol: "owner",
+                inicio: new Date(),
+                vencimiento: new Date("2030-12-31")
+            });
+
+        }
+
+        await Account.updateMany(
+            {
+                ownerId: {
+                    $exists: false
+                }
+            },
+            {
+                ownerId: propietario._id
+            }
+        );
+
+        res.send("✅ Propietario creado y cuentas antiguas asignadas");
+
+    } catch(error){
+
+        console.log(error);
+        res.send("Error creando propietario");
+
+    }
+
+});
+
 /* ========================= */
 /* ADMIN */
 /* ========================= */
