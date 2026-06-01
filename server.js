@@ -216,10 +216,15 @@ app.get("/editar-cuenta/:id", async (req, res) => {
 
     try {
 
-        const cuenta =
-        await Account.findById(
-            req.params.id
-        );
+        if(!req.session.userId){
+    return res.redirect("/login-revendedor");
+}
+
+const cuenta =
+await Account.findOne({
+    _id: req.params.id,
+    ownerId: req.session.userId
+});
 
         if(!cuenta){
 
@@ -474,42 +479,27 @@ app.post("/editar-cuenta/:id", async (req, res) => {
 
     try {
 
-        await Account.findByIdAndUpdate(
+        if(!req.session.userId){
+    return res.redirect("/login-revendedor");
+}
 
-            req.params.id,
-
-            {
-
-                plataforma:
-                req.body.plataforma,
-
-                plan:
-                req.body.plan,
-
-                correo:
-                req.body.correo,
-
-                password:
-                req.body.password,
-
-                cliente:
-                req.body.cliente,
-
-                whatsapp:
-                req.body.whatsapp,
-
-                cuentaCompleta:
-                req.body.cuentaCompleta,
-
-                inicio:
-                req.body.inicio,
-
-                vencimiento:
-                req.body.vencimiento
-
-            }
-
-        );
+await Account.findOneAndUpdate(
+    {
+        _id: req.params.id,
+        ownerId: req.session.userId
+    },
+    {
+        plataforma: req.body.plataforma,
+        plan: req.body.plan,
+        correo: req.body.correo,
+        password: req.body.password,
+        cliente: req.body.cliente,
+        whatsapp: req.body.whatsapp,
+        cuentaCompleta: req.body.cuentaCompleta,
+        inicio: req.body.inicio,
+        vencimiento: req.body.vencimiento
+    }
+);
 
         res.redirect("/admin/cuentas");
 
