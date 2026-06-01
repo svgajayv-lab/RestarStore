@@ -684,6 +684,14 @@ Ingresar
 
 app.post("/login-revendedor", async (req, res) => {
 
+app.get("/logout-revendedor", (req, res) => {
+
+    req.session.destroy();
+
+    res.redirect("/login-revendedor");
+
+});
+
     try {
 
         const user =
