@@ -1,7 +1,10 @@
-const mongoose = require("mongoose");
-
 const AccountSchema =
 new mongoose.Schema({
+
+    ownerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
 
     plataforma: String,
 
