@@ -3354,8 +3354,6 @@ table{
 
     margin-top:20px;
 
-    table-layout:fixed;
-
 }
 
 th,td{
