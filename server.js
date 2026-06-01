@@ -181,16 +181,27 @@ app.post("/eliminar-cuenta/:id", async (req, res) => {
 
     try {
 
-        await Account.findByIdAndDelete(
-            req.params.id
-        );
+        if(!req.session.userId){
+            return res.redirect("/login-revendedor");
+        }
+
+        const cuenta =
+        await Account.findOne({
+            _id: req.params.id,
+            ownerId: req.session.userId
+        });
+
+        if(!cuenta){
+            return res.send("Acceso denegado");
+        }
+
+        await cuenta.deleteOne();
 
         res.redirect("/admin/cuentas");
 
     } catch (error) {
 
         console.log(error);
-
         res.send("Error eliminando cuenta");
 
     }
@@ -411,10 +422,15 @@ app.post("/cambiar-estado/:id", async (req, res) => {
 
     try {
 
-        const cuenta =
-        await Account.findById(
-            req.params.id
-        );
+        if(!req.session.userId){
+    return res.redirect("/login-revendedor");
+}
+
+const cuenta =
+await Account.findOne({
+    _id: req.params.id,
+    ownerId: req.session.userId
+});
 
         if(!cuenta){
 
