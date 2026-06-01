@@ -1778,20 +1778,14 @@ Panel de gestión de cuentas
 
 </div>
 
-<a
-href="/cambiar-password"
+<div
 style="
-background:#6c2cff;
-color:white;
-padding:12px 18px;
-border-radius:10px;
-text-decoration:none;
-font-weight:bold;
-margin-right:10px;
+display:flex;
+flex-direction:column;
+gap:10px;
+align-items:flex-end;
 "
 >
-🔐 Cambiar contraseña
-</a>
 
 <a
 href="/logout-revendedor"
@@ -1805,6 +1799,20 @@ font-weight:bold;
 "
 >
 🚪 Cerrar sesión
+</a>
+
+<a
+href="/cambiar-password"
+style="
+background:#6c2cff;
+color:white;
+padding:12px 18px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+"
+>
+🔐 Cambiar contraseña
 </a>
 
 </div>
