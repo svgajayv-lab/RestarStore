@@ -2609,9 +2609,6 @@ await Account.findOne({
 
 });
 
-console.log("📧 CORREO:", correoCliente);
-console.log("👤 CLIENTE WEB:", nombreCliente);
-console.log("📦 CUENTA:", cuentaAutorizada);
 
 if(
 
@@ -2905,9 +2902,6 @@ console.log(
     "📩 BODY LENGTH:",
     body.length
 );
-
-console.log("🔥 HTML NETFLIX:");
-console.log(body.substring(0,3000));
 
         const textoPlano = body
 .replace(/<[^>]*>/g, " ")
