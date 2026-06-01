@@ -3664,6 +3664,22 @@ th{
 </h1>
 
 <a
+href="/logout"
+style="
+background:#ff2d2d;
+color:white;
+padding:12px 18px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+display:inline-block;
+margin-bottom:20px;
+"
+>
+🚪 Cerrar sesión admin
+</a>
+
+<a
 href="/entrar-propietario"
 style="
 background:#ffd700;
@@ -3980,7 +3996,10 @@ app.post("/login", (req, res) => {
 
         req.session.admin = true;
 
-        return res.redirect("/admin");
+        req.session.save(() => {
+    res.redirect("/admin");
+});
+        return;
 
     }
 
