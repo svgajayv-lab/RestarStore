@@ -2613,6 +2613,10 @@ await Account.findOne({
 
     plataforma,
 
+    cliente: {
+        $regex: new RegExp("^" + nombreCliente + "$", "i")
+    },
+
     vencimiento: {
         $gte: new Date()
     }
@@ -2624,23 +2628,7 @@ console.log("📧 CORREO:", correoCliente);
 console.log("👤 CLIENTE WEB:", nombreCliente);
 console.log("📦 CUENTA:", cuentaAutorizada);
 
-if(
-
-    !cuentaAutorizada ||
-
-    !cuentaAutorizada.cliente ||
-
-    cuentaAutorizada.cliente
-    .toLowerCase()
-    .trim()
-
-    !==
-
-    nombreCliente
-    .toLowerCase()
-    .trim()
-
-){
+if(!cuentaAutorizada){
 
     return res.json({
         otp: "🚫 Acceso no autorizado"
