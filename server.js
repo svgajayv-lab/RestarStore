@@ -1718,10 +1718,15 @@ h1{
 }
 
 table{
+
     width:100%;
-    min-width:1500px;
+
+    min-width:1800px;
+
     border-collapse:collapse;
+
     margin-top:20px;
+
     background:#111;
 }
 
@@ -1730,6 +1735,12 @@ th,td{
     border-bottom:1px solid #333;
     text-align:left;
     vertical-align:middle;
+}
+
+th:last-child,
+td:last-child{
+    min-width:420px;
+    white-space:nowrap;
 }
 
 th{
