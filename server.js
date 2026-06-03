@@ -3100,18 +3100,15 @@ const spotifyLink = body.match(
 /https:\/\/accounts\.spotify\.com[^"' <>\]]+/i
 );
 
-const maxLink = body.match(
-/https:\/\/ablink\.alerts\.hbomax\.com[^"' <>\]]*(reset|password|forgot|login)[^"' <>\]]*/i
+const maxResetLink = textoPlano.match(
+/https:\/\/auth\.hbomax\.com\/set-new-password\?passwordResetToken=[^\s>]+/i
 );
 
-const todosLinksMax =
-body.match(/https:\/\/ablink\.alerts\.hbomax\.com[^"' <>\]]+/gi);
-
-console.log("🔗 LINKS MAX:", todosLinksMax);
+const maxLink = maxResetLink;
 
 console.log(
-"🔍 RESET INDEX:",
-body.indexOf("Reset Password")
+    "🔥 LINK MAX:",
+    maxLink?.[0]
 );
 
 const pos = body.indexOf("Reset Password");
