@@ -3104,6 +3104,11 @@ const maxLink = body.match(
 /https:\/\/ablink\.alerts\.hbomax\.com[^"' <>\]]*(reset|password|forgot|login)[^"' <>\]]*/i
 );
 
+const todosLinksMax =
+body.match(/https:\/\/ablink\.alerts\.hbomax\.com[^"' <>\]]+/gi);
+
+console.log("🔗 LINKS MAX:", todosLinksMax);
+
 const crunchyLink = body.match(
 /https?:\/\/[^"' <>\]]+crunchyroll[^"' <>\]]+/i
 );
