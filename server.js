@@ -3096,20 +3096,20 @@ numerosVisibles.length - 1
 
 }
 
-const spotifyLink = textoPlano.match(
-/https:\/\/accounts\.spotify\.com[^\s"]+/i
+const spotifyLink = body.match(
+/https:\/\/accounts\.spotify\.com[^"' <>\]]+/i
 );
 
-const maxLink = textoPlano.match(
-/https:\/\/ablink\.alerts\.hbomax\.com[^\s")]+/i
+const maxLink = body.match(
+/https:\/\/ablink\.alerts\.hbomax\.com[^"' <>\]]+/i
 );
 
-const crunchyLink = textoPlano.match(
-/https?:\/\/[^\s")]+crunchyroll[^\s")]+/i
+const crunchyLink = body.match(
+/https?:\/\/[^"' <>\]]+crunchyroll[^"' <>\]]+/i
 );
 
-const netflixLink = textoPlano.match(
-/https?:\/\/(?:www\.)?netflix\.com[^\s\]\)"]+/i
+const netflixLink = body.match(
+/https?:\/\/(?:www\.)?netflix\.com[^"' <>\]]+/i
 );
 
 if(spotifyLink){
