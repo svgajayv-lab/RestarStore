@@ -3111,12 +3111,6 @@ if(zonaReset && zonaReset[1]){
 
 }
 
-console.log(
-    "🔥 LINK MAX:",
-    maxLink?.[0]
-);
-
-
 const crunchyLink = body.match(
 /https?:\/\/[^"' <>\]]+crunchyroll[^"' <>\]]+/i
 );
