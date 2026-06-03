@@ -3116,21 +3116,6 @@ console.log(
     maxLink?.[0]
 );
 
-console.log(
-    "🔥 LINK MAX:",
-    maxLink?.[0]
-);
-
-const pos = body.indexOf("Reset Password");
-
-if(pos !== -1){
-
-    console.log(
-        "🔍 ZONA RESET:",
-        body.substring(pos, pos + 3000)
-    );
-
-}
 
 const crunchyLink = body.match(
 /https?:\/\/[^"' <>\]]+crunchyroll[^"' <>\]]+/i
