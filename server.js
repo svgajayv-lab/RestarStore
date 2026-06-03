@@ -3100,11 +3100,21 @@ const spotifyLink = body.match(
 /https:\/\/accounts\.spotify\.com[^"' <>\]]+/i
 );
 
-const maxResetLink = textoPlano.match(
-/https:\/\/auth\.hbomax\.com\/set-new-password\?passwordResetToken=[^\s<>\]]+/i
-);
+let maxLink = null;
 
-const maxLink = maxResetLink;
+const zonaReset =
+body.match(/Reset Password<([^>]+)>/i);
+
+if(zonaReset && zonaReset[1]){
+
+    maxLink = [zonaReset[1]];
+
+}
+
+console.log(
+    "🔥 LINK MAX:",
+    maxLink?.[0]
+);
 
 console.log(
     "🔥 LINK MAX:",
