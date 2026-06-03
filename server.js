@@ -3109,7 +3109,7 @@ const crunchyLink = body.match(
 );
 
 const netflixLink = body.match(
-/https?:\/\/(?:www\.)?netflix\.com[^"' <>\]]+/i
+/https?:\/\/(?:www\.)?netflix\.com\/password[^"' <>\]]+/i
 );
 
 if(spotifyLink){
