@@ -1736,10 +1736,10 @@ th,td{
 }
 
 .acciones{
-    min-width:300px;
+    min-width:420px;
     display:flex;
     gap:8px;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
     align-items:center;
 }
 
