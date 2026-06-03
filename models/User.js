@@ -23,16 +23,16 @@ const UserSchema = new mongoose.Schema({
     vencimiento: Date,
 
     rol: {
-        type: String,
-        enum: ["superadmin", "owner", "revendedor"],
-        default: "revendedor"
-    },
+    type: String,
+    enum: ["superadmin", "admin", "revendedor"],
+    default: "revendedor"
+},
 
-    ownerId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        default: null
-    }
+ownerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    default: null
+}
 
 });
 

@@ -600,7 +600,7 @@ app.post("/crear-revendedor", async (req, res) => {
             vencimiento: req.body.vencimiento,
             whatsapp: req.body.whatsapp,
     rol: req.body.rol || "revendedor",
-    ownerId: req.body.rol === "owner" ? null : req.session.userId || null
+ownerId: req.session.userId || null
 
         });
 
@@ -866,29 +866,34 @@ Ingresar
 
 app.post("/login-revendedor", async (req, res) => {
 
-
     try {
 
         const user =
-await User.findOne({
-    usuario: req.body.usuario,
-    password: req.body.password,
-    estado: "Activo"
-});
+        await User.findOne({
+            usuario: req.body.usuario,
+            password: req.body.password,
+            estado: "Activo"
+        });
 
         if(!user){
             return res.send("❌ Usuario no autorizado o vencido");
         }
 
         req.session.userId = user._id;
-        req.session.userNombre = user.nombre;
+req.session.userNombre = user.nombre;
+req.session.rol = user.rol;
 
-        res.redirect("/admin/cuentas");
+if(user.rol === "admin"){
+    req.session.admin = true;
+    return res.redirect("/admin");
+}
+
+res.redirect("/admin/cuentas");
 
     } catch(error){
 
         console.log(error);
-        res.send("Error login revendedor");
+        res.send("Error login");
 
     }
 
@@ -3767,9 +3772,9 @@ style="padding:12px;"
         Revendedor
     </option>
 
-    <option value="owner">
-        Propietario
-    </option>
+    <option value="admin">
+    Admin proveedor
+</option>
 </select>
 
 <input
