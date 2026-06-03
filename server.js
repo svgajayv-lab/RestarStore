@@ -3089,9 +3089,7 @@ numerosVisibles.length - 1
 
         if(
     otpSnippet &&
-    plataforma !== "netflix" &&
-    plataforma !== "disney" &&
-    plataforma !== "spotify"
+    plataforma === "amazon"
 ){
 
     otp = otpSnippet[1];
