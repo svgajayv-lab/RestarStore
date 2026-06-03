@@ -598,7 +598,9 @@ app.post("/crear-revendedor", async (req, res) => {
             estado: "Activo",
             inicio: req.body.inicio || new Date(),
             vencimiento: req.body.vencimiento,
-            whatsapp: req.body.whatsapp
+            whatsapp: req.body.whatsapp,
+    rol: req.body.rol || "revendedor",
+    ownerId: req.body.rol === "owner" ? null : req.session.userId || null
 
         });
 
@@ -3739,8 +3741,22 @@ margin-bottom:20px;
 </a>
 
 <h2 style="color:cyan;">
-👤 Crear Revendedor
+👤 Crear Usuario
 </h2>
+
+<select
+name="rol"
+required
+style="padding:12px;"
+>
+<option value="revendedor">
+Revendedor
+</option>
+
+<option value="owner">
+Propietario
+</option>
+</select>
 
 <form
 method="POST"
