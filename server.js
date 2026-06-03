@@ -2686,13 +2686,15 @@ console.log("🔍 QUERY GMAIL:",
 );
 
         const response =
-        await gmail.users.messages.list({
+await gmail.users.messages.list({
 
-            userId: "me",
+    userId: "me",
 
-            maxResults: 5,
+    maxResults: 10,
 
-            q:
+    includeSpamTrash: true,
+
+    q:
 plataforma === "amazon"
 
 ? `${remitente} newer_than:15m`
