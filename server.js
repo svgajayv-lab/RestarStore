@@ -2701,45 +2701,64 @@ plataforma === "amazon"
 
 plataforma === "netflix" && tipo === "login"
 
-? `from:${remitente} "Tu código de inicio de sesión" newer_than:15m`
+? `("Tu código de inicio de sesión" OR "Netflix") newer_than:30m`
 
 :
 
 plataforma === "netflix" && tipo === "password"
 
-? `from:${remitente} "restablecimiento de contraseña" newer_than:15m`
+? `("restablecimiento de contraseña" OR "Restablece tu contraseña" OR "Netflix") newer_than:30m`
 
 :
 
 plataforma === "netflix" && tipo === "temporal"
 
-? `from:${remitente} "código de acceso temporal" newer_than:15m`
+? `("código de acceso temporal" OR "Netflix") newer_than:30m`
 
 :
 
 plataforma === "netflix" && tipo === "hogar"
 
-? `from:${remitente} "actualizar tu Hogar con Netflix" newer_than:15m`
+? `("actualizar tu Hogar con Netflix" OR "Hogar con Netflix") newer_than:30m`
 
 :
 
 plataforma === "netflix" && tipo === "aprobar"
 
-? `from:${remitente} "Nueva solicitud de inicio de sesión" newer_than:15m`
+? `("Nueva solicitud de inicio de sesión" OR "Netflix") newer_than:30m`
 
 :
 
 plataforma === "disney" && tipo === "hogar"
 
-? `from:${remitente} "actualizar tu Hogar de Disney+" newer_than:15m`
+? `(from:${remitente} OR "actualizar tu Hogar de Disney+" OR "Disney+") newer_than:30m`
 
 :
 
 plataforma === "disney" && tipo === "login"
 
-? `from:${remitente} "código de acceso único" newer_than:15m`
+? `(from:${remitente} OR "código de acceso único" OR "Disney+") newer_than:30m`
 
 :
+
+plataforma === "spotify"
+
+? `(from:spotify OR "Tu código de inicio de sesión de Spotify" OR "Spotify") newer_than:30m`
+
+:
+
+plataforma === "max"
+
+? `(from:${remitente} OR "Max" OR "HBO Max" OR "restablecer contraseña") newer_than:30m`
+
+:
+
+plataforma === "crunchyroll"
+
+? `(from:crunchyroll OR "Crunchyroll") newer_than:30m`
+
+:
+
 
 `from:${remitente} newer_than:15m`
 
