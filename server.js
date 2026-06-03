@@ -1526,8 +1526,6 @@ new Date(cuenta.vencimiento)
 
 <td style="white-space:nowrap;">
 
-📱 ${cuenta.whatsapp || "-"}
-
 ${
 cuenta.whatsapp
 ?
@@ -1555,7 +1553,7 @@ font-weight:bold;
 
 </td>
 
-<td style="white-space:nowrap;">
+<td class="acciones">
 
 ${
 cuenta.whatsapp
@@ -1721,7 +1719,7 @@ table{
 
     width:100%;
 
-    min-width:1800px;
+    min-width:1500px;
 
     border-collapse:collapse;
 
@@ -1737,10 +1735,19 @@ th,td{
     vertical-align:middle;
 }
 
-th:last-child,
-td:last-child{
-    min-width:420px;
-    white-space:nowrap;
+.acciones{
+    min-width:300px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    align-items:center;
+}
+
+.acciones button,
+.acciones a{
+    padding:8px 10px !important;
+    margin-right:0 !important;
+    font-size:14px;
 }
 
 th{
