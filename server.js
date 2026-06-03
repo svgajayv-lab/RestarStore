@@ -3101,7 +3101,7 @@ const spotifyLink = body.match(
 );
 
 const maxResetLink = textoPlano.match(
-/https:\/\/auth\.hbomax\.com\/set-new-password\?passwordResetToken=[^\s>]+/i
+/https:\/\/auth\.hbomax\.com\/set-new-password\?passwordResetToken=[^\s<>\]]+/i
 );
 
 const maxLink = maxResetLink;
