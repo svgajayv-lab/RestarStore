@@ -3109,6 +3109,22 @@ body.match(/https:\/\/ablink\.alerts\.hbomax\.com[^"' <>\]]+/gi);
 
 console.log("🔗 LINKS MAX:", todosLinksMax);
 
+console.log(
+"🔍 RESET INDEX:",
+body.indexOf("Reset Password")
+);
+
+const pos = body.indexOf("Reset Password");
+
+if(pos !== -1){
+
+    console.log(
+        "🔍 ZONA RESET:",
+        body.substring(pos, pos + 3000)
+    );
+
+}
+
 const crunchyLink = body.match(
 /https?:\/\/[^"' <>\]]+crunchyroll[^"' <>\]]+/i
 );
