@@ -3101,7 +3101,7 @@ const spotifyLink = body.match(
 );
 
 const maxLink = body.match(
-/https:\/\/ablink\.alerts\.hbomax\.com[^"' <>\]]+/i
+/https:\/\/ablink\.alerts\.hbomax\.com[^"' <>\]]*(reset|password|forgot|login)[^"' <>\]]*/i
 );
 
 const crunchyLink = body.match(
