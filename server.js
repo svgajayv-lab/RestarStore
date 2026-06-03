@@ -3744,20 +3744,6 @@ margin-bottom:20px;
 👤 Crear Usuario
 </h2>
 
-<select
-name="rol"
-required
-style="padding:12px;"
->
-<option value="revendedor">
-Revendedor
-</option>
-
-<option value="owner">
-Propietario
-</option>
-</select>
-
 <form
 method="POST"
 action="/crear-revendedor"
@@ -3771,6 +3757,20 @@ gap:10px;
 flex-wrap:wrap;
 "
 >
+
+<select
+name="rol"
+required
+style="padding:12px;"
+>
+    <option value="revendedor">
+        Revendedor
+    </option>
+
+    <option value="owner">
+        Propietario
+    </option>
+</select>
 
 <input
 name="nombre"
