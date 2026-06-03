@@ -24,7 +24,14 @@ const UserSchema = new mongoose.Schema({
 
     rol: {
         type: String,
+        enum: ["superadmin", "owner", "revendedor"],
         default: "revendedor"
+    },
+
+    ownerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        default: null
     }
 
 });
