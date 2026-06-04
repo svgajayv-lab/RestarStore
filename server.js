@@ -593,6 +593,7 @@ app.post("/crear-revendedor", async (req, res) => {
         await User.create({
 
             nombre: req.body.nombre,
+            nombreComercial: req.body.nombreComercial || req.body.nombre,
             usuario: req.body.usuario,
             password: req.body.password,
             estado: "Activo",
@@ -989,8 +990,9 @@ app.post("/login-proveedor", async (req, res) => {
         }
 
         req.session.userId = user._id;
-        req.session.userNombre = user.nombre;
-        req.session.rol = user.rol;
+req.session.userNombre = user.nombre;
+req.session.nombreComercial = user.nombreComercial || user.nombre;
+req.session.rol = user.rol;
 
         res.redirect("/admin");
 
@@ -1892,7 +1894,7 @@ margin:0;
 color:cyan;
 "
 >
-👋 Bienvenido, ${req.session.userNombre}
+👋 Bienvenido, ${req.session.nombreComercial || req.session.userNombre}
 </h1>
 
 <div
@@ -3824,7 +3826,7 @@ req.session.admin
 ?
 "RestarStore Admin"
 :
-req.session.userNombre
+(req.session.nombreComercial || req.session.userNombre)
 }
 </h1>
 
@@ -3896,6 +3898,12 @@ style="padding:12px;"
 name="nombre"
 placeholder="Nombre"
 required
+style="padding:12px;"
+>
+
+<input
+name="nombreComercial"
+placeholder="Nombre comercial"
 style="padding:12px;"
 >
 

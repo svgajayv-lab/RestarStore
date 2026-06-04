@@ -28,6 +28,16 @@ const UserSchema = new mongoose.Schema({
     default: "revendedor"
 },
 
+logo: {
+    type: String,
+    default: ""
+},
+
+nombreComercial: {
+    type: String,
+    default: ""
+},
+
 ownerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
