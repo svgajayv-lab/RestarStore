@@ -3855,6 +3855,30 @@ margin-bottom:20px;
 </a>
 
 ${
+req.session.rol === "admin"
+?
+`
+<a
+href="/cambiar-password"
+style="
+background:#6c2cff;
+color:white;
+padding:12px 18px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+display:inline-block;
+margin-bottom:20px;
+"
+>
+🔐 Cambiar contraseña
+</a>
+`
+:
+""
+}
+
+${
 req.session.admin
 ?
 `
