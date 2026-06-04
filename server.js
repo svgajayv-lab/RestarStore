@@ -3625,6 +3625,14 @@ usuarios.forEach(user => {
 
     <td>${user.usuario}</td>
 
+<td>
+${
+user.rol === "admin"
+? "👑 Proveedor"
+: "👤 Revendedor"
+}
+</td>
+
     <td>${user.whatsapp || "-"}</td>
 
 <td>${user.estado}</td>
@@ -3846,6 +3854,10 @@ margin-bottom:20px;
 🚪 Cerrar sesión admin
 </a>
 
+${
+req.session.admin
+?
+`
 <a
 href="/entrar-propietario"
 style="
@@ -3861,6 +3873,10 @@ margin-bottom:20px;
 >
 👑 Entrar como propietario
 </a>
+`
+:
+""
+}
 
 <h2 style="color:cyan;">
 👤 Crear Usuario
@@ -4017,6 +4033,7 @@ width:220px;
 <tr>
 <th>Nombre</th>
 <th>Usuario</th>
+<th>Rol</th>
 <th>WhatsApp</th>
 <th>Estado</th>
 <th>Inicio</th>
