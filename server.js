@@ -3600,8 +3600,15 @@ await User.find({
     ownerId: req.session.userId
 }).sort({ fecha:-1 });
 
+const totalProveedores =
+usuarios.filter(
+u => u.rol === "admin"
+).length;
+
 const totalRevendedores =
-usuarios.length;
+usuarios.filter(
+u => u.rol === "revendedor"
+).length;
 
 const activos =
 usuarios.filter(
@@ -4003,6 +4010,20 @@ gap:20px;
 margin-bottom:25px;
 "
 >
+
+<div
+style="
+background:#111;
+padding:20px;
+border-radius:15px;
+width:220px;
+"
+>
+<h2 style="color:#ffd700;">
+👑 Proveedores
+</h2>
+<h1>${totalProveedores}</h1>
+</div>
 
 <div
 style="
