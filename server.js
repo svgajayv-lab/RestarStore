@@ -4014,6 +4014,10 @@ ${filasUsuarios}
 
 </table>
 
+${
+req.session.admin
+?
+`
 <h2 style="color:cyan;">
 📜 Historial OTP
 </h2>
@@ -4021,16 +4025,18 @@ ${filasUsuarios}
 <table>
 
 <tr>
-
 <th>Correo</th>
 <th>Plataforma</th>
 <th>OTP</th>
-
 </tr>
 
 ${filas}
 
 </table>
+`
+:
+""
+}
 
 </body>
 
