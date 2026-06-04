@@ -3819,7 +3819,13 @@ th{
 <body>
 
 <h1>
-🔥 RestarStore Admin
+🔥 ${
+req.session.admin
+?
+"RestarStore Admin"
+:
+req.session.userNombre
+}
 </h1>
 
 <a
