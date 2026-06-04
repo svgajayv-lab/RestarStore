@@ -870,10 +870,11 @@ app.post("/login-revendedor", async (req, res) => {
 
         const user =
         await User.findOne({
-            usuario: req.body.usuario,
-            password: req.body.password,
-            estado: "Activo"
-        });
+    usuario: req.body.usuario,
+    password: req.body.password,
+    estado: "Activo",
+    rol: "revendedor"
+});
 
         if(!user){
             return res.send("❌ Usuario no autorizado o vencido");
@@ -883,10 +884,6 @@ app.post("/login-revendedor", async (req, res) => {
 req.session.userNombre = user.nombre;
 req.session.rol = user.rol;
 
-if(user.rol === "admin"){
-    req.session.admin = true;
-    return res.redirect("/admin");
-}
 
 res.redirect("/admin/cuentas");
 
@@ -894,6 +891,113 @@ res.redirect("/admin/cuentas");
 
         console.log(error);
         res.send("Error login");
+
+    }
+
+});
+
+/* ========================= */
+/* LOGIN PROVEEDOR */
+/* ========================= */
+
+app.get("/login-proveedor", (req, res) => {
+
+    res.send(`
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login Proveedor</title>
+<style>
+body{
+    background:#050816;
+    color:white;
+    font-family:Arial;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+form{
+    background:#111;
+    padding:40px;
+    border-radius:20px;
+    width:350px;
+}
+input{
+    width:100%;
+    padding:15px;
+    margin-bottom:20px;
+}
+button{
+    width:100%;
+    padding:15px;
+    background:cyan;
+    border:none;
+    font-weight:bold;
+}
+h1{ color:cyan; }
+</style>
+</head>
+
+<body>
+
+<form method="POST" action="/login-proveedor">
+
+<h1>👑 Proveedor</h1>
+
+<input
+name="usuario"
+placeholder="Usuario"
+required
+>
+
+<input
+type="password"
+name="password"
+placeholder="Password"
+required
+>
+
+<button>
+Ingresar
+</button>
+
+</form>
+
+</body>
+</html>
+
+    `);
+
+});
+
+app.post("/login-proveedor", async (req, res) => {
+
+    try {
+
+        const user =
+        await User.findOne({
+            usuario: req.body.usuario,
+            password: req.body.password,
+            estado: "Activo",
+            rol: "admin"
+        });
+
+        if(!user){
+            return res.send("❌ Proveedor no autorizado");
+        }
+
+        req.session.userId = user._id;
+        req.session.userNombre = user.nombre;
+        req.session.rol = user.rol;
+
+        res.redirect("/admin");
+
+    } catch(error){
+
+        console.log(error);
+        res.send("Error login proveedor");
 
     }
 
@@ -3483,11 +3587,16 @@ app.get("/entrar-propietario", async (req, res) => {
 
 app.get("/admin", async (req, res) => {
 
-    if(req.session.admin){
+    if(req.session.admin || req.session.rol === "admin"){
 
         const usuarios =
-await User.find()
-.sort({ fecha:-1 });
+req.session.admin
+?
+await User.find().sort({ fecha:-1 })
+:
+await User.find({
+    ownerId: req.session.userId
+}).sort({ fecha:-1 });
 
 const totalRevendedores =
 usuarios.length;
